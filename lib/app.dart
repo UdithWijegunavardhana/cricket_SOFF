@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:soff_cricket_hybrid/routes/app_router.gr.dart';
 import 'package:soff_cricket_hybrid/routes/guards/auth_guard.dart';
+import 'package:soff_cricket_hybrid/utils/bindings/service_bindings.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -15,10 +17,17 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerDelegate: _appRouter.delegate(),
-      routeInformationProvider: _appRouter.routeInfoProvider(),
-      routeInformationParser: _appRouter.defaultRouteParser(),
-    );
+    return LayoutBuilder(builder: (context, constraints) {
+      return OrientationBuilder(
+          builder: (context, orientation) {
+            return GetMaterialApp.router(
+              initialBinding: ServiceBindings(),
+              routerDelegate: _appRouter.delegate(),
+              routeInformationProvider: _appRouter.routeInfoProvider(),
+              routeInformationParser: _appRouter.defaultRouteParser(),
+              builder: (context, router) => router!,
+            );
+          });
+    });
   }
 }
