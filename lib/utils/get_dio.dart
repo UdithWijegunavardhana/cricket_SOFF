@@ -4,6 +4,7 @@ import 'package:soff_cricket_hybrid/utils/dio/token_interceptor.dart';
 
 class GetDio {
   static Dio dio() {
+
     BaseOptions options =
     BaseOptions(baseUrl: ConfigHandler.loadAPIConfigs()!.baseApiUrl);
     Dio dio = Dio(options);
