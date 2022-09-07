@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class MachineTimeScreen extends StatelessWidget {
-  const MachineTimeScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.yellow,
+      color: Colors.red,
       child: const Center(
         child: Text(
-          "Machine Time",
+          "profile",
           style: TextStyle(
             color: Colors.white
           ),
