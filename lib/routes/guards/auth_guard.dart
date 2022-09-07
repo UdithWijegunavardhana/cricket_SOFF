@@ -17,7 +17,7 @@ class AuthGuard extends AutoRouteGuard {
       resolver.next(false);
       bool loginState = await KeyCloakAuthService.login();
       if(loginState) {
-        router.replace(const QRCodeRoute());
+        router.replace(const HomeBase());
       }
     }
   }
