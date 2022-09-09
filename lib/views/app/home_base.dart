@@ -44,13 +44,6 @@ class _HomeBaseState extends State<HomeBase> {
                   _homeBaseController.onNavigation(context, index);
                 },
               ),
-              drawer: Drawer(
-                child: Column(
-                  children: <Widget>[
-                    ElevatedButton(onPressed: () {}, child: Text("LOGOUT"))
-                  ],
-                ),
-              ),
               body: const AutoRouter()),
         )
     );
