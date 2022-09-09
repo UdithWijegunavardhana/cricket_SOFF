@@ -5,14 +5,14 @@ class TokenManager extends BaseService {
   Future<bool> setAccessTokens(String loginAuthToken) async {
     GetStorage box = GetStorage();
     await box.write(
-        TokenMangerKeys.ACCESS_TOKEN.toString(), loginAuthToken);
+        TokenMangerKeys.accessToken.toString(), loginAuthToken);
     return true;
   }
 
   Future<bool> setRefreshToken(String refreshToken) async {
     GetStorage box = GetStorage();
     await box.write(
-        TokenMangerKeys.REFRESH_TOKEN.toString(), refreshToken);
+        TokenMangerKeys.refreshToken.toString(), refreshToken);
     return true;
   }
 
@@ -20,24 +20,24 @@ class TokenManager extends BaseService {
 
     GetStorage box = GetStorage();
     await box.write(
-        TokenMangerKeys.EXPIRY_TIME.toString(), expiryTime.toIso8601String());
+        TokenMangerKeys.expiryTime.toString(), expiryTime.toIso8601String());
 
     return true;
   }
 
   String? getAccessToken() {
     GetStorage box = GetStorage();
-    return box.read(TokenMangerKeys.ACCESS_TOKEN.toString());
+    return box.read(TokenMangerKeys.accessToken.toString());
   }
 
   String? getRefreshToken() {
     GetStorage box = GetStorage();
-    return box.read(TokenMangerKeys.REFRESH_TOKEN.toString());
+    return box.read(TokenMangerKeys.refreshToken.toString());
   }
 
   String? getExpiryTime() {
     GetStorage box = GetStorage();
-    return box.read(TokenMangerKeys.EXPIRY_TIME.toString());
+    return box.read(TokenMangerKeys.expiryTime.toString());
   }
 
   Future<void> removeTokens() async {
@@ -48,4 +48,4 @@ class TokenManager extends BaseService {
 
 }
 
-enum TokenMangerKeys { ACCESS_TOKEN, REFRESH_TOKEN, EXPIRY_TIME }
+enum TokenMangerKeys { accessToken, refreshToken, expiryTime }

@@ -7,8 +7,7 @@ class TokenInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     TokenManager _tokenManager = Get.find<TokenManager>();
     String? accessToken = _tokenManager.getAccessToken();
-    options.headers['auth-token'] = accessToken;
-    // options.headers['Authorization'] = 'Bearer $accessToken';
+    options.headers['Authorization'] = 'Bearer $accessToken';
     super.onRequest(options, handler);
   }
 }
