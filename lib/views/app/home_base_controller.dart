@@ -10,7 +10,7 @@ class HomeBaseController extends GetxController {
   onNavigation(BuildContext context, int index) {
     switch (index) {
       case 0:
-        AutoRouter.of(context).replace(const MachineTimeRoute());
+        AutoRouter.of(context).replace(const HomeRoute());
         bottomNavBarSelectedItem.value = 0;
         break;
       case 1:
@@ -18,6 +18,10 @@ class HomeBaseController extends GetxController {
         bottomNavBarSelectedItem.value = 1;
         break;
       case 2:
+        AutoRouter.of(context).replace(const MachineHoursRoute());
+        bottomNavBarSelectedItem.value = 2;
+        break;
+      case 3:
         AutoRouter.of(context).replace(const ProfileRoute());
         bottomNavBarSelectedItem.value = 2;
         break;

@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:openid_client/openid_client_io.dart';
 import 'package:soff_cricket_hybrid/services/auth/token_manager_service.dart';
+import 'package:soff_cricket_hybrid/services/auth/user_manager_service.dart';
 import 'package:soff_cricket_hybrid/utils/datetime_utils/datetime_util.dart';
 import 'package:soff_cricket_hybrid/views/_shared/constants/app_constants.dart';
 import 'package:soff_cricket_hybrid/views/_shared/widget/toast.dart';
@@ -83,6 +84,7 @@ class KeyCloakAuthService {
 
   static Future<bool> login() async {
     try {
+      UserManager _userManager = Get.find<UserManager>();
       TokenManager _tokenManager = Get.find<TokenManager>();
       _tokenManager.removeTokens();
 
@@ -90,11 +92,12 @@ class KeyCloakAuthService {
       TokenResponse tokenResponse = await credential.getTokenResponse();
 
       if(!tokenResponse.isBlank!){
-        // UserInfo userInfo = await credential.getUserInfo();
+        UserInfo userInfo = await credential.getUserInfo();
 
         _tokenManager.setAccessTokens(tokenResponse.accessToken!);
         _tokenManager.setRefreshToken(tokenResponse.refreshToken!);
         _tokenManager.setExpiryTime(tokenResponse.expiresAt!);
+        _userManager.setUserName(userInfo.email!);
         toastBottom(AppConstants.loginSuccessMessage);
 
         return true;
