@@ -18,12 +18,12 @@ class HomeBaseController extends GetxController {
         bottomNavBarSelectedItem.value = 1;
         break;
       case 2:
-        AutoRouter.of(context).replace(const MachineHoursRoute());
+        AutoRouter.of(context).replace(const RecordsRoute());
         bottomNavBarSelectedItem.value = 2;
         break;
       case 3:
         AutoRouter.of(context).replace(const ProfileRoute());
-        bottomNavBarSelectedItem.value = 2;
+        bottomNavBarSelectedItem.value = 3;
         break;
       default:
         AutoRouter.of(context).replace(const QRCodeRoute());
