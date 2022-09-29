@@ -14,7 +14,7 @@ class _RecordsScreenState extends State<RecordsScreen>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    TabController _tabController = TabController(length: 2, vsync: this);
+    TabController _tabController = TabController(length: 1, vsync: this);
 
     return Container(
       color: kLayoutLightColor,
@@ -40,9 +40,9 @@ class _RecordsScreenState extends State<RecordsScreen>
                   Tab(
                     text: 'Machine Hours',
                   ),
-                  Tab(
-                    text: 'Points',
-                  ),
+                  // Tab(
+                  //   text: 'Points',
+                  // ),
                 ]),
           ),
         ),
@@ -52,7 +52,7 @@ class _RecordsScreenState extends State<RecordsScreen>
               physics: const NeverScrollableScrollPhysics(),
               children: const [
                 MachineHoursScreen(),
-                PointsScreen()
+                // PointsScreen()
               ]),
         ),
       ]),
