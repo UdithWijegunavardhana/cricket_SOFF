@@ -33,42 +33,39 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Container(
-      color: kLayoutLightColor,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 120),
-            child: Text(_qrCodeScreenController.username.value,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 18,
-              fontWeight: FontWeight.w600
-            ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 40),
-            child: QrImage(
-              data: _qrCodeScreenController.username.value,
-              version: QrVersions.auto,
-              size: 220.0,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 60),
-            child: ElevatedButton.icon(
-              onPressed: () async {
-                context.router.popUntilRoot();
-                KeyCloakAuthService.login();
-              },
-              label: const Text("Download QR code"),
-              icon: const Icon(Icons.download_sharp),
-            ),
+    return Obx(
+          () => Container(
+          color: kLayoutLightColor,
+          child: Column(
+            children: [
+              Row(
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                    child: Text(
+                      'Scan QR Code',
+                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),),
+                  ),
+                ],
+              ),
+              Spacer(),
+              Text(
+                _qrCodeScreenController.username.value,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(height: 60,),
+              QrImage(
+                data: _qrCodeScreenController.username.value,
+                version: QrVersions.auto,
+                size: 220.0,
+              ),
+              Spacer(),
+            ],
           )
-        ],
       ),
-    ),
     );
   }
 }
