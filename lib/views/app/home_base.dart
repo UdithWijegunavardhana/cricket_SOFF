@@ -26,11 +26,11 @@ class _HomeBaseState extends State<HomeBase> {
                 elevation: 10,
                 selectedItemColor: Colors.black,
                 items: const <BottomNavigationBarItem>[
-                  // BottomNavigationBarItem(
-                  //   icon: Icon(Icons.home_filled, size: 28,),
-                  //   activeIcon: Icon(Icons.home_filled, size: 28,),
-                  //   label: 'Home',
-                  // ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home_filled, size: 28,),
+                    activeIcon: Icon(Icons.home_filled, size: 28,),
+                    label: 'Home',
+                  ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.qr_code_outlined, size: 28,),
                     activeIcon: Icon(Icons.qr_code, size: 28,),
@@ -41,11 +41,11 @@ class _HomeBaseState extends State<HomeBase> {
                     activeIcon: Icon(Icons.sticky_note_2, size: 28,),
                     label: 'Records',
                   ),
-                  // BottomNavigationBarItem(
-                  //   icon: Icon(Icons.person_outline, size: 28,),
-                  //   activeIcon: Icon(Icons.person, size: 28,),
-                  //   label: 'Profile',
-                  // ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.person_outline, size: 28,),
+                    activeIcon: Icon(Icons.person, size: 28,),
+                    label: 'Profile',
+                  ),
                 ],
                 onTap: (index) {
                   _homeBaseController.onNavigation(context, index);
