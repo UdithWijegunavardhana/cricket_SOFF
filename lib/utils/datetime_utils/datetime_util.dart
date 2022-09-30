@@ -17,40 +17,40 @@ class DateTimeUtil {
     String monthAbbr = "";
 
     switch(month){
-      case 0:
+      case 1:
         monthAbbr = "JAN";
         break;
-      case 1:
+      case 2:
         monthAbbr = "FEB";
         break;
-      case 2:
+      case 3:
         monthAbbr = "MAR";
         break;
-      case 3:
+      case 4:
         monthAbbr = "APR";
         break;
-      case 4:
+      case 5:
         monthAbbr = "MAY";
         break;
-      case 5:
+      case 6:
         monthAbbr = "JUN";
         break;
-      case 6:
+      case 7:
         monthAbbr = "JUL";
         break;
-      case 7:
+      case 8:
         monthAbbr = "AUG";
         break;
-      case 8:
+      case 9:
         monthAbbr = "SEP";
         break;
-      case 9:
+      case 10:
         monthAbbr = "OCT";
         break;
-      case 10:
+      case 11:
         monthAbbr = "NOV";
         break;
-      case 11:
+      case 12:
         monthAbbr = "DEC";
         break;
     }

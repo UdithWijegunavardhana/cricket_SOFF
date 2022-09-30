@@ -16,12 +16,6 @@ class _MachineHoursScreenState extends State<MachineHoursScreen> {
   final MachineHoursController _machineHoursController = Get.put(MachineHoursController());
 
   @override
-  void dispose() {
-    Get.delete<MachineHoursController>();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       color: kLayoutLightColor,
