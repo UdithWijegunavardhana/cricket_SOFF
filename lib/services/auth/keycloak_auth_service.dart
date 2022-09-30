@@ -5,12 +5,13 @@ import 'package:get/get.dart';
 import 'package:openid_client/openid_client_io.dart';
 import 'package:soff_cricket_hybrid/services/auth/token_manager_service.dart';
 import 'package:soff_cricket_hybrid/services/auth/user_manager_service.dart';
+import 'package:soff_cricket_hybrid/services/customer_service.dart';
 import 'package:soff_cricket_hybrid/utils/datetime_utils/datetime_util.dart';
 import 'package:soff_cricket_hybrid/views/_shared/constants/app_constants.dart';
 import 'package:soff_cricket_hybrid/views/_shared/widget/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class KeyCloakAuthService {
+class KeyCloakAuthService extends FullLifeCycleController {
 
   static Future<Credential> authenticate() async {
 
@@ -98,6 +99,20 @@ class KeyCloakAuthService {
         _tokenManager.setRefreshToken(tokenResponse.refreshToken!);
         _tokenManager.setExpiryTime(tokenResponse.expiresAt!);
         _userManager.setUserName(userInfo.email!);
+
+        CustomerService()
+            .getCustomerByEmail(userInfo.email!)
+            .then((value) async {
+          if(value.status){
+            UserManager _userManager = UserManager();
+            await _userManager.setUserData(value.data);
+          }
+        }).whenComplete(() {
+          print('completed');
+        }).onError((error, stackTrace) {
+          print(stackTrace);
+        });
+
         toastBottom(AppConstants.loginSuccessMessage);
 
         return true;
