@@ -12,16 +12,16 @@ import 'package:soff_cricket_hybrid/views/_shared/widget/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class KeyCloakAuthService extends FullLifeCycleController {
-
   static Future<Credential> authenticate() async {
-
     var uri = Uri.https("auth2.gangfy.com", "/auth/realms/gangfy"); // auth2
     var issuer = await Issuer.discover(uri);
     var client = Client(issuer, "gangfy_booking");
 
-    urlLauncher( String url ) async {
-      if (await canLaunch(url)) {
-        await launch(url, forceWebView: true,enableJavaScript: true);
+    urlLauncher(String url) async {
+      if (await canLaunchUrl(Uri.parse(url))) {
+        await launchUrl(Uri.parse(url),
+            webViewConfiguration:
+                const WebViewConfiguration(enableJavaScript: true));
       } else {
         throw 'Could not launch $url';
       }
@@ -29,7 +29,7 @@ class KeyCloakAuthService extends FullLifeCycleController {
 
     var authenticator = Authenticator(
       client,
-      scopes: ['openid','profile','email','offline_access'],
+      scopes: ['openid', 'profile', 'email', 'offline_access'],
       port: 4200,
       urlLancher: urlLauncher,
       // redirectUri: redirectUri
@@ -42,7 +42,7 @@ class KeyCloakAuthService extends FullLifeCycleController {
   }
 
   static refreshToken() async {
-    if(isTokenExpired()){
+    if (isTokenExpired()) {
       toastBottom(AppConstants.sessionExpiredWarningMessage);
       var dio = Dio();
       TokenManager _tokenManager = Get.find<TokenManager>();
@@ -51,26 +51,25 @@ class KeyCloakAuthService extends FullLifeCycleController {
       Map<String, dynamic> requestBody = {
         'grant_type': 'refresh_token',
         'client_id': 'gangfy_booking',
-        'refresh_token' : refreshToken!
+        'refresh_token': refreshToken!
       };
 
       try {
-
         var response = await dio.post(
           'https://auth2.gangfy.com/auth/realms/gangfy/protocol/openid-connect/token',
           data: requestBody,
           options: Options(contentType: Headers.formUrlEncodedContentType),
         );
 
-        if(response.statusCode == HttpStatus.ok) {
+        if (response.statusCode == HttpStatus.ok) {
           int _expiresIn = response.data['expires_in'];
-          DateTime _updatedExpiryAt = DateTimeUtil.addTimeToCurrentTime(_expiresIn~/60);
+          DateTime _updatedExpiryAt =
+              DateTimeUtil.addTimeToCurrentTime(_expiresIn ~/ 60);
           _tokenManager.setExpiryTime(_updatedExpiryAt);
           _tokenManager.setAccessTokens(response.data['access_token']);
           _tokenManager.setRefreshToken(response.data['refresh_token']);
         }
-
-      }on DioError catch (e) {
+      } on DioError catch (e) {
         toastBottom(AppConstants.sessionExpiredWarningMessage);
         login();
       }
@@ -92,7 +91,7 @@ class KeyCloakAuthService extends FullLifeCycleController {
       Credential credential = await KeyCloakAuthService.authenticate();
       TokenResponse tokenResponse = await credential.getTokenResponse();
 
-      if(!tokenResponse.isBlank!){
+      if (!tokenResponse.isBlank!) {
         UserInfo userInfo = await credential.getUserInfo();
 
         _tokenManager.setAccessTokens(tokenResponse.accessToken!);
@@ -123,5 +122,4 @@ class KeyCloakAuthService extends FullLifeCycleController {
       return false;
     }
   }
-
 }
