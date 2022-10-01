@@ -12,4 +12,49 @@ class DateTimeUtil {
     return timeUpdated;
   }
 
+  static String getMonthAbbriviation(int month){
+
+    String monthAbbr = "";
+
+    switch(month){
+      case 1:
+        monthAbbr = "JAN";
+        break;
+      case 2:
+        monthAbbr = "FEB";
+        break;
+      case 3:
+        monthAbbr = "MAR";
+        break;
+      case 4:
+        monthAbbr = "APR";
+        break;
+      case 5:
+        monthAbbr = "MAY";
+        break;
+      case 6:
+        monthAbbr = "JUN";
+        break;
+      case 7:
+        monthAbbr = "JUL";
+        break;
+      case 8:
+        monthAbbr = "AUG";
+        break;
+      case 9:
+        monthAbbr = "SEP";
+        break;
+      case 10:
+        monthAbbr = "OCT";
+        break;
+      case 11:
+        monthAbbr = "NOV";
+        break;
+      case 12:
+        monthAbbr = "DEC";
+        break;
+    }
+    return monthAbbr;
+  }
+
 }
