@@ -16,8 +16,14 @@ class AuthGuard extends AutoRouteGuard {
     } else {
       resolver.next(false);
       bool loginState = await KeyCloakAuthService.login();
-      if(loginState) {
-        router.replace(const HomeBase());
+      TokenManager _tokenManager = Get.find<TokenManager>();
+      bool emailVerified = _tokenManager.getEmailVerified() == 'true' ? true :false;
+      if( emailVerified ) {
+        router.replace(CompleteProfileRoute());
+      }else {
+        if (loginState) {
+          router.replace(const HomeBase());
+        }
       }
     }
   }

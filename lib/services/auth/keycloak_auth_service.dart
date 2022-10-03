@@ -98,6 +98,7 @@ class KeyCloakAuthService extends FullLifeCycleController {
         _tokenManager.setRefreshToken(tokenResponse.refreshToken!);
         _tokenManager.setExpiryTime(tokenResponse.expiresAt!);
         _userManager.setUserName(userInfo.email!);
+        _tokenManager.setEmailVerification(userInfo.emailVerified!);
 
         CustomerService()
             .getCustomerByEmail(userInfo.email!)
