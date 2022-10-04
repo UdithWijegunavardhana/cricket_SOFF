@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soff_cricket_hybrid/views/_shared/widget/input_validator.dart';
 
 import '../constants/colors.dart';
 
@@ -24,6 +25,7 @@ class CustomFormField extends StatelessWidget {
   final Function? onChange;
   final TextInputType inputType;
   final FocusNode? focusNode;
+  final String? Function(String?)? validator;
 
   const CustomFormField(
       {Key? key,
@@ -47,7 +49,9 @@ class CustomFormField extends StatelessWidget {
       this.paddingBottom = 0,
       this.paddingTop = 0,
       this.onChange,
-      this.focusNode})
+      this.focusNode,
+      this.validator
+      })
       : super(key: key);
 
   @override
@@ -90,6 +94,7 @@ class CustomFormField extends StatelessWidget {
             cursorColor: kPrimaryColor,
             controller: controller,
             obscureText: obSecureText,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             autofocus: false,
             decoration: InputDecoration(
               filled: true,
@@ -119,9 +124,10 @@ class CustomFormField extends StatelessWidget {
                 borderSide: BorderSide.none,
               ),
             ),
-            onChanged: (value) {
-              print(value);
+            onChanged: (value){
+
             },
+            validator: validator,
           ),
         ],
       ),

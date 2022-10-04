@@ -100,18 +100,25 @@ class KeyCloakAuthService extends FullLifeCycleController {
         _userManager.setUserName(userInfo.email!);
         _tokenManager.setEmailVerification(userInfo.emailVerified!);
 
-        CustomerService()
-            .getCustomerByEmail(userInfo.email!)
-            .then((value) async {
-          if(value.status){
-            UserManager _userManager = UserManager();
-            await _userManager.setUserData(value.data);
-          }
-        }).whenComplete(() {
-          print('completed');
-        }).onError((error, stackTrace) {
-          print(stackTrace);
-        });
+        // CustomerService()
+        //     .getCustomerByEmail(userInfo.email!)
+        //     .then((value) async {
+        //   if(value.status){
+        //     UserManager _userManager = UserManager();
+        //     await _userManager.setUserData(value.data);
+        //   }
+        // }).whenComplete(() {
+        //   print('completed');
+        // }).onError((error, stackTrace) {
+        //   print(stackTrace);
+        // });
+
+        var apiResponse = await CustomerService().getCustomerByEmail(userInfo.email!);
+
+        if(apiResponse.status){
+          UserManager _userManager = UserManager();
+          await _userManager.setUserData(apiResponse.data);
+        }
 
         toastBottom(AppConstants.loginSuccessMessage);
 

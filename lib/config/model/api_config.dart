@@ -61,41 +61,48 @@ class CustomerApis {
   const CustomerApis({
     required this.getCustomerByEmail,
     required this.getMachineHoursByCustomerId,
+    required this.saveCustomer,
   });
 
   final String getCustomerByEmail;
   final String getMachineHoursByCustomerId;
+  final String saveCustomer;
 
   factory CustomerApis.fromJson(Map<String,dynamic> json) => CustomerApis(
     getCustomerByEmail: json['get_customer_by_email'].toString(),
-    getMachineHoursByCustomerId: json['get_machine_hours_by_customer_id'].toString()
+    getMachineHoursByCustomerId: json['get_machine_hours_by_customer_id'].toString(),
+    saveCustomer: json['save_customer'].toString()
   );
   
   Map<String, dynamic> toJson() => {
     'get_customer_by_email': getCustomerByEmail,
-    'get_machine_hours_by_customer_id': getMachineHoursByCustomerId
+    'get_machine_hours_by_customer_id': getMachineHoursByCustomerId,
+    'save_customer': saveCustomer
   };
 
   CustomerApis clone() => CustomerApis(
     getCustomerByEmail: getCustomerByEmail,
-    getMachineHoursByCustomerId: getMachineHoursByCustomerId
+    getMachineHoursByCustomerId: getMachineHoursByCustomerId,
+    saveCustomer: saveCustomer
   );
 
 
   CustomerApis copyWith({
     String? getCustomerByEmail,
-    String? getMachineHoursByCustomerId
+    String? getMachineHoursByCustomerId,
+    String? saveCustomer
   }) => CustomerApis(
     getCustomerByEmail: getCustomerByEmail ?? this.getCustomerByEmail,
     getMachineHoursByCustomerId: getMachineHoursByCustomerId ?? this.getMachineHoursByCustomerId,
+    saveCustomer: saveCustomer ?? this.saveCustomer,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is CustomerApis && getCustomerByEmail == other.getCustomerByEmail && getMachineHoursByCustomerId == other.getMachineHoursByCustomerId;
+    || other is CustomerApis && getCustomerByEmail == other.getCustomerByEmail && getMachineHoursByCustomerId == other.getMachineHoursByCustomerId && saveCustomer == other.saveCustomer;
 
   @override
-  int get hashCode => getCustomerByEmail.hashCode ^ getMachineHoursByCustomerId.hashCode;
+  int get hashCode => getCustomerByEmail.hashCode ^ getMachineHoursByCustomerId.hashCode ^ saveCustomer.hashCode;
 }
 
 @immutable
