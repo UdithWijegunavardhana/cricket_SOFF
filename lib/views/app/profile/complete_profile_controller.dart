@@ -24,7 +24,7 @@ class CompleteProfileController extends GetxController {
       image: "default_image",
       imageObject: null,
       isEditable: true,
-      telephone: telephone.value
+      telephone: telephone.value.trim()
     );
 
     return customerModel;

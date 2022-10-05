@@ -36,8 +36,8 @@ class AuthGuard extends AutoRouteGuard {
       await KeyCloakAuthService.refreshToken();
 
       UserManager userManager = UserManager();
-      var userData = userManager.getUserData();
-      bool isUserRegistered = await checkRegisteredUser(userData.email!);
+      var userName = userManager.getUserName();
+      bool isUserRegistered = await checkRegisteredUser(userName!);
 
       if( !isUserRegistered ) {
         router.replace( CompleteProfileRoute() );
@@ -64,6 +64,10 @@ class AuthGuard extends AutoRouteGuard {
 
     var response = await CustomerService()
         .getCustomerByEmail(email);
+
+    if(response.data != []){
+      return false;
+    }
 
     if(response.status) {
       return response.data.email  != null;

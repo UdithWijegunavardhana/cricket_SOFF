@@ -22,7 +22,7 @@ class CustomFormField extends StatelessWidget {
   final double paddingRight;
   final double paddingBottom;
   final double paddingTop;
-  final Function? onChange;
+  final Function(String?)? onChange;
   final TextInputType inputType;
   final FocusNode? focusNode;
   final String? Function(String?)? validator;
@@ -124,9 +124,7 @@ class CustomFormField extends StatelessWidget {
                 borderSide: BorderSide.none,
               ),
             ),
-            onChanged: (value){
-
-            },
+            onChanged: onChange,
             validator: validator,
           ),
         ],

@@ -18,13 +18,12 @@ class CompleteProfileScreen extends StatefulWidget {
 }
 
 class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
-  final TextEditingController _telephoneNumberController =
-      TextEditingController();
+  final TextEditingController _telephoneNumberController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
   CompleteProfileController _completeProfileController =
-      Get.put(CompleteProfileController());
+  Get.put(CompleteProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +52,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   const CustomText(
                     textAlign: TextAlign.center,
                     text:
-                        'To complete your registration please enter your contact number',
+                    'To complete your registration please enter your contact number',
                     marginLeft: 20,
                     marginTop: 24,
                     marginRight: 20,
@@ -63,16 +62,25 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                     height: 20,
                   ),
                   CustomFormField(
-                    formTitle: 'Contact Number',
-                    hintText: 'xxx-xxx-xxxx',
-                    controller: _telephoneNumberController,
-                    inputType: TextInputType.number,
-                    suffixIcon: Icons.phone,
-                    marginLeft: 20,
-                    marginTop: 24,
-                    marginRight: 20,
-                    marginBottom: 24,
-                    validator: InputValidator.validatePhoneNumber,
+                      formTitle: 'Contact Number',
+                      hintText: 'xxx-xxx-xxxx',
+                      controller: _telephoneNumberController,
+                      inputType: TextInputType.number,
+                      suffixIcon: Icons.phone,
+                      marginLeft: 20,
+                      marginTop: 24,
+                      marginRight: 20,
+                      marginBottom: 24,
+                      validator: InputValidator.validatePhoneNumber,
+                      onChange: (value) {
+                        if (value?.length == 3) {
+                          _telephoneNumberController.text = value! + '-';
+                        }
+
+                        if (value?.length == 7) {
+                          _telephoneNumberController.text = value! + '-';
+                        }
+                      }
                   ),
                   const SizedBox(
                     height: 20,
@@ -80,7 +88,10 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   Container(
                     margin: const EdgeInsets.fromLTRB(20, 40, 20, 20),
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
                       height: 60,
                       child: OutlinedButton(
                         onPressed: () async {
@@ -89,9 +100,10 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                                 _telephoneNumberController.value.text;
                             var apiResponseModel = await CustomerService()
                                 .saveCustomer(
-                                    _completeProfileController.getUser());
+                                _completeProfileController.getUser());
                             if (apiResponseModel.apiStatus == 201) {
-                              AutoRouter.of(context, watch: true).replace(const HomeBase());
+                              AutoRouter.of(context, watch: true).replace(
+                                  const HomeBase());
                               // AutoRouter.of(context, watch: true)
                             } else {
                               _completeProfileController.apiError.value = true;
@@ -104,7 +116,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                         ),
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all<Color>(kPrimaryColor),
+                          MaterialStateProperty.all<Color>(kPrimaryColor),
                           shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(14.0))),
@@ -112,34 +124,35 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       ),
                     ),
                   ),
-                  Obx(() => _completeProfileController.apiError.value == true
+                  Obx(() =>
+                  _completeProfileController.apiError.value == true
                       ? Container(
-                          height: 40,
-                          width: double.infinity,
-                          margin: const EdgeInsets.fromLTRB(20, 24, 20, 0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text("Something Went Wrong Try again"),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              IconButton(
-                                  onPressed: () {
-                                    _completeProfileController.apiError.value =
-                                        false;
-                                  },
-                                  icon: Icon(Icons.cancel_outlined,
-                                      color: kWarningColor))
-                            ],
-                          ),
-                          decoration: BoxDecoration(
-                              color: kWarningBackground,
-                              border: Border.all(color: kWarningColor)),
-                        )
+                    height: 40,
+                    width: double.infinity,
+                    margin: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Something Went Wrong Try again"),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              _completeProfileController.apiError.value =
+                              false;
+                            },
+                            icon: Icon(Icons.cancel_outlined,
+                                color: kWarningColor))
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                        color: kWarningBackground,
+                        border: Border.all(color: kWarningColor)),
+                  )
                       : Container(
-                          height: 20,
-                        )),
+                    height: 20,
+                  )),
                   const Spacer(),
                 ],
               ),
