@@ -1,6 +1,7 @@
+import 'dart:convert';
+
 import 'package:soff_cricket_hybrid/config/config_handler.dart';
 import 'package:soff_cricket_hybrid/models/api_response/api_respone_model.dart';
-import 'package:soff_cricket_hybrid/models/save_customer/save_customer_model.dart';
 import 'package:soff_cricket_hybrid/services/base_service.dart';
 
 import '../models/user/user_model.dart';
@@ -31,10 +32,14 @@ class CustomerService extends BaseService {
   }
 
   Future<ApiResponseModel> saveCustomer(
-      SaveCustomerModel saveCustomerModel) async {
+      UserModel userModel) async {
+
+    var encoded = json.encode(userModel);
+    var decoded = json.decode(encoded);
+    
     try {
       var res = await dio.post(_customerAPIConfigHandler!.saveCustomer,
-          data: saveCustomerModel.toJson());
+          data: decoded);
       return ApiResponseModel(status: true, apiStatus: res.statusCode, data: res.data['data']);
     } catch (e) {
       return ApiResponseModel(status: false, apiStatus: 500, message: e.toString());

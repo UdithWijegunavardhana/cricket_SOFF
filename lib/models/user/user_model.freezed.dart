@@ -27,19 +27,25 @@ class _$UserModelTearOff {
       @JsonKey(name: 'firstName') String? firstName,
       @JsonKey(name: 'lastName') String? lastName,
       @JsonKey(name: 'telephone') String? telephone,
+      @JsonKey(name: 'action') String? action,
       @JsonKey(name: 'email') String? email,
       @JsonKey(name: 'image') String? image,
       @JsonKey(name: 'vaccination') bool? vaccination,
-      @JsonKey(name: 'agreement') bool? agreement}) {
+      @JsonKey(name: 'agreement') bool? agreement,
+      @JsonKey(name: 'imageObject') String? imageObject,
+      @JsonKey(name: 'isEditable') bool? isEditable}) {
     return _UserModel(
       id: id,
       firstName: firstName,
       lastName: lastName,
       telephone: telephone,
+      action: action,
       email: email,
       image: image,
       vaccination: vaccination,
       agreement: agreement,
+      imageObject: imageObject,
+      isEditable: isEditable,
     );
   }
 
@@ -61,6 +67,8 @@ mixin _$UserModel {
   String? get lastName => throw _privateConstructorUsedError;
   @JsonKey(name: 'telephone')
   String? get telephone => throw _privateConstructorUsedError;
+  @JsonKey(name: 'action')
+  String? get action => throw _privateConstructorUsedError;
   @JsonKey(name: 'email')
   String? get email => throw _privateConstructorUsedError;
   @JsonKey(name: 'image')
@@ -69,6 +77,10 @@ mixin _$UserModel {
   bool? get vaccination => throw _privateConstructorUsedError;
   @JsonKey(name: 'agreement')
   bool? get agreement => throw _privateConstructorUsedError;
+  @JsonKey(name: 'imageObject')
+  String? get imageObject => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isEditable')
+  bool? get isEditable => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -85,10 +97,13 @@ abstract class $UserModelCopyWith<$Res> {
       @JsonKey(name: 'firstName') String? firstName,
       @JsonKey(name: 'lastName') String? lastName,
       @JsonKey(name: 'telephone') String? telephone,
+      @JsonKey(name: 'action') String? action,
       @JsonKey(name: 'email') String? email,
       @JsonKey(name: 'image') String? image,
       @JsonKey(name: 'vaccination') bool? vaccination,
-      @JsonKey(name: 'agreement') bool? agreement});
+      @JsonKey(name: 'agreement') bool? agreement,
+      @JsonKey(name: 'imageObject') String? imageObject,
+      @JsonKey(name: 'isEditable') bool? isEditable});
 }
 
 /// @nodoc
@@ -105,10 +120,13 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? telephone = freezed,
+    Object? action = freezed,
     Object? email = freezed,
     Object? image = freezed,
     Object? vaccination = freezed,
     Object? agreement = freezed,
+    Object? imageObject = freezed,
+    Object? isEditable = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -127,6 +145,10 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _value.telephone
           : telephone // ignore: cast_nullable_to_non_nullable
               as String?,
+      action: action == freezed
+          ? _value.action
+          : action // ignore: cast_nullable_to_non_nullable
+              as String?,
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -143,6 +165,14 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _value.agreement
           : agreement // ignore: cast_nullable_to_non_nullable
               as bool?,
+      imageObject: imageObject == freezed
+          ? _value.imageObject
+          : imageObject // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isEditable: isEditable == freezed
+          ? _value.isEditable
+          : isEditable // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -158,10 +188,13 @@ abstract class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       @JsonKey(name: 'firstName') String? firstName,
       @JsonKey(name: 'lastName') String? lastName,
       @JsonKey(name: 'telephone') String? telephone,
+      @JsonKey(name: 'action') String? action,
       @JsonKey(name: 'email') String? email,
       @JsonKey(name: 'image') String? image,
       @JsonKey(name: 'vaccination') bool? vaccination,
-      @JsonKey(name: 'agreement') bool? agreement});
+      @JsonKey(name: 'agreement') bool? agreement,
+      @JsonKey(name: 'imageObject') String? imageObject,
+      @JsonKey(name: 'isEditable') bool? isEditable});
 }
 
 /// @nodoc
@@ -179,10 +212,13 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? telephone = freezed,
+    Object? action = freezed,
     Object? email = freezed,
     Object? image = freezed,
     Object? vaccination = freezed,
     Object? agreement = freezed,
+    Object? imageObject = freezed,
+    Object? isEditable = freezed,
   }) {
     return _then(_UserModel(
       id: id == freezed
@@ -201,6 +237,10 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.telephone
           : telephone // ignore: cast_nullable_to_non_nullable
               as String?,
+      action: action == freezed
+          ? _value.action
+          : action // ignore: cast_nullable_to_non_nullable
+              as String?,
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -217,6 +257,14 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.agreement
           : agreement // ignore: cast_nullable_to_non_nullable
               as bool?,
+      imageObject: imageObject == freezed
+          ? _value.imageObject
+          : imageObject // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isEditable: isEditable == freezed
+          ? _value.isEditable
+          : isEditable // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -229,10 +277,13 @@ class _$_UserModel implements _UserModel {
       @JsonKey(name: 'firstName') this.firstName,
       @JsonKey(name: 'lastName') this.lastName,
       @JsonKey(name: 'telephone') this.telephone,
+      @JsonKey(name: 'action') this.action,
       @JsonKey(name: 'email') this.email,
       @JsonKey(name: 'image') this.image,
       @JsonKey(name: 'vaccination') this.vaccination,
-      @JsonKey(name: 'agreement') this.agreement});
+      @JsonKey(name: 'agreement') this.agreement,
+      @JsonKey(name: 'imageObject') this.imageObject,
+      @JsonKey(name: 'isEditable') this.isEditable});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
@@ -250,6 +301,9 @@ class _$_UserModel implements _UserModel {
   @JsonKey(name: 'telephone')
   final String? telephone;
   @override
+  @JsonKey(name: 'action')
+  final String? action;
+  @override
   @JsonKey(name: 'email')
   final String? email;
   @override
@@ -261,10 +315,16 @@ class _$_UserModel implements _UserModel {
   @override
   @JsonKey(name: 'agreement')
   final bool? agreement;
+  @override
+  @JsonKey(name: 'imageObject')
+  final String? imageObject;
+  @override
+  @JsonKey(name: 'isEditable')
+  final bool? isEditable;
 
   @override
   String toString() {
-    return 'UserModel(id: $id, firstName: $firstName, lastName: $lastName, telephone: $telephone, email: $email, image: $image, vaccination: $vaccination, agreement: $agreement)';
+    return 'UserModel(id: $id, firstName: $firstName, lastName: $lastName, telephone: $telephone, action: $action, email: $email, image: $image, vaccination: $vaccination, agreement: $agreement, imageObject: $imageObject, isEditable: $isEditable)';
   }
 
   @override
@@ -276,11 +336,16 @@ class _$_UserModel implements _UserModel {
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
             const DeepCollectionEquality().equals(other.telephone, telephone) &&
+            const DeepCollectionEquality().equals(other.action, action) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.image, image) &&
             const DeepCollectionEquality()
                 .equals(other.vaccination, vaccination) &&
-            const DeepCollectionEquality().equals(other.agreement, agreement));
+            const DeepCollectionEquality().equals(other.agreement, agreement) &&
+            const DeepCollectionEquality()
+                .equals(other.imageObject, imageObject) &&
+            const DeepCollectionEquality()
+                .equals(other.isEditable, isEditable));
   }
 
   @override
@@ -290,10 +355,13 @@ class _$_UserModel implements _UserModel {
       const DeepCollectionEquality().hash(firstName),
       const DeepCollectionEquality().hash(lastName),
       const DeepCollectionEquality().hash(telephone),
+      const DeepCollectionEquality().hash(action),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(image),
       const DeepCollectionEquality().hash(vaccination),
-      const DeepCollectionEquality().hash(agreement));
+      const DeepCollectionEquality().hash(agreement),
+      const DeepCollectionEquality().hash(imageObject),
+      const DeepCollectionEquality().hash(isEditable));
 
   @JsonKey(ignore: true)
   @override
@@ -312,10 +380,13 @@ abstract class _UserModel implements UserModel {
       @JsonKey(name: 'firstName') String? firstName,
       @JsonKey(name: 'lastName') String? lastName,
       @JsonKey(name: 'telephone') String? telephone,
+      @JsonKey(name: 'action') String? action,
       @JsonKey(name: 'email') String? email,
       @JsonKey(name: 'image') String? image,
       @JsonKey(name: 'vaccination') bool? vaccination,
-      @JsonKey(name: 'agreement') bool? agreement}) = _$_UserModel;
+      @JsonKey(name: 'agreement') bool? agreement,
+      @JsonKey(name: 'imageObject') String? imageObject,
+      @JsonKey(name: 'isEditable') bool? isEditable}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
@@ -333,6 +404,9 @@ abstract class _UserModel implements UserModel {
   @JsonKey(name: 'telephone')
   String? get telephone;
   @override
+  @JsonKey(name: 'action')
+  String? get action;
+  @override
   @JsonKey(name: 'email')
   String? get email;
   @override
@@ -344,6 +418,12 @@ abstract class _UserModel implements UserModel {
   @override
   @JsonKey(name: 'agreement')
   bool? get agreement;
+  @override
+  @JsonKey(name: 'imageObject')
+  String? get imageObject;
+  @override
+  @JsonKey(name: 'isEditable')
+  bool? get isEditable;
   @override
   @JsonKey(ignore: true)
   _$UserModelCopyWith<_UserModel> get copyWith =>

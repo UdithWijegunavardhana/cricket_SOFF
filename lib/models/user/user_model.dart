@@ -10,10 +10,13 @@ class UserModel with _$UserModel {
     @JsonKey(name: 'firstName') String? firstName,
     @JsonKey(name: 'lastName') String? lastName,
     @JsonKey(name: 'telephone') String? telephone,
+    @JsonKey(name: 'action') String? action,
     @JsonKey(name: 'email') String? email,
     @JsonKey(name: 'image') String? image,
     @JsonKey(name: 'vaccination') bool? vaccination,
     @JsonKey(name: 'agreement') bool? agreement,
+    @JsonKey(name: 'imageObject') String? imageObject,
+    @JsonKey(name: 'isEditable') bool? isEditable,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

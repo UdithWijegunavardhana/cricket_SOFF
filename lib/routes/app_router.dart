@@ -3,7 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:soff_cricket_hybrid/routes/guards/auth_guard.dart';
 import 'package:soff_cricket_hybrid/views/app/home/home_screen.dart';
 import 'package:soff_cricket_hybrid/views/app/home_base.dart';
-import 'package:soff_cricket_hybrid/views/app/profile/complete_profile.dart';
+import 'package:soff_cricket_hybrid/views/app/profile/complete_profile_screen.dart';
 import 'package:soff_cricket_hybrid/views/app/profile/profile_screen.dart';
 import 'package:soff_cricket_hybrid/views/app/qr_code/qr_code_screen.dart';
 import 'package:soff_cricket_hybrid/views/app/records/records_screen.dart';

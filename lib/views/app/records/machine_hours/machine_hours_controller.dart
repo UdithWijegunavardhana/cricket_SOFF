@@ -25,7 +25,7 @@ class MachineHoursController extends FullLifeCycleController {
 
   Future<void> getMachineHours() async {
     UserManager _userManager = UserManager();
-    UserModel _user = _userManager.getUserData();
+    UserModel _user = await _userManager.getUserData();
     CustomerService()
         .getMachineHoursByCustomer(_user.id!)
         .then((value) {
@@ -33,7 +33,6 @@ class MachineHoursController extends FullLifeCycleController {
             double? totalHours = 0;
 
             for (var machineHour in value.data) {
-              print(machineHour['hours']);
               totalHours = totalHours! + machineHour['hours'];
             }
 

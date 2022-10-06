@@ -4,7 +4,6 @@ import 'package:soff_cricket_hybrid/services/auth/user_manager_service.dart';
 import 'package:soff_cricket_hybrid/services/point_service.dart';
 
 class PointsController extends FullLifeCycleController {
-
   var points = RxList();
   var totalPoints = RxInt(0);
 
@@ -23,7 +22,7 @@ class PointsController extends FullLifeCycleController {
 
   Future<void> getPoints() async {
     UserManager _userManager = UserManager();
-    UserModel _user = _userManager.getUserData();
+    UserModel _user = await _userManager.getUserData();
     PointService()
         .getPointsByCustomerEmail(_user.email!)
         .then((value) {
