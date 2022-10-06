@@ -26,11 +26,11 @@ class _HomeBaseState extends State<HomeBase> {
                 elevation: 10,
                 selectedItemColor: Colors.black,
                 items: const <BottomNavigationBarItem>[
-                  // BottomNavigationBarItem(
-                  //   icon: Icon(Icons.home_filled, size: 28,),
-                  //   activeIcon: Icon(Icons.home_filled, size: 28,),
-                  //   label: 'Home',
-                  // ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home_filled, size: 28,),
+                    activeIcon: Icon(Icons.home_filled, size: 28,),
+                    label: 'Home',
+                  ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.qr_code_outlined, size: 28,),
                     activeIcon: Icon(Icons.qr_code, size: 28,),

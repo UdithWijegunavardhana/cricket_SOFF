@@ -13,9 +13,7 @@ class SettingScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         leading: InkWell(
           onTap: () {
-            // AutoRouter.of(context).navigateBack();
-            context.navigateBack();
-            print(AutoRouter.of(context).current.name);
+            AutoRouter.of(context).pop();
           },
           child: const Icon(
             Icons.arrow_back_ios,
