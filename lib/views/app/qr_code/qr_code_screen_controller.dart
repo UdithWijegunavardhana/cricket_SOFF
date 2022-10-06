@@ -11,9 +11,9 @@ class QRCodeScreenController extends GetxController {
     super.onReady();
   }
 
-  void getUserName() {
+  void getUserName() async {
     UserManager _userManager = Get.find<UserManager>();
-    username.value = _userManager.getUserName()!;
+    username.value = await _userManager.getUserName();
   }
 
 }

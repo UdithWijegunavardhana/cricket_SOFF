@@ -23,14 +23,15 @@ class UserManager extends FullLifeCycleController {
     return true;
   }
 
-  String? getUserName() {
+  Future<String> getUserName() async {
     GetStorage box = GetStorage();
     return box.read(UserMangerKeys.userName.toString());
   }
 
-  UserModel getUserData() {
+  Future<UserModel> getUserData() async {
     GetStorage box = GetStorage();
-    var encoded = jsonEncode(box.read(UserMangerKeys.user.toString()));
+    var user = await box.read(UserMangerKeys.user.toString());
+    var encoded = jsonEncode(user);
     var decoded = jsonDecode(encoded);
 
     return UserModel.fromJson(decoded);

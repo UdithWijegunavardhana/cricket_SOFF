@@ -23,9 +23,13 @@ class _$ApiResponseModelTearOff {
   const _$ApiResponseModelTearOff();
 
   _ApiResponseModel call(
-      {required bool status, String? message = '', dynamic data}) {
+      {required bool status,
+      int? apiStatus,
+      String? message = '',
+      dynamic data}) {
     return _ApiResponseModel(
       status: status,
+      apiStatus: apiStatus,
       message: message,
       data: data,
     );
@@ -42,6 +46,7 @@ const $ApiResponseModel = _$ApiResponseModelTearOff();
 /// @nodoc
 mixin _$ApiResponseModel {
   bool get status => throw _privateConstructorUsedError;
+  int? get apiStatus => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
   dynamic get data => throw _privateConstructorUsedError;
 
@@ -56,7 +61,7 @@ abstract class $ApiResponseModelCopyWith<$Res> {
   factory $ApiResponseModelCopyWith(
           ApiResponseModel value, $Res Function(ApiResponseModel) then) =
       _$ApiResponseModelCopyWithImpl<$Res>;
-  $Res call({bool status, String? message, dynamic data});
+  $Res call({bool status, int? apiStatus, String? message, dynamic data});
 }
 
 /// @nodoc
@@ -71,6 +76,7 @@ class _$ApiResponseModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = freezed,
+    Object? apiStatus = freezed,
     Object? message = freezed,
     Object? data = freezed,
   }) {
@@ -79,6 +85,10 @@ class _$ApiResponseModelCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as bool,
+      apiStatus: apiStatus == freezed
+          ? _value.apiStatus
+          : apiStatus // ignore: cast_nullable_to_non_nullable
+              as int?,
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -98,7 +108,7 @@ abstract class _$ApiResponseModelCopyWith<$Res>
           _ApiResponseModel value, $Res Function(_ApiResponseModel) then) =
       __$ApiResponseModelCopyWithImpl<$Res>;
   @override
-  $Res call({bool status, String? message, dynamic data});
+  $Res call({bool status, int? apiStatus, String? message, dynamic data});
 }
 
 /// @nodoc
@@ -115,6 +125,7 @@ class __$ApiResponseModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = freezed,
+    Object? apiStatus = freezed,
     Object? message = freezed,
     Object? data = freezed,
   }) {
@@ -123,6 +134,10 @@ class __$ApiResponseModelCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as bool,
+      apiStatus: apiStatus == freezed
+          ? _value.apiStatus
+          : apiStatus // ignore: cast_nullable_to_non_nullable
+              as int?,
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -139,13 +154,15 @@ class __$ApiResponseModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ApiResponseModel implements _ApiResponseModel {
   const _$_ApiResponseModel(
-      {required this.status, this.message = '', this.data});
+      {required this.status, this.apiStatus, this.message = '', this.data});
 
   factory _$_ApiResponseModel.fromJson(Map<String, dynamic> json) =>
       _$$_ApiResponseModelFromJson(json);
 
   @override
   final bool status;
+  @override
+  final int? apiStatus;
   @JsonKey()
   @override
   final String? message;
@@ -154,7 +171,7 @@ class _$_ApiResponseModel implements _ApiResponseModel {
 
   @override
   String toString() {
-    return 'ApiResponseModel(status: $status, message: $message, data: $data)';
+    return 'ApiResponseModel(status: $status, apiStatus: $apiStatus, message: $message, data: $data)';
   }
 
   @override
@@ -163,6 +180,7 @@ class _$_ApiResponseModel implements _ApiResponseModel {
         (other.runtimeType == runtimeType &&
             other is _ApiResponseModel &&
             const DeepCollectionEquality().equals(other.status, status) &&
+            const DeepCollectionEquality().equals(other.apiStatus, apiStatus) &&
             const DeepCollectionEquality().equals(other.message, message) &&
             const DeepCollectionEquality().equals(other.data, data));
   }
@@ -171,6 +189,7 @@ class _$_ApiResponseModel implements _ApiResponseModel {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(status),
+      const DeepCollectionEquality().hash(apiStatus),
       const DeepCollectionEquality().hash(message),
       const DeepCollectionEquality().hash(data));
 
@@ -188,6 +207,7 @@ class _$_ApiResponseModel implements _ApiResponseModel {
 abstract class _ApiResponseModel implements ApiResponseModel {
   const factory _ApiResponseModel(
       {required bool status,
+      int? apiStatus,
       String? message,
       dynamic data}) = _$_ApiResponseModel;
 
@@ -196,6 +216,8 @@ abstract class _ApiResponseModel implements ApiResponseModel {
 
   @override
   bool get status;
+  @override
+  int? get apiStatus;
   @override
   String? get message;
   @override

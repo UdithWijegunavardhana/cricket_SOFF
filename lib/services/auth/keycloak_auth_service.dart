@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:openid_client/openid_client_io.dart';
+import 'package:soff_cricket_hybrid/models/user/user_model.dart';
 import 'package:soff_cricket_hybrid/services/auth/token_manager_service.dart';
 import 'package:soff_cricket_hybrid/services/auth/user_manager_service.dart';
 import 'package:soff_cricket_hybrid/services/customer_service.dart';
@@ -98,19 +99,16 @@ class KeyCloakAuthService extends FullLifeCycleController {
         _tokenManager.setRefreshToken(tokenResponse.refreshToken!);
         _tokenManager.setExpiryTime(tokenResponse.expiresAt!);
         _userManager.setUserName(userInfo.email!);
+        _tokenManager.setEmailVerification(userInfo.emailVerified!);
 
-        CustomerService()
-            .getCustomerByEmail(userInfo.email!)
-            .then((value) async {
-          if(value.status){
-            UserManager _userManager = UserManager();
-            await _userManager.setUserData(value.data);
-          }
-        }).whenComplete(() {
-          print('completed');
-        }).onError((error, stackTrace) {
-          print(stackTrace);
-        });
+        var apiResponse = await CustomerService().getCustomerByEmail(userInfo.email!);
+
+        if(apiResponse.status){
+          await _userManager.setUserData(apiResponse.data);
+        }else{
+          var user = UserModel(firstName: userInfo.givenName!, lastName: userInfo.familyName!,email: userInfo.email!);
+          await _userManager.setUserData(user);
+        }
 
         toastBottom(AppConstants.loginSuccessMessage);
 
