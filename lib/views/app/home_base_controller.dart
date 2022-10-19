@@ -10,7 +10,7 @@ class HomeBaseController extends GetxController {
   onNavigation(BuildContext context, int index) {
     switch (index) {
       case 0:
-        AutoRouter.of(context).replace(const HomeRoute());
+        AutoRouter.of(context).replace(HomeRoute());
         bottomNavBarSelectedItem.value = 0;
         break;
       case 1:

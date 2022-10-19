@@ -27,9 +27,9 @@ class _HomeBaseState extends State<HomeBase> {
                 selectedItemColor: Colors.black,
                 items: const <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.home_filled, size: 28,),
-                    activeIcon: Icon(Icons.home_filled, size: 28,),
-                    label: 'Home',
+                    icon: Icon(Icons.bookmark_add_outlined, size: 28,),
+                    activeIcon: Icon(Icons.bookmark_add, size: 28,),
+                    label: 'Bookings',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.qr_code_outlined, size: 28,),

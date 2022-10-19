@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:openid_client/openid_client_io.dart';
 import 'package:soff_cricket_hybrid/models/user/user_model.dart';
@@ -97,6 +99,7 @@ class KeyCloakAuthService extends FullLifeCycleController {
 
         _tokenManager.setAccessTokens(tokenResponse.accessToken!);
         _tokenManager.setRefreshToken(tokenResponse.refreshToken!);
+        _tokenManager.setIdToken(tokenResponse['id_token']);
         _tokenManager.setExpiryTime(tokenResponse.expiresAt!);
         _userManager.setUserName(userInfo.email!);
         _tokenManager.setEmailVerification(userInfo.emailVerified!);
@@ -120,4 +123,40 @@ class KeyCloakAuthService extends FullLifeCycleController {
       return false;
     }
   }
+
+  static Future<bool> logOut(BuildContext buildContext) async {
+
+    var uri = Uri.https("auth2.gangfy.com", "/auth/realms/gangfy"); // auth2
+    var issuer = await Issuer.discover(uri);
+    var client = Client(issuer, "gangfy_booking");
+
+    TokenManager _tokenManager = Get.find<TokenManager>();
+
+    Credential credential = client.createCredential(
+      tokenType: 'Bearer',
+      refreshToken: _tokenManager.getRefreshToken(),
+      idToken: _tokenManager.getIdToken(),
+    );
+
+    Uri? logOutUri = credential.generateLogoutUrl();
+
+    urlLauncher(String url) async {
+      if (await canLaunchUrl(Uri.parse(url))) {
+        await launchUrl(Uri.parse(url),
+            webViewConfiguration:
+            const WebViewConfiguration(enableJavaScript: true));
+      } else {
+        throw 'Could not launch $url';
+      }
+    }
+
+    _tokenManager.removeTokens();
+
+    urlLauncher.call(logOutUri.toString());
+    AutoRouter.of(buildContext).popUntilRoot();
+    login();
+
+    return true;
+  }
+
 }
