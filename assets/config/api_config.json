@@ -13,6 +13,7 @@
     "get_all_resources_by_category_id" : "/resource/get-resource-by-categorie-id/"
   },
   "schedule_apis" : {
-    "get_schedules_by_date" : "/schedule/get-all-schedule-by-date2/"
+    "get_schedules_by_date" : "/schedule/get-all-schedule-by-date2/",
+    "save_schedule" : "/schedule/save-schedule"
   }
 }

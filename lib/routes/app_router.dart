@@ -2,6 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:soff_cricket_hybrid/routes/guards/auth_guard.dart';
 import 'package:soff_cricket_hybrid/views/app/bookings/booking_screen.dart';
+import 'package:soff_cricket_hybrid/views/app/bookings/create_booking_overlay.dart';
 import 'package:soff_cricket_hybrid/views/app/home/home_screen.dart';
 import 'package:soff_cricket_hybrid/views/app/home_base.dart';
 import 'package:soff_cricket_hybrid/views/app/profile/complete_profile_screen.dart';
@@ -21,6 +22,11 @@ import 'package:soff_cricket_hybrid/views/app/settings/settings_screen.dart';
     CustomRoute(
         page: BookingScreen,
         path: 'bookings',
+        transitionsBuilder: TransitionsBuilders.fadeIn,
+        maintainState: true),
+    CustomRoute(
+        page: CreateBookingScreen,
+        path: 'create- bookings',
         transitionsBuilder: TransitionsBuilders.fadeIn,
         maintainState: true),
     CustomRoute(

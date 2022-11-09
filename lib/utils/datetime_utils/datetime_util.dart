@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DateTimeUtil {
@@ -57,6 +58,15 @@ class DateTimeUtil {
         break;
     }
     return monthAbbr;
+  }
+
+  static DateTime timeOfDayToDateTime(DateTime date, TimeOfDay timeOfDay) {
+
+    DateTime dateTime = DateTime(date.year, date.month,
+        date.day, timeOfDay.hour, timeOfDay.minute);
+
+    return dateTime;
+
   }
 
 }

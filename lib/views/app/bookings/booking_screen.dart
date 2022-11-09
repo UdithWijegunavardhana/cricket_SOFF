@@ -1,16 +1,24 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:soff_cricket_hybrid/models/resource/resource_model.dart';
+import 'package:soff_cricket_hybrid/routes/app_router.gr.dart';
 import 'package:soff_cricket_hybrid/views/_shared/constants/colors.dart';
 import 'package:soff_cricket_hybrid/views/_shared/loaders/event_page_loader.dart';
+import 'package:soff_cricket_hybrid/views/_shared/widget/custom_date_picker.dart';
+import 'package:soff_cricket_hybrid/views/_shared/widget/custom_elevated_button.dart';
+import 'package:soff_cricket_hybrid/views/_shared/widget/custom_time_picker.dart';
 import 'package:soff_cricket_hybrid/views/app/bookings/booking_controller.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../_shared/constants/font_styles.dart';
 import '../schedules/schedule_widget.dart';
+import 'create_booking_overlay.dart';
+import 'booking_requested_success_overlay.dart';
 
 class BookingScreen extends StatefulWidget {
-  const BookingScreen({Key? key, required this.resourceId, required this.selectedDate}) : super(key: key);
+  const BookingScreen(
+      {Key? key, required this.resourceId, required this.selectedDate})
+      : super(key: key);
 
   final DateTime selectedDate;
   final String resourceId;
@@ -24,9 +32,8 @@ class _BookingScreenState extends State<BookingScreen>
   late final BookingController _bookingController;
   int tabSize = 0;
 
-  late final TabController _tabController = TabController(
-      length: _bookingController.resources.length,
-      vsync: this);
+  late final TabController _tabController =
+      TabController(length: _bookingController.resources.length, vsync: this);
 
   @override
   void initState() {
@@ -44,10 +51,15 @@ class _BookingScreenState extends State<BookingScreen>
     List<Appointment> meetings = <Appointment>[];
 
     final DateTime today = DateTime.now();
-    final DateTime startTime = DateTime(today.year, today.month, today.day, 9, 0, 0);
-    final DateTime endTime = startTime.add(const Duration( minutes: 30 ));
+    final DateTime startTime =
+        DateTime(today.year, today.month, today.day, 9, 0, 0);
+    final DateTime endTime = startTime.add(const Duration(minutes: 30));
 
-    meetings.add(Appointment(startTime: startTime, endTime: endTime, subject: 'Booked ( 9.00AM - 11.00AM )', color: kPrimaryColor));
+    meetings.add(Appointment(
+        startTime: startTime,
+        endTime: endTime,
+        subject: 'Booked ( 9.00AM - 11.00AM )',
+        color: kPrimaryColor));
 
     return meetings;
   }
@@ -72,17 +84,48 @@ class _BookingScreenState extends State<BookingScreen>
     for (i = 0; i < resources.length; i++) {
       listings.add(
         Tab(
-          text: _bookingController.resources[i].code,
+          text: _bookingController.resources[i].description,
         ),
       );
     }
     return listings;
   }
 
+  TextEditingController startTimeController = TextEditingController();
+  TextEditingController endTimeController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
+  void _showOverlay(BuildContext context) {
+    AutoRouter.of(context).push(CreateBookingRoute(selectedDateTime: widget.selectedDate));
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        // floatingActionButton: Obx(
+        //   () => _bookingController.isLoading.isFalse
+        //       ? FloatingActionButton(
+        //           onPressed: () {
+        //             _showOverlay(context);
+        //           },
+        //           backgroundColor: kPrimaryColor,
+        //           child: Icon(
+        //             Icons.add,
+        //             color: kLayoutLightColor,
+        //             size: 30,
+        //           ),
+        //         )
+        //       : FloatingActionButton(
+        //           onPressed: () {},
+        //           backgroundColor: kPrimaryColor,
+        //           child: Icon(
+        //             Icons.add,
+        //             color: kLayoutLightColor,
+        //             size: 30,
+        //           ),
+        //         ),
+        // ),
         body: Obx(
           () => _bookingController.isLoading.isFalse
               ? Container(
@@ -93,7 +136,8 @@ class _BookingScreenState extends State<BookingScreen>
                         Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: Text(
-                            _bookingController.resources[0].resourceCategorieName,
+                            _bookingController
+                                .resources[0].resourceCategorieName,
                             style: kFontScreenTitle,
                           ),
                         ),
@@ -101,7 +145,8 @@ class _BookingScreenState extends State<BookingScreen>
                     ),
                     Container(
                       width: double.maxFinite,
-                      margin: const EdgeInsets.only(top: 10, left: 10),
+                      margin:
+                          const EdgeInsets.only(top: 10, left: 10, right: 10),
                       height: 30,
                       child: Align(
                         alignment: Alignment.centerLeft,
@@ -118,8 +163,7 @@ class _BookingScreenState extends State<BookingScreen>
                             ),
                             controller: _tabController,
                             tabs: _getResourceEventsTabs(
-                                _bookingController.resources)
-                        ),
+                                _bookingController.resources)),
                       ),
                     ),
                     const SizedBox(
@@ -130,46 +174,8 @@ class _BookingScreenState extends State<BookingScreen>
                           controller: _tabController,
                           physics: const NeverScrollableScrollPhysics(),
                           children: _getResourceEventsTabView(
-                              _bookingController.resources)
-                      ),
+                              _bookingController.resources)),
                     ),
-                    // Container(
-                    //   child: Container(
-                    //     width: MediaQuery.of(context).size.width,
-                    //     height: 60,
-                    //     margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                    //     child: ElevatedButton(
-                    //       child: Row(
-                    //         mainAxisAlignment: MainAxisAlignment.center,
-                    //         children: [
-                    //           Icon(Icons.call, color: kLayoutLightColor,),
-                    //           const SizedBox(width: 20,),
-                    //           Text('Book Now', style: TextStyle(color: kLayoutLightColor, fontWeight: FontWeight.w500),),
-                    //         ],
-                    //       ),
-                    //       onPressed: () => Navigator.pop(context),
-                    //       style: ButtonStyle(
-                    //         elevation: MaterialStateProperty.all<double>(0),
-                    //         backgroundColor:
-                    //         MaterialStateProperty.all<Color>(kPrimaryColor),
-                    //         shape: MaterialStateProperty.all(
-                    //             RoundedRectangleBorder(
-                    //                 borderRadius: BorderRadius.circular(0))),
-                    //       ),
-                    //     ),
-                    //   ),
-                    //   decoration: BoxDecoration(
-                    //       color: kLayoutLightColor,
-                    //     boxShadow: [
-                    //       BoxShadow(
-                    //         color: kPrimaryColor,
-                    //         blurRadius: 2.0,
-                    //         spreadRadius: 0.0,
-                    //         offset: const Offset(2.0, 2.0),
-                    //       )
-                    //     ],
-                    //   ),
-                    // )
                   ]),
                 )
               : const EventPageLoader(),

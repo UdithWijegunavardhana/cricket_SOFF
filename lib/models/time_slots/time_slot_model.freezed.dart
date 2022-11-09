@@ -27,6 +27,7 @@ class _$TimeSlotModelTearOff {
       @JsonKey(name: 'startTime') String? startTime,
       @JsonKey(name: 'endTime') String? endTime,
       @JsonKey(name: 'comment') String? comment,
+      @JsonKey(name: 'status') String? status,
       @JsonKey(name: 'customerId') String? customerId,
       @JsonKey(name: 'subResourceList') List<SubResourceModel>? subResourceList,
       @JsonKey(name: 'customer') CustomerModel? customer}) {
@@ -35,6 +36,7 @@ class _$TimeSlotModelTearOff {
       startTime: startTime,
       endTime: endTime,
       comment: comment,
+      status: status,
       customerId: customerId,
       subResourceList: subResourceList,
       customer: customer,
@@ -59,6 +61,8 @@ mixin _$TimeSlotModel {
   String? get endTime => throw _privateConstructorUsedError;
   @JsonKey(name: 'comment')
   String? get comment => throw _privateConstructorUsedError;
+  @JsonKey(name: 'status')
+  String? get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'customerId')
   String? get customerId => throw _privateConstructorUsedError;
   @JsonKey(name: 'subResourceList')
@@ -83,6 +87,7 @@ abstract class $TimeSlotModelCopyWith<$Res> {
       @JsonKey(name: 'startTime') String? startTime,
       @JsonKey(name: 'endTime') String? endTime,
       @JsonKey(name: 'comment') String? comment,
+      @JsonKey(name: 'status') String? status,
       @JsonKey(name: 'customerId') String? customerId,
       @JsonKey(name: 'subResourceList') List<SubResourceModel>? subResourceList,
       @JsonKey(name: 'customer') CustomerModel? customer});
@@ -105,6 +110,7 @@ class _$TimeSlotModelCopyWithImpl<$Res>
     Object? startTime = freezed,
     Object? endTime = freezed,
     Object? comment = freezed,
+    Object? status = freezed,
     Object? customerId = freezed,
     Object? subResourceList = freezed,
     Object? customer = freezed,
@@ -125,6 +131,10 @@ class _$TimeSlotModelCopyWithImpl<$Res>
       comment: comment == freezed
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
               as String?,
       customerId: customerId == freezed
           ? _value.customerId
@@ -165,6 +175,7 @@ abstract class _$TimeSlotModelCopyWith<$Res>
       @JsonKey(name: 'startTime') String? startTime,
       @JsonKey(name: 'endTime') String? endTime,
       @JsonKey(name: 'comment') String? comment,
+      @JsonKey(name: 'status') String? status,
       @JsonKey(name: 'customerId') String? customerId,
       @JsonKey(name: 'subResourceList') List<SubResourceModel>? subResourceList,
       @JsonKey(name: 'customer') CustomerModel? customer});
@@ -190,6 +201,7 @@ class __$TimeSlotModelCopyWithImpl<$Res>
     Object? startTime = freezed,
     Object? endTime = freezed,
     Object? comment = freezed,
+    Object? status = freezed,
     Object? customerId = freezed,
     Object? subResourceList = freezed,
     Object? customer = freezed,
@@ -210,6 +222,10 @@ class __$TimeSlotModelCopyWithImpl<$Res>
       comment: comment == freezed
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
               as String?,
       customerId: customerId == freezed
           ? _value.customerId
@@ -235,6 +251,7 @@ class _$_TimeSlotModel implements _TimeSlotModel {
       @JsonKey(name: 'startTime') this.startTime,
       @JsonKey(name: 'endTime') this.endTime,
       @JsonKey(name: 'comment') this.comment,
+      @JsonKey(name: 'status') this.status,
       @JsonKey(name: 'customerId') this.customerId,
       @JsonKey(name: 'subResourceList') this.subResourceList,
       @JsonKey(name: 'customer') this.customer});
@@ -255,6 +272,9 @@ class _$_TimeSlotModel implements _TimeSlotModel {
   @JsonKey(name: 'comment')
   final String? comment;
   @override
+  @JsonKey(name: 'status')
+  final String? status;
+  @override
   @JsonKey(name: 'customerId')
   final String? customerId;
   @override
@@ -266,7 +286,7 @@ class _$_TimeSlotModel implements _TimeSlotModel {
 
   @override
   String toString() {
-    return 'TimeSlotModel(id: $id, startTime: $startTime, endTime: $endTime, comment: $comment, customerId: $customerId, subResourceList: $subResourceList, customer: $customer)';
+    return 'TimeSlotModel(id: $id, startTime: $startTime, endTime: $endTime, comment: $comment, status: $status, customerId: $customerId, subResourceList: $subResourceList, customer: $customer)';
   }
 
   @override
@@ -278,6 +298,7 @@ class _$_TimeSlotModel implements _TimeSlotModel {
             const DeepCollectionEquality().equals(other.startTime, startTime) &&
             const DeepCollectionEquality().equals(other.endTime, endTime) &&
             const DeepCollectionEquality().equals(other.comment, comment) &&
+            const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality()
                 .equals(other.customerId, customerId) &&
             const DeepCollectionEquality()
@@ -292,6 +313,7 @@ class _$_TimeSlotModel implements _TimeSlotModel {
       const DeepCollectionEquality().hash(startTime),
       const DeepCollectionEquality().hash(endTime),
       const DeepCollectionEquality().hash(comment),
+      const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(customerId),
       const DeepCollectionEquality().hash(subResourceList),
       const DeepCollectionEquality().hash(customer));
@@ -313,6 +335,7 @@ abstract class _TimeSlotModel implements TimeSlotModel {
       @JsonKey(name: 'startTime') String? startTime,
       @JsonKey(name: 'endTime') String? endTime,
       @JsonKey(name: 'comment') String? comment,
+      @JsonKey(name: 'status') String? status,
       @JsonKey(name: 'customerId') String? customerId,
       @JsonKey(name: 'subResourceList') List<SubResourceModel>? subResourceList,
       @JsonKey(name: 'customer') CustomerModel? customer}) = _$_TimeSlotModel;
@@ -332,6 +355,9 @@ abstract class _TimeSlotModel implements TimeSlotModel {
   @override
   @JsonKey(name: 'comment')
   String? get comment;
+  @override
+  @JsonKey(name: 'status')
+  String? get status;
   @override
   @JsonKey(name: 'customerId')
   String? get customerId;

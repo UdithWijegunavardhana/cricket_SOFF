@@ -83,13 +83,13 @@ class _HomeCategoryCardState extends State<HomeCategoryCard> {
                     padding: EdgeInsets.only(right: 10),
                     child: Row(
                       children: [
-                        Text('Selected Date : '),
+                        const Text('Selected Date : '),
                         selectedDate != null
                             ? Text(
                                 '${selectedDate?.year} - ${selectedDate?.month} - ${selectedDate?.day}',
                                 style: const TextStyle(fontWeight: FontWeight.w500),
                               )
-                            : Text(''),
+                            : const Text(''),
                       ],
                     ),
                   )

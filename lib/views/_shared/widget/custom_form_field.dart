@@ -6,11 +6,12 @@ import '../constants/colors.dart';
 
 class CustomFormField extends StatelessWidget {
   final String hintText;
-  final String? formTitle;
+  final String? formFieldTitle;
   final bool? isFilled;
   final Color? fillColor;
   final TextEditingController controller;
   final IconData? suffixIcon;
+  final IconData? prefixIcon;
   final String? errorText;
   final bool obSecureText;
   final EdgeInsetsGeometry? margin;
@@ -29,11 +30,16 @@ class CustomFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final List<TextInputFormatter>? inputFormatters;
   final bool? autoFocus;
+  final int? maxLines;
+  final bool? isEnabled;
+  final VoidCallback? onTap;
+  final TextStyle? textStyle;
+  final Color? suffixIconColor;
 
   const CustomFormField(
       {Key? key,
       required this.hintText,
-      this.formTitle,
+      this.formFieldTitle,
       this.inputType = TextInputType.text,
       this.isFilled = true,
       this.fillColor,
@@ -55,7 +61,13 @@ class CustomFormField extends StatelessWidget {
       this.focusNode,
       this.validator,
       this.inputFormatters,
-      this.autoFocus = false
+      this.autoFocus = false,
+      this.maxLines,
+      this.prefixIcon,
+      this.isEnabled = true,
+      this.onTap,
+      this.textStyle,
+      this.suffixIconColor
       })
       : super(key: key);
 
@@ -78,17 +90,16 @@ class CustomFormField extends StatelessWidget {
           ),
       child: Column(
         children: [
-          (formTitle != null)
+          (formFieldTitle != null)
               ? Row(
                   children: [
                     Container(
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        formTitle!,
+                        formFieldTitle!,
                         style: TextStyle(
                           color: kPrimaryColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
+                          fontSize: 14,
                         ),
                       ),
                     ),
@@ -97,17 +108,25 @@ class CustomFormField extends StatelessWidget {
               : Container(height: 0, width: 0),
           TextFormField(
             cursorColor: kPrimaryColor,
+            enabled: isEnabled,
             controller: controller,
+            style: textStyle,
             obscureText: obSecureText,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             autofocus: false,
             inputFormatters: inputFormatters,
             keyboardType: inputType,
+            maxLines: maxLines,
+            onTap: onTap,
             decoration: InputDecoration(
               filled: true,
               fillColor: kSecondaryColor,
               suffixIcon: Icon(
                 suffixIcon,
+                color: suffixIconColor ?? kPrimaryColor,
+              ),
+              prefixIcon: Icon(
+                  prefixIcon,
                 color: kPrimaryColor,
               ),
               hintText: hintText,

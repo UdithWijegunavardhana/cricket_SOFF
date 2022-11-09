@@ -54,7 +54,7 @@ class _EventScheduleWidgetState extends State<EventScheduleWidget> {
             () =>
         _scheduleWidgetController.isLoading.isFalse
             ? Container(
-          margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+          margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
           child: SfCalendar(
             view: CalendarView.day,
             todayHighlightColor: kPrimaryColor,
@@ -82,6 +82,30 @@ class _EventScheduleWidgetState extends State<EventScheduleWidget> {
                 ? ScheduleDataSource(_scheduleWidgetController.schedules,
                 widget.selectedDate)
                 : ScheduleDataSource([], widget.selectedDate),
+            appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
+
+              Appointment appointment = details.appointments.first;
+
+              return Container(
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text( appointment.subject, style: const TextStyle(
+                      fontWeight: FontWeight.w500
+                    )),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                  color: appointment.color,
+                  borderRadius: BorderRadius.circular(6)
+                ),
+              );
+
+            },
+            selectionDecoration: BoxDecoration(
+              border: Border.all(color: Colors.transparent, width: 0)
+            ),
           ),
         )
             : const EventCalenderLoader(),

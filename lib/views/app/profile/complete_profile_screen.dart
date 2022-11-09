@@ -72,7 +72,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                     height: 20,
                   ),
                   CustomFormField(
-                    formTitle: 'Contact Number',
+                    formFieldTitle: 'Contact Number',
                     hintText: 'xxx-xxx-xxxx',
                     controller: _telephoneNumberController,
                     inputType: TextInputType.phone,

@@ -1,35 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'time_slot_model.dart';
+part of 'booking_timeslot_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TimeSlotModel _$$_TimeSlotModelFromJson(Map<String, dynamic> json) =>
-    _$_TimeSlotModel(
-      id: json['_id'] as String?,
+_$_BookingTimeslotModel _$$_BookingTimeslotModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_BookingTimeslotModel(
       startTime: json['startTime'] as String?,
       endTime: json['endTime'] as String?,
-      comment: json['comment'] as String?,
-      status: json['status'] as String?,
       customerId: json['customerId'] as String?,
-      subResourceList: (json['subResourceList'] as List<dynamic>?)
-          ?.map((e) => SubResourceModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      comment: json['comment'] as String?,
       customer: json['customer'] == null
           ? null
           : CustomerModel.fromJson(json['customer'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_TimeSlotModelToJson(_$_TimeSlotModel instance) =>
+Map<String, dynamic> _$$_BookingTimeslotModelToJson(
+        _$_BookingTimeslotModel instance) =>
     <String, dynamic>{
-      '_id': instance.id,
       'startTime': instance.startTime,
       'endTime': instance.endTime,
-      'comment': instance.comment,
-      'status': instance.status,
       'customerId': instance.customerId,
-      'subResourceList': instance.subResourceList,
+      'comment': instance.comment,
       'customer': instance.customer,
     };

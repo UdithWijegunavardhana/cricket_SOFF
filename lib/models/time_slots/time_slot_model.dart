@@ -13,6 +13,7 @@ class TimeSlotModel with _$TimeSlotModel {
     @JsonKey(name: 'startTime') String? startTime,
     @JsonKey(name: 'endTime') String? endTime,
     @JsonKey(name: 'comment') String? comment,
+    @JsonKey(name: 'status') String? status,
     @JsonKey(name: 'customerId') String? customerId,
     @JsonKey(name: 'subResourceList') List<SubResourceModel>? subResourceList,
     @JsonKey(name: 'customer') CustomerModel? customer,
