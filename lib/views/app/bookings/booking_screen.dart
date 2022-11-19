@@ -103,29 +103,29 @@ class _BookingScreenState extends State<BookingScreen>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // floatingActionButton: Obx(
-        //   () => _bookingController.isLoading.isFalse
-        //       ? FloatingActionButton(
-        //           onPressed: () {
-        //             _showOverlay(context);
-        //           },
-        //           backgroundColor: kPrimaryColor,
-        //           child: Icon(
-        //             Icons.add,
-        //             color: kLayoutLightColor,
-        //             size: 30,
-        //           ),
-        //         )
-        //       : FloatingActionButton(
-        //           onPressed: () {},
-        //           backgroundColor: kPrimaryColor,
-        //           child: Icon(
-        //             Icons.add,
-        //             color: kLayoutLightColor,
-        //             size: 30,
-        //           ),
-        //         ),
-        // ),
+        floatingActionButton: Obx(
+          () => _bookingController.isLoading.isFalse
+              ? FloatingActionButton(
+                  onPressed: () {
+                    _showOverlay(context);
+                  },
+                  backgroundColor: kPrimaryColor,
+                  child: Icon(
+                    Icons.add,
+                    color: kLayoutLightColor,
+                    size: 30,
+                  ),
+                )
+              : FloatingActionButton(
+                  onPressed: () {},
+                  backgroundColor: kPrimaryColor,
+                  child: Icon(
+                    Icons.add,
+                    color: kLayoutLightColor,
+                    size: 30,
+                  ),
+                ),
+        ),
         body: Obx(
           () => _bookingController.isLoading.isFalse
               ? Container(
