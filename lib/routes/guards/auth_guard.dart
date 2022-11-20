@@ -19,7 +19,7 @@ class AuthGuard extends AutoRouteGuard {
       var userName = await userManager.getUserName();
       bool isUserRegistered = await checkRegisteredUser(userName);
 
-      if ( !isUserRegistered) {
+      if (!isUserRegistered) {
         router.replace(CompleteProfileRoute());
       } else {
         resolver.next(true);
@@ -34,7 +34,7 @@ class AuthGuard extends AutoRouteGuard {
       var userName = await userManager.getUserName();
       bool isUserRegistered = await checkRegisteredUser(userName);
 
-      if ( !isUserRegistered) {
+      if (!isUserRegistered) {
         router.replace(CompleteProfileRoute());
       } else {
         if (loginState) {
