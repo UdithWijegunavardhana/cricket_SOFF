@@ -16,6 +16,13 @@ class TokenManager extends BaseService {
     return true;
   }
 
+  Future<bool> setIdToken(String idToken) async {
+    GetStorage box = GetStorage();
+    await box.write(
+        TokenMangerKeys.idToken.toString(), idToken);
+    return true;
+  }
+
   Future<bool> setExpiryTime(DateTime expiryTime) async {
 
     GetStorage box = GetStorage();
@@ -44,6 +51,11 @@ class TokenManager extends BaseService {
     return box.read(TokenMangerKeys.refreshToken.toString());
   }
 
+  String? getIdToken() {
+    GetStorage box = GetStorage();
+    return box.read(TokenMangerKeys.idToken.toString());
+  }
+
   String? getExpiryTime() {
     GetStorage box = GetStorage();
     return box.read(TokenMangerKeys.expiryTime.toString());
@@ -62,4 +74,4 @@ class TokenManager extends BaseService {
 
 }
 
-enum TokenMangerKeys { accessToken, refreshToken, expiryTime, emailVerified }
+enum TokenMangerKeys { accessToken, refreshToken, expiryTime, emailVerified, idToken }

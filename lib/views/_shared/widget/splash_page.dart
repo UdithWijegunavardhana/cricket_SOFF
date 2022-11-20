@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soff_cricket_hybrid/views/_shared/constants/colors.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -9,8 +10,10 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: CircularProgressIndicator()),
+    return Scaffold(
+      body: Center(child: CircularProgressIndicator(
+        color: kPrimaryColor,
+      )),
     );
   }
 }
