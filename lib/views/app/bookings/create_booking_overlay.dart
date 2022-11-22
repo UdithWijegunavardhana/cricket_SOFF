@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:soff_cricket_hybrid/app.dart';
+import 'package:soff_cricket_hybrid/models/api_response/api_respone_model.dart';
+import 'package:soff_cricket_hybrid/models/booking_schedule/booking_schedule_model.dart';
+import 'package:soff_cricket_hybrid/models/user/user_model.dart';
+import 'package:soff_cricket_hybrid/services/auth/user_manager_service.dart';
+import 'package:soff_cricket_hybrid/services/schedule_service.dart';
+import 'package:soff_cricket_hybrid/views/_shared/loaders/progress_loader.dart';
 import 'package:soff_cricket_hybrid/views/_shared/widget/custom_dropdown.dart';
-
+import 'package:soff_cricket_hybrid/views/_shared/widget/toast.dart';
+import 'package:intl/intl.dart';
 import '../../../utils/datetime_utils/datetime_util.dart';
 import '../../_shared/constants/colors.dart';
 import '../../_shared/constants/font_styles.dart';
 import '../../_shared/widget/custom_date_picker.dart';
 import '../../_shared/widget/custom_elevated_button.dart';
 import '../../_shared/widget/custom_time_picker.dart';
+import 'booking_requested_success_overlay.dart';
 
 // class CreateBookingOverlay extends ModalRoute<void> {
 //   @override
@@ -177,7 +184,7 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
   TextEditingController endTimeController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   bool disableDropdown = true;
-  String errorMessage = '';
+  String? errorMessage;
   String duration = '';
 
   DateTime currentDateTime = DateTime.now();
@@ -298,6 +305,7 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                                 if (startTimeChanged && !endTimeChanged) {
                                   setState(() {
                                     DateTime updatedTime = startDateTime.add(duration);
+                                    endDateTime = updatedTime;
                                     String formattedTime = DateFormat.jm().format(updatedTime);
                                     endTimeController.text = formattedTime;
                                   });
@@ -306,6 +314,7 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                                 if (!startTimeChanged && endTimeChanged) {
                                   setState(() {
                                     DateTime updatedTime = endDateTime.subtract(duration);
+                                    startDateTime = updatedTime;
                                     String formattedTime = DateFormat.jm().format(updatedTime);
                                     startTimeController.text = formattedTime;
                                   });
@@ -355,7 +364,7 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                         ),
                         CustomDatePicker(title: 'Future Date ( Optional )', hintText: 'Select Future Date', controller: descriptionController),
                         const Spacer(),
-                        if (errorMessage != '') ...[
+                        if (errorMessage != null) ...[
                           Container(
                             height: 40,
                             width: double.infinity,
@@ -363,9 +372,11 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text(
-                                  errorMessage,
-                                  style: TextStyle(color: kLayoutLightColor),
+                                Expanded(
+                                  child: Text(
+                                    errorMessage ?? '',
+                                    style: TextStyle(color: kLayoutLightColor),
+                                  ),
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -373,7 +384,7 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                                 IconButton(
                                     onPressed: () {
                                       setState(() {
-                                        errorMessage = '';
+                                        errorMessage = null;
                                       });
                                     },
                                     icon: Icon(Icons.cancel, color: kLayoutLightColor))
@@ -387,8 +398,8 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                             width: 120,
                             height: 50,
                             buttonText: 'Request',
-                            onPressed: () {
-                              String errorType = '';
+                            onPressed: () async {
+                              String? errorType;
 
                               if (startTimeController.text.isEmpty && endTimeController.text.isEmpty) {
                                 errorType = "Start time and End time must be selected";
@@ -410,17 +421,25 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                                   errorType = "Start time cannot be in future than ending time";
                                 }
 
-                                if (start[1] == end[1]) {
-                                  if (int.parse(start[0].split(':')[0]) > int.parse(end[0].split(':')[0])) {
-                                    errorType = "Start time cannot be in future than ending time";
-                                  } else if (int.parse(start[0].split(':')[0]) == int.parse(end[0].split(':')[0])) {
-                                    if (int.parse(start[0].split(':')[1]) > int.parse(end[0].split(':')[1])) {
-                                      errorType = "Start time cannot be in future than ending time";
-                                    } else {
-                                      errorType = "Start time cannot be same as ending time";
-                                    }
-                                  }
+                                if (startDateTime.isAfter(endDateTime)) {
+                                  errorType = "Start time cannot be in future than ending time";
                                 }
+
+                                if (startDateTime.isAtSameMomentAs(endDateTime)) {
+                                  errorType = "Start time cannot be same as ending time";
+                                }
+
+                                // if (start[1] == end[1]) {
+                                //   if (int.parse(start[0].split(':')[0]) > int.parse(end[0].split(':')[0])) {
+                                //     errorType = "Start time cannot be in future than ending time";
+                                //   } else if (int.parse(start[0].split(':')[0]) == int.parse(end[0].split(':')[0])) {
+                                //     if (int.parse(start[0].split(':')[1]) > int.parse(end[0].split(':')[1])) {
+                                //       errorType = "Start time cannot be in future than ending time";
+                                //     } else {
+                                //       errorType = "Start time cannot be same as ending time";
+                                //     }
+                                //   }
+                                // }
 
                                 // double startTime = toDouble(myTime);
                                 // double endTime = toDouble(myTime);
@@ -431,8 +450,40 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                               setState(() {
                                 errorMessage = errorType;
                               });
-
-                              // Navigator.of(context).push(ProgressLoader());
+                              if (errorType == null) {
+                                DateTime dateTime = widget.selectedDateTime;
+                                UserManager _userManager = UserManager();
+                                UserModel _user = await _userManager.getUserData();
+                                Navigator.of(context).push(ProgressLoader());
+                                var bookingSchedule = {
+                                  "actionStatus": "SAVE",
+                                  "date": '${dateTime.year}-${dateTime.month}-${dateTime.day}',
+                                  "rescheduleDate": descriptionController.text, //null,
+                                  "resources": [
+                                    {
+                                      "timeslots": [
+                                        {
+                                          "startTime": DateFormat.Hm().format(startDateTime),
+                                          "endTime": DateFormat.Hm().format(endDateTime),
+                                          "customerId": _user.id!,
+                                          "comment": "",
+                                          "status": "FIXED",
+                                          "isReschedule": "false",
+                                          "isSendEmail": "SEND_EMAIL",
+                                          "createdDateTime": DateFormat('yyyy-MM-dd hh:mm:ss').format(DateTime.now()) //"2022-11-21 20:00:01"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                };
+                                ApiResponseModel res = await ScheduleService().saveSchedule(bookingSchedule);
+                                Navigator.pop(context);
+                                if (res.status) {
+                                  Navigator.of(context).push(BookingRequestedSuccessOverlay());
+                                } else {
+                                  toastBottom("Something went wrong, Please try again later");
+                                }
+                              }
                             },
                             color: kPrimaryColor)
                       ],

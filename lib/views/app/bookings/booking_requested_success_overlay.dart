@@ -25,10 +25,10 @@ class BookingRequestedSuccessOverlay extends ModalRoute<void> {
 
   @override
   Widget buildPage(
-      BuildContext context,
-      Animation<double> animation,
-      Animation<double> secondaryAnimation,
-      ) {
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
     return SafeArea(
       child: Material(
         type: MaterialType.canvas,
@@ -47,7 +47,9 @@ class BookingRequestedSuccessOverlay extends ModalRoute<void> {
         children: <Widget>[
           const Spacer(),
           Icon(Icons.done_outline, color: kPrimaryColor, size: 50),
-          const SizedBox(height: 40,),
+          const SizedBox(
+            height: 40,
+          ),
           Text(
             'Booking Requested Successfully',
             style: kModalTitle,
@@ -59,6 +61,7 @@ class BookingRequestedSuccessOverlay extends ModalRoute<void> {
               buttonText: 'Close',
               onPressed: () {
                 Navigator.pop(context);
+                Navigator.pop(context);
               },
               color: kPrimaryColor)
         ],
@@ -67,8 +70,7 @@ class BookingRequestedSuccessOverlay extends ModalRoute<void> {
   }
 
   @override
-  Widget buildTransitions(
-      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     return FadeTransition(
       opacity: animation,
       child: ScaleTransition(
@@ -76,7 +78,5 @@ class BookingRequestedSuccessOverlay extends ModalRoute<void> {
         child: child,
       ),
     );
-
   }
-  
 }

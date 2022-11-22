@@ -8,23 +8,18 @@ import '../config/config_handler.dart';
 import '../models/api_response/api_respone_model.dart';
 
 class ScheduleService extends BaseService {
-
-  final _scheduleAPIConfigHandler =
-      ConfigHandler.loadAPIConfigs()?.scheduleApis;
+  final _scheduleAPIConfigHandler = ConfigHandler.loadAPIConfigs()?.scheduleApis;
 
   Future<ApiResponseModel> getSchedulesByDate(String date) async {
-
     List<ResourceModel> _resourceList = <ResourceModel>[];
 
     try {
-      var res = await dio
-          .get(_scheduleAPIConfigHandler!.getSchedulesByDate + date);
+      var res = await dio.get(_scheduleAPIConfigHandler!.getSchedulesByDate + date);
 
-      if(res.statusCode == 200) {
-
+      if (res.statusCode == 200) {
         var schedules = ScheduleModel.fromJson(res.data);
 
-        for(var item in schedules.data!.resources!){
+        for (var item in schedules.data!.resources!) {
           _resourceList.add(item);
         }
       }
@@ -35,20 +30,18 @@ class ScheduleService extends BaseService {
     }
   }
 
-  Future<ApiResponseModel> saveSchedule(BookingScheduleModel bookingSchedule) async {
-
+  Future<ApiResponseModel> saveSchedule(bookingSchedule) async {
     List<ResourceModel> _resourceList = <ResourceModel>[];
 
     try {
-      var res = await dio
-          .post(_scheduleAPIConfigHandler!.saveSchedule,
-      data: bookingSchedule);
+      var res = await dio.post(_scheduleAPIConfigHandler!.saveSchedule,
+          // "https://soffcricket.gangfy.com/soffCricketAPI/schedule/save-schedule",
+          data: bookingSchedule);
 
-      if(res.statusCode == 200) {
-
+      if (res.statusCode == 200) {
         var schedules = ScheduleModel.fromJson(res.data);
 
-        for(var item in schedules.data!.resources!){
+        for (var item in schedules.data!.resources!) {
           _resourceList.add(item);
         }
       }
@@ -58,5 +51,4 @@ class ScheduleService extends BaseService {
       return ApiResponseModel(status: false, message: e.toString());
     }
   }
-
 }

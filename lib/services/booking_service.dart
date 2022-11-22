@@ -7,16 +7,13 @@ import '../config/config_handler.dart';
 import '../models/api_response/api_respone_model.dart';
 
 class BookingService extends BaseService {
-
-  final _resourceAPIConfigHandler =
-      ConfigHandler.loadAPIConfigs()?.resourcesApis;
+  final _resourceAPIConfigHandler = ConfigHandler.loadAPIConfigs()?.resourcesApis;
 
   Future<ApiResponseModel> getCategories() async {
     try {
       List<CategoryModel> resourceList = <CategoryModel>[];
-      var res = await dio
-          .get(_resourceAPIConfigHandler!.getAllResourceCategories + '0/1000');
-      for(var item in res.data['data']['list']){
+      var res = await dio.get(_resourceAPIConfigHandler!.getAllResourceCategories + '0/1000');
+      for (var item in res.data['data']['list']) {
         resourceList.add(CategoryModel.fromJson(item));
       }
       return ApiResponseModel(status: true, data: resourceList);
@@ -28,9 +25,8 @@ class BookingService extends BaseService {
   Future<ApiResponseModel> getResources(String categoryId) async {
     try {
       List<ResourceModel> resourceList = <ResourceModel>[];
-      var res = await dio
-          .get(_resourceAPIConfigHandler!.getAllResourcesByCategoryId + categoryId);
-      for(var item in res.data['data']){
+      var res = await dio.get(_resourceAPIConfigHandler!.getAllResourcesByCategoryId + categoryId);
+      for (var item in res.data['data']) {
         resourceList.add(ResourceModel.fromJson(item));
       }
       return ApiResponseModel(status: true, data: resourceList);
@@ -39,17 +35,17 @@ class BookingService extends BaseService {
     }
   }
 
-  Future<ApiResponseModel> getSchedulesByDate(String date) async {
-    try {
-      var res = await dio
-          .get(_resourceAPIConfigHandler!.getAllResourcesByCategoryId + date);
+  // Future<ApiResponseModel> getSchedulesByDate(String date) async {
+  //   try {
+  //     var res = await dio
+  //         .get(_resourceAPIConfigHandler!.getAllResourcesByCategoryId + date);
 
-      ScheduleModel resource = ScheduleModel.fromJson(res.data);
+  //     ScheduleModel resource = ScheduleModel.fromJson(res.data);
 
-      return ApiResponseModel(status: true, data: resource);
-    } catch (e) {
-      return ApiResponseModel(status: false, message: e.toString());
-    }
-  }
+  //     return ApiResponseModel(status: true, data: resource);
+  //   } catch (e) {
+  //     return ApiResponseModel(status: false, message: e.toString());
+  //   }
+  // }
 
 }
