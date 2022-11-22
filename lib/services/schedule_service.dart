@@ -34,9 +34,7 @@ class ScheduleService extends BaseService {
     List<ResourceModel> _resourceList = <ResourceModel>[];
 
     try {
-      var res = await dio.post(_scheduleAPIConfigHandler!.saveSchedule,
-          // "https://soffcricket.gangfy.com/soffCricketAPI/schedule/save-schedule",
-          data: bookingSchedule);
+      var res = await dio.post(_scheduleAPIConfigHandler!.saveSchedule, data: bookingSchedule);
 
       if (res.statusCode == 200) {
         var schedules = ScheduleModel.fromJson(res.data);
