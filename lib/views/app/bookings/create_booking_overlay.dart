@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:soff_cricket_hybrid/app.dart';
 import 'package:soff_cricket_hybrid/views/_shared/widget/custom_dropdown.dart';
 
 import '../../../utils/datetime_utils/datetime_util.dart';
@@ -165,8 +166,7 @@ import '../../_shared/widget/custom_time_picker.dart';
 class CreateBookingScreen extends StatefulWidget {
   final DateTime selectedDateTime;
 
-  const CreateBookingScreen({Key? key, required this.selectedDateTime})
-      : super(key: key);
+  const CreateBookingScreen({Key? key, required this.selectedDateTime}) : super(key: key);
 
   @override
   State<CreateBookingScreen> createState() => _CreateBookingScreenState();
@@ -187,13 +187,7 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
   bool startTimeChanged = false;
   bool endTimeChanged = false;
 
-  List<String> durationList = const <String>[
-    '00:30',
-    '01:00',
-    '01:30',
-    '02:00',
-    '02:30'
-  ];
+  List<String> durationList = const <String>['00:30', '01:00', '01:30', '02:00', '02:30'];
 
   Map<String, dynamic> getDuration(String selectedDuration) {
     int hours = int.parse(selectedDuration.split(':')[0]);
@@ -217,275 +211,237 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
       disableDropdown = true;
     }
 
-    return SafeArea(
-      child: Material(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      Icons.close,
-                      color: kFontLightColor,
-                    ))
-              ],
-            ),
-            Expanded(
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.96,
-                height: 450,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Form(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Request a booking",
-                        style: kModalTitle,
-                      ),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                              padding: const EdgeInsets.all(10),
-                              margin: const EdgeInsets.only(top: 10),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Container(
-                                  padding: const EdgeInsets.all(5),
-                                  width: 72,
-                                  height: 72,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        widget.selectedDateTime.year.toString(),
-                                        style: const TextStyle(
-                                          color:
-                                              Color.fromRGBO(97, 97, 97, 1),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(2.0),
-                                        child: Text(
-                                          DateTimeUtil.getMonthAbbriviation(
-                                              widget.selectedDateTime.month)
-                                              .toLowerCase(),
+    return Scaffold(
+      body: SafeArea(
+        child: Material(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        Icons.close,
+                        color: kFontLightColor,
+                      ))
+                ],
+              ),
+              Expanded(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.96,
+                  height: 450,
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Form(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Request a booking",
+                          style: kModalTitle,
+                        ),
+                        const SizedBox(
+                          height: 6,
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                                padding: const EdgeInsets.all(10),
+                                margin: const EdgeInsets.only(top: 10),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    width: 72,
+                                    height: 78,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          widget.selectedDateTime.year.toString(),
                                           style: const TextStyle(
-                                              color: Color.fromRGBO(
-                                                  97, 97, 97, 1),
-                                              fontSize: 14),
+                                            color: Color.fromRGBO(97, 97, 97, 1),
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        widget.selectedDateTime.day.toString(),
-                                        style: const TextStyle(
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.w600,
-                                            color: Color.fromRGBO(
-                                                97, 97, 97, 1)),
-                                      )
-                                    ],
+                                        Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: Text(
+                                            DateTimeUtil.getMonthAbbriviation(widget.selectedDateTime.month).toLowerCase(),
+                                            style: const TextStyle(color: Color.fromRGBO(97, 97, 97, 1), fontSize: 14),
+                                          ),
+                                        ),
+                                        Text(
+                                          widget.selectedDateTime.day.toString(),
+                                          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Color.fromRGBO(97, 97, 97, 1)),
+                                        )
+                                      ],
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: kSecondaryColor,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
                                   ),
-                                  decoration: BoxDecoration(
-                                    color: kSecondaryColor,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                              )
-                          ),
-                          const Spacer(),
-                          CustomDropdown(
-                            title: 'Duration',
-                            hint: 'Select Duration',
-                            disabled: disableDropdown,
+                                )),
+                            const Spacer(),
+                            CustomDropdown(
+                              title: 'Duration',
+                              hint: 'Select Duration',
+                              disabled: disableDropdown,
+                              onValueChanged: (value) {
+                                Map<String, dynamic> formattedDuration = getDuration(value);
+
+                                Duration duration = Duration(hours: formattedDuration['hours'], minutes: formattedDuration['minutes']);
+
+                                if (startTimeChanged && !endTimeChanged) {
+                                  setState(() {
+                                    DateTime updatedTime = startDateTime.add(duration);
+                                    String formattedTime = DateFormat.jm().format(updatedTime);
+                                    endTimeController.text = formattedTime;
+                                  });
+                                }
+
+                                if (!startTimeChanged && endTimeChanged) {
+                                  setState(() {
+                                    DateTime updatedTime = endDateTime.subtract(duration);
+                                    String formattedTime = DateFormat.jm().format(updatedTime);
+                                    startTimeController.text = formattedTime;
+                                  });
+                                }
+                              },
+                              items: durationList,
+                              padding: const EdgeInsets.all(10),
+                            ),
+                          ],
+                        ),
+                        CustomTimePicker(
+                            title: 'Start Time',
+                            hintText: 'Select Time',
+                            date: widget.selectedDateTime,
                             onValueChanged: (value) {
-                              Map<String, dynamic> formattedDuration =
-                                  getDuration(value);
-
-                              Duration duration = Duration(
-                                  hours: formattedDuration['hours'],
-                                  minutes: formattedDuration['minutes']);
-
-                              if (startTimeChanged && !endTimeChanged) {
-                                setState(() {
-                                  DateTime updatedTime =
-                                      startDateTime.add(duration);
-                                  String formattedTime =
-                                      DateFormat.jm().format(updatedTime);
-                                  endTimeController.text = formattedTime;
-                                });
-                              }
-
-                              if (!startTimeChanged && endTimeChanged) {
-                                setState(() {
-                                  DateTime updatedTime =
-                                      endDateTime.subtract(duration);
-                                  String formattedTime =
-                                      DateFormat.jm().format(updatedTime);
-                                  startTimeController.text = formattedTime;
-                                });
-                              }
+                              setState(() {
+                                startTimeChanged = !startTimeChanged;
+                                if (startTimeChanged && !endTimeChanged) {
+                                  disableDropdown = !disableDropdown;
+                                }
+                                startDateTime = value;
+                              });
                             },
-                            items: durationList,
-                            padding: const EdgeInsets.all(10),
-                          ),
+                            controller: startTimeController),
+                        const SizedBox(
+                          height: 6,
+                        ),
+                        const SizedBox(
+                          height: 6,
+                        ),
+                        CustomTimePicker(
+                            title: 'End Time',
+                            hintText: 'Select Time',
+                            date: widget.selectedDateTime,
+                            onValueChanged: (value) {
+                              setState(() {
+                                endTimeChanged = !endTimeChanged;
+                                if (!startTimeChanged && endTimeChanged) {
+                                  disableDropdown = !disableDropdown;
+                                }
+                                endDateTime = value;
+                              });
+                            },
+                            controller: endTimeController),
+                        const SizedBox(
+                          height: 6,
+                        ),
+                        CustomDatePicker(title: 'Future Date ( Optional )', hintText: 'Select Future Date', controller: descriptionController),
+                        const Spacer(),
+                        if (errorMessage != '') ...[
+                          Container(
+                            height: 40,
+                            width: double.infinity,
+                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  errorMessage,
+                                  style: TextStyle(color: kLayoutLightColor),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        errorMessage = '';
+                                      });
+                                    },
+                                    icon: Icon(Icons.cancel, color: kLayoutLightColor))
+                              ],
+                            ),
+                            decoration: BoxDecoration(color: kWarningColor, borderRadius: BorderRadius.circular(10)),
+                          )
                         ],
-                      ),
-                      CustomTimePicker(
-                          title: 'Start Time',
-                          hintText: 'Select Time',
-                          date: widget.selectedDateTime,
-                          onValueChanged: (value) {
-                            setState(() {
-                              startTimeChanged = !startTimeChanged;
-                              if (startTimeChanged && !endTimeChanged) {
-                                disableDropdown = !disableDropdown;
-                              }
-                              startDateTime = value;
-                            });
-                          },
-                          controller: startTimeController),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      CustomTimePicker(
-                          title: 'End Time',
-                          hintText: 'Select Time',
-                          date: widget.selectedDateTime,
-                          onValueChanged: (value) {
-                            setState(() {
-                              endTimeChanged = !endTimeChanged;
-                              if (!startTimeChanged && endTimeChanged) {
-                                disableDropdown = !disableDropdown;
-                              }
-                              endDateTime = value;
-                            });
-                          },
-                          controller: endTimeController),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      CustomDatePicker(
-                          title: 'Future Date ( Optional )',
-                          hintText: 'Select Future Date',
-                          controller: descriptionController),
-                      const Spacer(),
-                      if (errorMessage != '') ...[
-                        Container(
-                          height: 40,
-                          width: double.infinity,
-                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                errorMessage,
-                                style: TextStyle(color: kLayoutLightColor),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      errorMessage = '';
-                                    });
-                                  },
-                                  icon: Icon(Icons.cancel,
-                                      color: kLayoutLightColor))
-                            ],
-                          ),
-                          decoration: BoxDecoration(
-                              color: kWarningColor,
-                              borderRadius: BorderRadius.circular(10)),
-                        )
-                      ],
-                      const Spacer(),
-                      CustomElevatedButton(
-                          width: 120,
-                          height: 50,
-                          buttonText: 'Request',
-                          onPressed: () {
-                            String errorType = '';
+                        const Spacer(),
+                        CustomElevatedButton(
+                            width: 120,
+                            height: 50,
+                            buttonText: 'Request',
+                            onPressed: () {
+                              String errorType = '';
 
-                            if (startTimeController.text.isEmpty &&
-                                endTimeController.text.isEmpty) {
-                              errorType =
-                                  "Start time and End time must be selected";
-                            }
-
-                            if (startTimeController.text.isEmpty &&
-                                endTimeController.text.isNotEmpty) {
-                              errorType = "Start time must be selected";
-                            }
-
-                            if (endTimeController.text.isEmpty &&
-                                startTimeController.text.isNotEmpty) {
-                              errorType = "End time must be selected";
-                            }
-
-                            if (startTimeController.text.isNotEmpty &&
-                                endTimeController.text.isNotEmpty) {
-                              List<String> start =
-                                  startTimeController.text.split(" ");
-                              List<String> end =
-                                  endTimeController.text.split(" ");
-
-                              if (start[1] == 'PM' && end[1] == 'AM') {
-                                errorType =
-                                    "Start time cannot be in future than ending time";
+                              if (startTimeController.text.isEmpty && endTimeController.text.isEmpty) {
+                                errorType = "Start time and End time must be selected";
                               }
 
-                              if (start[1] == end[1]) {
-                                if (int.parse(start[0].split(':')[0]) >
-                                    int.parse(end[0].split(':')[0])) {
-                                  errorType =
-                                      "Start time cannot be in future than ending time";
-                                } else if (int.parse(start[0].split(':')[0]) ==
-                                    int.parse(end[0].split(':')[0])) {
-                                  if (int.parse(start[0].split(':')[1]) >
-                                      int.parse(end[0].split(':')[1])) {
-                                    errorType =
-                                        "Start time cannot be in future than ending time";
-                                  } else {
-                                    errorType =
-                                        "Start time cannot be same as ending time";
+                              if (startTimeController.text.isEmpty && endTimeController.text.isNotEmpty) {
+                                errorType = "Start time must be selected";
+                              }
+
+                              if (endTimeController.text.isEmpty && startTimeController.text.isNotEmpty) {
+                                errorType = "End time must be selected";
+                              }
+
+                              if (startTimeController.text.isNotEmpty && endTimeController.text.isNotEmpty) {
+                                List<String> start = startTimeController.text.split(" ");
+                                List<String> end = endTimeController.text.split(" ");
+
+                                if (start[1] == 'PM' && end[1] == 'AM') {
+                                  errorType = "Start time cannot be in future than ending time";
+                                }
+
+                                if (start[1] == end[1]) {
+                                  if (int.parse(start[0].split(':')[0]) > int.parse(end[0].split(':')[0])) {
+                                    errorType = "Start time cannot be in future than ending time";
+                                  } else if (int.parse(start[0].split(':')[0]) == int.parse(end[0].split(':')[0])) {
+                                    if (int.parse(start[0].split(':')[1]) > int.parse(end[0].split(':')[1])) {
+                                      errorType = "Start time cannot be in future than ending time";
+                                    } else {
+                                      errorType = "Start time cannot be same as ending time";
+                                    }
                                   }
                                 }
+
+                                // double startTime = toDouble(myTime);
+                                // double endTime = toDouble(myTime);
+                                // Navigator.pop(context);
+                                // Navigator.of(context).push(BookingRequestedSuccessOverlay());
                               }
 
-                              // double startTime = toDouble(myTime);
-                              // double endTime = toDouble(myTime);
-                              // Navigator.pop(context);
-                              // Navigator.of(context).push(BookingRequestedSuccessOverlay());
-                            }
+                              setState(() {
+                                errorMessage = errorType;
+                              });
 
-                            setState(() {
-                              errorMessage = errorType;
-                            });
-
-                            // Navigator.of(context).push(ProgressLoader());
-                          },
-                          color: kPrimaryColor)
-                    ],
+                              // Navigator.of(context).push(ProgressLoader());
+                            },
+                            color: kPrimaryColor)
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

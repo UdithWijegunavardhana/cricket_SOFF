@@ -9,8 +9,7 @@ class HomeItemTile extends StatelessWidget {
   final String? subTitle;
   final VoidCallback onTap;
 
-  const HomeItemTile({Key? key, required this.title, this.subTitle, required this.onTap})
-      : super(key: key);
+  const HomeItemTile({Key? key, required this.title, this.subTitle, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,22 +23,19 @@ class HomeItemTile extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(
-                  color: kLayoutLightColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500),
+              style: TextStyle(color: kLayoutLightColor, fontSize: 18, fontWeight: FontWeight.w500),
             ),
             const SizedBox(
               height: 10,
             ),
             Text(
               subTitle ?? '',
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(color: kLayoutLightColor),
             ),
           ],
         ),
-        decoration: BoxDecoration(
-            color: kPrimaryColor, borderRadius: BorderRadius.circular(10)),
+        decoration: BoxDecoration(color: kPrimaryColor, borderRadius: BorderRadius.circular(10)),
       ),
     );
   }

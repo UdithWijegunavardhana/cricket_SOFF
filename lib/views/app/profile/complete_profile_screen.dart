@@ -26,9 +26,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
-  CompleteProfileController _completeProfileController = Get.put(CompleteProfileController());
+  final CompleteProfileController _completeProfileController = Get.put(CompleteProfileController());
 
-  var maskFormatter = new MaskTextInputFormatter(mask: '###-###-####', filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.lazy);
+  var maskFormatter = MaskTextInputFormatter(mask: '###-###-####', filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.lazy);
 
   @override
   Widget build(BuildContext context) {

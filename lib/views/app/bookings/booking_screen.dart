@@ -16,9 +16,7 @@ import 'create_booking_overlay.dart';
 import 'booking_requested_success_overlay.dart';
 
 class BookingScreen extends StatefulWidget {
-  const BookingScreen(
-      {Key? key, required this.resourceId, required this.selectedDate})
-      : super(key: key);
+  const BookingScreen({Key? key, required this.resourceId, required this.selectedDate}) : super(key: key);
 
   final DateTime selectedDate;
   final String resourceId;
@@ -27,13 +25,11 @@ class BookingScreen extends StatefulWidget {
   State<BookingScreen> createState() => _BookingScreenState();
 }
 
-class _BookingScreenState extends State<BookingScreen>
-    with TickerProviderStateMixin {
+class _BookingScreenState extends State<BookingScreen> with TickerProviderStateMixin {
   late final BookingController _bookingController;
   int tabSize = 0;
 
-  late final TabController _tabController =
-      TabController(length: _bookingController.resources.length, vsync: this);
+  late final TabController _tabController = TabController(length: _bookingController.resources.length, vsync: this);
 
   @override
   void initState() {
@@ -51,15 +47,10 @@ class _BookingScreenState extends State<BookingScreen>
     List<Appointment> meetings = <Appointment>[];
 
     final DateTime today = DateTime.now();
-    final DateTime startTime =
-        DateTime(today.year, today.month, today.day, 9, 0, 0);
+    final DateTime startTime = DateTime(today.year, today.month, today.day, 9, 0, 0);
     final DateTime endTime = startTime.add(const Duration(minutes: 30));
 
-    meetings.add(Appointment(
-        startTime: startTime,
-        endTime: endTime,
-        subject: 'Booked ( 9.00AM - 11.00AM )',
-        color: kPrimaryColor));
+    meetings.add(Appointment(startTime: startTime, endTime: endTime, subject: 'Booked ( 9.00AM - 11.00AM )', color: kPrimaryColor));
 
     return meetings;
   }
@@ -101,32 +92,33 @@ class _BookingScreenState extends State<BookingScreen>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        floatingActionButton: Obx(
-          () => _bookingController.isLoading.isFalse
-              ? FloatingActionButton(
-                  onPressed: () {
-                    _showOverlay(context);
-                  },
-                  backgroundColor: kPrimaryColor,
-                  child: Icon(
-                    Icons.add,
-                    color: kLayoutLightColor,
-                    size: 30,
-                  ),
-                )
-              : FloatingActionButton(
-                  onPressed: () {},
-                  backgroundColor: kPrimaryColor,
-                  child: Icon(
-                    Icons.add,
-                    color: kLayoutLightColor,
-                    size: 30,
-                  ),
+    return Scaffold(
+      appBar: AppBar(elevation: 0, backgroundColor: kSecondaryColor, foregroundColor: kFontLightColor),
+      floatingActionButton: Obx(
+        () => _bookingController.isLoading.isFalse
+            ? FloatingActionButton(
+                onPressed: () {
+                  _showOverlay(context);
+                },
+                backgroundColor: kPrimaryColor,
+                child: Icon(
+                  Icons.add,
+                  color: kLayoutLightColor,
+                  size: 30,
                 ),
-        ),
-        body: Obx(
+              )
+            : FloatingActionButton(
+                onPressed: () {},
+                backgroundColor: kPrimaryColor,
+                child: Icon(
+                  Icons.add,
+                  color: kLayoutLightColor,
+                  size: 30,
+                ),
+              ),
+      ),
+      body: SafeArea(
+        child: Obx(
           () => _bookingController.isLoading.isFalse
               ? Container(
                   color: kLayoutLightColor,
@@ -136,8 +128,7 @@ class _BookingScreenState extends State<BookingScreen>
                         Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: Text(
-                            _bookingController
-                                .resources[0].resourceCategorieName,
+                            _bookingController.resources[0].resourceCategorieName,
                             style: kFontScreenTitle,
                           ),
                         ),
@@ -145,15 +136,13 @@ class _BookingScreenState extends State<BookingScreen>
                     ),
                     Container(
                       width: double.maxFinite,
-                      margin:
-                          const EdgeInsets.only(top: 10, left: 10, right: 10),
+                      margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
                       height: 30,
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: TabBar(
                             labelColor: Colors.white,
-                            labelPadding:
-                                const EdgeInsets.only(left: 20, right: 20),
+                            labelPadding: const EdgeInsets.only(left: 20, right: 20),
                             isScrollable: true,
                             unselectedLabelColor: kPrimaryColor,
                             indicatorWeight: 0,
@@ -162,8 +151,7 @@ class _BookingScreenState extends State<BookingScreen>
                               borderRadius: BorderRadius.circular(20),
                             ),
                             controller: _tabController,
-                            tabs: _getResourceEventsTabs(
-                                _bookingController.resources)),
+                            tabs: _getResourceEventsTabs(_bookingController.resources)),
                       ),
                     ),
                     const SizedBox(
@@ -173,8 +161,7 @@ class _BookingScreenState extends State<BookingScreen>
                       child: TabBarView(
                           controller: _tabController,
                           physics: const NeverScrollableScrollPhysics(),
-                          children: _getResourceEventsTabView(
-                              _bookingController.resources)),
+                          children: _getResourceEventsTabView(_bookingController.resources)),
                     ),
                   ]),
                 )
