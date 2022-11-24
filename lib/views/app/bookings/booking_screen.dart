@@ -28,6 +28,7 @@ class BookingScreen extends StatefulWidget {
 class _BookingScreenState extends State<BookingScreen> with TickerProviderStateMixin {
   late final BookingController _bookingController;
   int tabSize = 0;
+  int selectedTabId = 0;
 
   late final TabController _tabController = TabController(length: _bookingController.resources.length, vsync: this);
 
@@ -87,7 +88,9 @@ class _BookingScreenState extends State<BookingScreen> with TickerProviderStateM
   TextEditingController descriptionController = TextEditingController();
 
   void _showOverlay(BuildContext context) {
-    AutoRouter.of(context).push(CreateBookingRoute(selectedDateTime: widget.selectedDate));
+    AutoRouter.of(context)
+        .push(CreateBookingRoute(selectedDateTime: widget.selectedDate, resourceId: _bookingController.resources[selectedTabId].id))
+        .then((value) => _bookingController.getResources());
   }
 
   @override
@@ -151,6 +154,9 @@ class _BookingScreenState extends State<BookingScreen> with TickerProviderStateM
                               borderRadius: BorderRadius.circular(20),
                             ),
                             controller: _tabController,
+                            onTap: (value) => setState(() {
+                                  selectedTabId = value;
+                                }),
                             tabs: _getResourceEventsTabs(_bookingController.resources)),
                       ),
                     ),

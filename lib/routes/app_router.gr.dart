@@ -59,17 +59,17 @@ class AppRouter extends _i10.RootStackRouter {
       return _i10.CustomPage<dynamic>(
           routeData: routeData,
           child: _i3.CreateBookingScreen(
-              key: args.key, selectedDateTime: args.selectedDateTime),
+              key: args.key,
+              selectedDateTime: args.selectedDateTime,
+              resourceId: args.resourceId),
           transitionsBuilder: _i10.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
     CompleteProfileRoute.name: (routeData) {
-      final args = routeData.argsAs<CompleteProfileRouteArgs>(
-          orElse: () => const CompleteProfileRouteArgs());
       return _i10.CustomPage<dynamic>(
           routeData: routeData,
-          child: _i4.CompleteProfileScreen(key: args.key),
+          child: const _i4.CompleteProfileScreen(),
           transitionsBuilder: _i10.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
@@ -187,48 +187,43 @@ class BookingRouteArgs {
 /// generated route for
 /// [_i3.CreateBookingScreen]
 class CreateBookingRoute extends _i10.PageRouteInfo<CreateBookingRouteArgs> {
-  CreateBookingRoute({_i11.Key? key, required DateTime selectedDateTime})
+  CreateBookingRoute(
+      {_i11.Key? key,
+      required DateTime selectedDateTime,
+      required String resourceId})
       : super(CreateBookingRoute.name,
             path: 'create- bookings',
             args: CreateBookingRouteArgs(
-                key: key, selectedDateTime: selectedDateTime));
+                key: key,
+                selectedDateTime: selectedDateTime,
+                resourceId: resourceId));
 
   static const String name = 'CreateBookingRoute';
 }
 
 class CreateBookingRouteArgs {
-  const CreateBookingRouteArgs({this.key, required this.selectedDateTime});
+  const CreateBookingRouteArgs(
+      {this.key, required this.selectedDateTime, required this.resourceId});
 
   final _i11.Key? key;
 
   final DateTime selectedDateTime;
 
+  final String resourceId;
+
   @override
   String toString() {
-    return 'CreateBookingRouteArgs{key: $key, selectedDateTime: $selectedDateTime}';
+    return 'CreateBookingRouteArgs{key: $key, selectedDateTime: $selectedDateTime, resourceId: $resourceId}';
   }
 }
 
 /// generated route for
 /// [_i4.CompleteProfileScreen]
-class CompleteProfileRoute
-    extends _i10.PageRouteInfo<CompleteProfileRouteArgs> {
-  CompleteProfileRoute({_i11.Key? key})
-      : super(CompleteProfileRoute.name,
-            path: 'complete-profile', args: CompleteProfileRouteArgs(key: key));
+class CompleteProfileRoute extends _i10.PageRouteInfo<void> {
+  const CompleteProfileRoute()
+      : super(CompleteProfileRoute.name, path: 'complete-profile');
 
   static const String name = 'CompleteProfileRoute';
-}
-
-class CompleteProfileRouteArgs {
-  const CompleteProfileRouteArgs({this.key});
-
-  final _i11.Key? key;
-
-  @override
-  String toString() {
-    return 'CompleteProfileRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for

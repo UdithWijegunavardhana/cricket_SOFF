@@ -172,8 +172,9 @@ import 'booking_requested_success_overlay.dart';
 
 class CreateBookingScreen extends StatefulWidget {
   final DateTime selectedDateTime;
+  final String resourceId;
 
-  const CreateBookingScreen({Key? key, required this.selectedDateTime}) : super(key: key);
+  const CreateBookingScreen({Key? key, required this.selectedDateTime, required this.resourceId}) : super(key: key);
 
   @override
   State<CreateBookingScreen> createState() => _CreateBookingScreenState();
@@ -209,6 +210,7 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
   void initState() {
     startDateTime = currentDateTime;
     endDateTime = currentDateTime;
+    print(widget.resourceId);
     super.initState();
   }
 
@@ -461,6 +463,7 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                                   "rescheduleDate": descriptionController.text, //null,
                                   "resources": [
                                     {
+                                      "_id": widget.resourceId,
                                       "timeslots": [
                                         {
                                           "startTime": DateFormat.Hm().format(startDateTime),

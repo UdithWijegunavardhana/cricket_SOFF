@@ -23,6 +23,7 @@ class BookingController extends GetxController {
   }
 
   Future<void> getResources() async {
+    isLoading.value = true;
     BookingService().getResources(resourceId).then((value) {
       if (value.status) {
         resources.value = value.data;
