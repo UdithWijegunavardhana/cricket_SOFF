@@ -3,7 +3,9 @@
   "customer_apis": {
     "get_customer_by_email" : "/api/customer/getCustomersByEmail/",
     "get_machine_hours_by_customer_id" : "/api/customer/get-hours-by-customer-id/",
-    "save_customer" : "/api/customer/save-customer"
+    "save_customer" : "/api/customer/save-customer",
+    "delete_soff_cricket":"/api/customer/delete-customer",
+    "delete_keycloak":"/api/user/delete"
   },
   "points_apis": {
     "get_points_by_customer_email" : "/points/get-customer-points-by-email/"
