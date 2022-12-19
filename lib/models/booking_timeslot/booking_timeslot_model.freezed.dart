@@ -27,13 +27,19 @@ class _$BookingTimeslotModelTearOff {
       @JsonKey(name: 'endTime') String? endTime,
       @JsonKey(name: 'customerId') String? customerId,
       @JsonKey(name: 'comment') String? comment,
-      @JsonKey(name: 'customer') CustomerModel? customer}) {
+      @JsonKey(name: 'status') BookingTimeSlotStatus? status,
+      @JsonKey(name: 'isReschedule') bool? isReschedule,
+      @JsonKey(name: 'isSendEmail') BookingEmailStatus? isSendEmail,
+      @JsonKey(name: 'createdDateTime') String? createdDateTime}) {
     return _BookingTimeslotModel(
       startTime: startTime,
       endTime: endTime,
       customerId: customerId,
       comment: comment,
-      customer: customer,
+      status: status,
+      isReschedule: isReschedule,
+      isSendEmail: isSendEmail,
+      createdDateTime: createdDateTime,
     );
   }
 
@@ -55,8 +61,14 @@ mixin _$BookingTimeslotModel {
   String? get customerId => throw _privateConstructorUsedError;
   @JsonKey(name: 'comment')
   String? get comment => throw _privateConstructorUsedError;
-  @JsonKey(name: 'customer')
-  CustomerModel? get customer => throw _privateConstructorUsedError;
+  @JsonKey(name: 'status')
+  BookingTimeSlotStatus? get status => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isReschedule')
+  bool? get isReschedule => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isSendEmail')
+  BookingEmailStatus? get isSendEmail => throw _privateConstructorUsedError;
+  @JsonKey(name: 'createdDateTime')
+  String? get createdDateTime => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -74,9 +86,10 @@ abstract class $BookingTimeslotModelCopyWith<$Res> {
       @JsonKey(name: 'endTime') String? endTime,
       @JsonKey(name: 'customerId') String? customerId,
       @JsonKey(name: 'comment') String? comment,
-      @JsonKey(name: 'customer') CustomerModel? customer});
-
-  $CustomerModelCopyWith<$Res>? get customer;
+      @JsonKey(name: 'status') BookingTimeSlotStatus? status,
+      @JsonKey(name: 'isReschedule') bool? isReschedule,
+      @JsonKey(name: 'isSendEmail') BookingEmailStatus? isSendEmail,
+      @JsonKey(name: 'createdDateTime') String? createdDateTime});
 }
 
 /// @nodoc
@@ -94,7 +107,10 @@ class _$BookingTimeslotModelCopyWithImpl<$Res>
     Object? endTime = freezed,
     Object? customerId = freezed,
     Object? comment = freezed,
-    Object? customer = freezed,
+    Object? status = freezed,
+    Object? isReschedule = freezed,
+    Object? isSendEmail = freezed,
+    Object? createdDateTime = freezed,
   }) {
     return _then(_value.copyWith(
       startTime: startTime == freezed
@@ -113,22 +129,23 @@ class _$BookingTimeslotModelCopyWithImpl<$Res>
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as String?,
-      customer: customer == freezed
-          ? _value.customer
-          : customer // ignore: cast_nullable_to_non_nullable
-              as CustomerModel?,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as BookingTimeSlotStatus?,
+      isReschedule: isReschedule == freezed
+          ? _value.isReschedule
+          : isReschedule // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isSendEmail: isSendEmail == freezed
+          ? _value.isSendEmail
+          : isSendEmail // ignore: cast_nullable_to_non_nullable
+              as BookingEmailStatus?,
+      createdDateTime: createdDateTime == freezed
+          ? _value.createdDateTime
+          : createdDateTime // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
-  }
-
-  @override
-  $CustomerModelCopyWith<$Res>? get customer {
-    if (_value.customer == null) {
-      return null;
-    }
-
-    return $CustomerModelCopyWith<$Res>(_value.customer!, (value) {
-      return _then(_value.copyWith(customer: value));
-    });
   }
 }
 
@@ -144,10 +161,10 @@ abstract class _$BookingTimeslotModelCopyWith<$Res>
       @JsonKey(name: 'endTime') String? endTime,
       @JsonKey(name: 'customerId') String? customerId,
       @JsonKey(name: 'comment') String? comment,
-      @JsonKey(name: 'customer') CustomerModel? customer});
-
-  @override
-  $CustomerModelCopyWith<$Res>? get customer;
+      @JsonKey(name: 'status') BookingTimeSlotStatus? status,
+      @JsonKey(name: 'isReschedule') bool? isReschedule,
+      @JsonKey(name: 'isSendEmail') BookingEmailStatus? isSendEmail,
+      @JsonKey(name: 'createdDateTime') String? createdDateTime});
 }
 
 /// @nodoc
@@ -167,7 +184,10 @@ class __$BookingTimeslotModelCopyWithImpl<$Res>
     Object? endTime = freezed,
     Object? customerId = freezed,
     Object? comment = freezed,
-    Object? customer = freezed,
+    Object? status = freezed,
+    Object? isReschedule = freezed,
+    Object? isSendEmail = freezed,
+    Object? createdDateTime = freezed,
   }) {
     return _then(_BookingTimeslotModel(
       startTime: startTime == freezed
@@ -186,10 +206,22 @@ class __$BookingTimeslotModelCopyWithImpl<$Res>
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as String?,
-      customer: customer == freezed
-          ? _value.customer
-          : customer // ignore: cast_nullable_to_non_nullable
-              as CustomerModel?,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as BookingTimeSlotStatus?,
+      isReschedule: isReschedule == freezed
+          ? _value.isReschedule
+          : isReschedule // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isSendEmail: isSendEmail == freezed
+          ? _value.isSendEmail
+          : isSendEmail // ignore: cast_nullable_to_non_nullable
+              as BookingEmailStatus?,
+      createdDateTime: createdDateTime == freezed
+          ? _value.createdDateTime
+          : createdDateTime // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -202,7 +234,10 @@ class _$_BookingTimeslotModel implements _BookingTimeslotModel {
       @JsonKey(name: 'endTime') this.endTime,
       @JsonKey(name: 'customerId') this.customerId,
       @JsonKey(name: 'comment') this.comment,
-      @JsonKey(name: 'customer') this.customer});
+      @JsonKey(name: 'status') this.status,
+      @JsonKey(name: 'isReschedule') this.isReschedule,
+      @JsonKey(name: 'isSendEmail') this.isSendEmail,
+      @JsonKey(name: 'createdDateTime') this.createdDateTime});
 
   factory _$_BookingTimeslotModel.fromJson(Map<String, dynamic> json) =>
       _$$_BookingTimeslotModelFromJson(json);
@@ -220,12 +255,21 @@ class _$_BookingTimeslotModel implements _BookingTimeslotModel {
   @JsonKey(name: 'comment')
   final String? comment;
   @override
-  @JsonKey(name: 'customer')
-  final CustomerModel? customer;
+  @JsonKey(name: 'status')
+  final BookingTimeSlotStatus? status;
+  @override
+  @JsonKey(name: 'isReschedule')
+  final bool? isReschedule;
+  @override
+  @JsonKey(name: 'isSendEmail')
+  final BookingEmailStatus? isSendEmail;
+  @override
+  @JsonKey(name: 'createdDateTime')
+  final String? createdDateTime;
 
   @override
   String toString() {
-    return 'BookingTimeslotModel(startTime: $startTime, endTime: $endTime, customerId: $customerId, comment: $comment, customer: $customer)';
+    return 'BookingTimeslotModel(startTime: $startTime, endTime: $endTime, customerId: $customerId, comment: $comment, status: $status, isReschedule: $isReschedule, isSendEmail: $isSendEmail, createdDateTime: $createdDateTime)';
   }
 
   @override
@@ -238,7 +282,13 @@ class _$_BookingTimeslotModel implements _BookingTimeslotModel {
             const DeepCollectionEquality()
                 .equals(other.customerId, customerId) &&
             const DeepCollectionEquality().equals(other.comment, comment) &&
-            const DeepCollectionEquality().equals(other.customer, customer));
+            const DeepCollectionEquality().equals(other.status, status) &&
+            const DeepCollectionEquality()
+                .equals(other.isReschedule, isReschedule) &&
+            const DeepCollectionEquality()
+                .equals(other.isSendEmail, isSendEmail) &&
+            const DeepCollectionEquality()
+                .equals(other.createdDateTime, createdDateTime));
   }
 
   @override
@@ -248,7 +298,10 @@ class _$_BookingTimeslotModel implements _BookingTimeslotModel {
       const DeepCollectionEquality().hash(endTime),
       const DeepCollectionEquality().hash(customerId),
       const DeepCollectionEquality().hash(comment),
-      const DeepCollectionEquality().hash(customer));
+      const DeepCollectionEquality().hash(status),
+      const DeepCollectionEquality().hash(isReschedule),
+      const DeepCollectionEquality().hash(isSendEmail),
+      const DeepCollectionEquality().hash(createdDateTime));
 
   @JsonKey(ignore: true)
   @override
@@ -268,7 +321,10 @@ abstract class _BookingTimeslotModel implements BookingTimeslotModel {
           @JsonKey(name: 'endTime') String? endTime,
           @JsonKey(name: 'customerId') String? customerId,
           @JsonKey(name: 'comment') String? comment,
-          @JsonKey(name: 'customer') CustomerModel? customer}) =
+          @JsonKey(name: 'status') BookingTimeSlotStatus? status,
+          @JsonKey(name: 'isReschedule') bool? isReschedule,
+          @JsonKey(name: 'isSendEmail') BookingEmailStatus? isSendEmail,
+          @JsonKey(name: 'createdDateTime') String? createdDateTime}) =
       _$_BookingTimeslotModel;
 
   factory _BookingTimeslotModel.fromJson(Map<String, dynamic> json) =
@@ -287,8 +343,17 @@ abstract class _BookingTimeslotModel implements BookingTimeslotModel {
   @JsonKey(name: 'comment')
   String? get comment;
   @override
-  @JsonKey(name: 'customer')
-  CustomerModel? get customer;
+  @JsonKey(name: 'status')
+  BookingTimeSlotStatus? get status;
+  @override
+  @JsonKey(name: 'isReschedule')
+  bool? get isReschedule;
+  @override
+  @JsonKey(name: 'isSendEmail')
+  BookingEmailStatus? get isSendEmail;
+  @override
+  @JsonKey(name: 'createdDateTime')
+  String? get createdDateTime;
   @override
   @JsonKey(ignore: true)
   _$BookingTimeslotModelCopyWith<_BookingTimeslotModel> get copyWith =>

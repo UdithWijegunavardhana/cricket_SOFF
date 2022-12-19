@@ -10,11 +10,7 @@ class BookingResourceModel with _$BookingResourceModel {
 
   const factory BookingResourceModel({
     @JsonKey(name: '_id') String? id,
-    @JsonKey(name: 'resourceCategorieId') String? resourceCategorieId,
-    @JsonKey(name: 'code') String? code,
-    @JsonKey(name: 'description') String? description,
     @JsonKey(name: 'timeslots') List<BookingTimeslotModel>? timeslots,
-    @JsonKey(name: 'timeslotsCalender') EventDataModel? timeslotsCalender,
   }) = _BookingResourceModel;
 
   factory BookingResourceModel.fromJson(Map<String, dynamic> json) =>

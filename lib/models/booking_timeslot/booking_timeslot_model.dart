@@ -12,9 +12,22 @@ class BookingTimeslotModel with _$BookingTimeslotModel {
     @JsonKey(name: 'endTime') String? endTime,
     @JsonKey(name: 'customerId') String? customerId,
     @JsonKey(name: 'comment') String? comment,
-    @JsonKey(name: 'customer') CustomerModel? customer,
+    @JsonKey(name: 'status') BookingTimeSlotStatus? status,
+    @JsonKey(name: 'isReschedule') bool? isReschedule,
+    @JsonKey(name: 'isSendEmail') BookingEmailStatus? isSendEmail,
+    @JsonKey(name: 'createdDateTime') String? createdDateTime,
   }) = _BookingTimeslotModel;
 
   factory BookingTimeslotModel.fromJson(Map<String, dynamic> json) =>
       _$BookingTimeslotModelFromJson(json);
+}
+
+enum BookingEmailStatus {
+  @JsonValue("SEND_EMAIL")
+  SendEmail
+}
+
+enum BookingTimeSlotStatus {
+  @JsonValue("FIXED")
+  Fixed
 }

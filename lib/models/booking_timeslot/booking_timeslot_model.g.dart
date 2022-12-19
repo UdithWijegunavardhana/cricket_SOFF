@@ -13,9 +13,12 @@ _$_BookingTimeslotModel _$$_BookingTimeslotModelFromJson(
       endTime: json['endTime'] as String?,
       customerId: json['customerId'] as String?,
       comment: json['comment'] as String?,
-      customer: json['customer'] == null
-          ? null
-          : CustomerModel.fromJson(json['customer'] as Map<String, dynamic>),
+      status:
+          $enumDecodeNullable(_$BookingTimeSlotStatusEnumMap, json['status']),
+      isReschedule: json['isReschedule'] as bool?,
+      isSendEmail:
+          $enumDecodeNullable(_$BookingEmailStatusEnumMap, json['isSendEmail']),
+      createdDateTime: json['createdDateTime'] as String?,
     );
 
 Map<String, dynamic> _$$_BookingTimeslotModelToJson(
@@ -25,5 +28,16 @@ Map<String, dynamic> _$$_BookingTimeslotModelToJson(
       'endTime': instance.endTime,
       'customerId': instance.customerId,
       'comment': instance.comment,
-      'customer': instance.customer,
+      'status': _$BookingTimeSlotStatusEnumMap[instance.status],
+      'isReschedule': instance.isReschedule,
+      'isSendEmail': _$BookingEmailStatusEnumMap[instance.isSendEmail],
+      'createdDateTime': instance.createdDateTime,
     };
+
+const _$BookingTimeSlotStatusEnumMap = {
+  BookingTimeSlotStatus.Fixed: 'FIXED',
+};
+
+const _$BookingEmailStatusEnumMap = {
+  BookingEmailStatus.SendEmail: 'SEND_EMAIL',
+};

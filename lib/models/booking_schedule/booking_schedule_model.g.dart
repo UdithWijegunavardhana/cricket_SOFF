@@ -9,8 +9,10 @@ part of 'booking_schedule_model.dart';
 _$_BookingScheduleModel _$$_BookingScheduleModelFromJson(
         Map<String, dynamic> json) =>
     _$_BookingScheduleModel(
-      id: json['_id'] as String?,
+      actionStatus: $enumDecodeNullable(
+          _$BookingActionStatusEnumMap, json['actionStatus']),
       date: json['date'] as String?,
+      rescheduleDate: json['rescheduleDate'] as String?,
       resources: (json['resources'] as List<dynamic>?)
           ?.map((e) => BookingResourceModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -19,7 +21,12 @@ _$_BookingScheduleModel _$$_BookingScheduleModelFromJson(
 Map<String, dynamic> _$$_BookingScheduleModelToJson(
         _$_BookingScheduleModel instance) =>
     <String, dynamic>{
-      '_id': instance.id,
+      'actionStatus': _$BookingActionStatusEnumMap[instance.actionStatus],
       'date': instance.date,
+      'rescheduleDate': instance.rescheduleDate,
       'resources': instance.resources,
     };
+
+const _$BookingActionStatusEnumMap = {
+  BookingActionStatus.Save: 'SAVE',
+};

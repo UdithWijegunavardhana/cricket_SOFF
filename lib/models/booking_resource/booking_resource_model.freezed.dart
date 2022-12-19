@@ -24,18 +24,10 @@ class _$BookingResourceModelTearOff {
 
   _BookingResourceModel call(
       {@JsonKey(name: '_id') String? id,
-      @JsonKey(name: 'resourceCategorieId') String? resourceCategorieId,
-      @JsonKey(name: 'code') String? code,
-      @JsonKey(name: 'description') String? description,
-      @JsonKey(name: 'timeslots') List<BookingTimeslotModel>? timeslots,
-      @JsonKey(name: 'timeslotsCalender') EventDataModel? timeslotsCalender}) {
+      @JsonKey(name: 'timeslots') List<BookingTimeslotModel>? timeslots}) {
     return _BookingResourceModel(
       id: id,
-      resourceCategorieId: resourceCategorieId,
-      code: code,
-      description: description,
       timeslots: timeslots,
-      timeslotsCalender: timeslotsCalender,
     );
   }
 
@@ -51,17 +43,9 @@ const $BookingResourceModel = _$BookingResourceModelTearOff();
 mixin _$BookingResourceModel {
   @JsonKey(name: '_id')
   String? get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'resourceCategorieId')
-  String? get resourceCategorieId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'code')
-  String? get code => throw _privateConstructorUsedError;
-  @JsonKey(name: 'description')
-  String? get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'timeslots')
   List<BookingTimeslotModel>? get timeslots =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'timeslotsCalender')
-  EventDataModel? get timeslotsCalender => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -76,13 +60,7 @@ abstract class $BookingResourceModelCopyWith<$Res> {
       _$BookingResourceModelCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: '_id') String? id,
-      @JsonKey(name: 'resourceCategorieId') String? resourceCategorieId,
-      @JsonKey(name: 'code') String? code,
-      @JsonKey(name: 'description') String? description,
-      @JsonKey(name: 'timeslots') List<BookingTimeslotModel>? timeslots,
-      @JsonKey(name: 'timeslotsCalender') EventDataModel? timeslotsCalender});
-
-  $EventDataModelCopyWith<$Res>? get timeslotsCalender;
+      @JsonKey(name: 'timeslots') List<BookingTimeslotModel>? timeslots});
 }
 
 /// @nodoc
@@ -97,49 +75,18 @@ class _$BookingResourceModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? resourceCategorieId = freezed,
-    Object? code = freezed,
-    Object? description = freezed,
     Object? timeslots = freezed,
-    Object? timeslotsCalender = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      resourceCategorieId: resourceCategorieId == freezed
-          ? _value.resourceCategorieId
-          : resourceCategorieId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      code: code == freezed
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: description == freezed
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
       timeslots: timeslots == freezed
           ? _value.timeslots
           : timeslots // ignore: cast_nullable_to_non_nullable
               as List<BookingTimeslotModel>?,
-      timeslotsCalender: timeslotsCalender == freezed
-          ? _value.timeslotsCalender
-          : timeslotsCalender // ignore: cast_nullable_to_non_nullable
-              as EventDataModel?,
     ));
-  }
-
-  @override
-  $EventDataModelCopyWith<$Res>? get timeslotsCalender {
-    if (_value.timeslotsCalender == null) {
-      return null;
-    }
-
-    return $EventDataModelCopyWith<$Res>(_value.timeslotsCalender!, (value) {
-      return _then(_value.copyWith(timeslotsCalender: value));
-    });
   }
 }
 
@@ -152,14 +99,7 @@ abstract class _$BookingResourceModelCopyWith<$Res>
   @override
   $Res call(
       {@JsonKey(name: '_id') String? id,
-      @JsonKey(name: 'resourceCategorieId') String? resourceCategorieId,
-      @JsonKey(name: 'code') String? code,
-      @JsonKey(name: 'description') String? description,
-      @JsonKey(name: 'timeslots') List<BookingTimeslotModel>? timeslots,
-      @JsonKey(name: 'timeslotsCalender') EventDataModel? timeslotsCalender});
-
-  @override
-  $EventDataModelCopyWith<$Res>? get timeslotsCalender;
+      @JsonKey(name: 'timeslots') List<BookingTimeslotModel>? timeslots});
 }
 
 /// @nodoc
@@ -176,37 +116,17 @@ class __$BookingResourceModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? resourceCategorieId = freezed,
-    Object? code = freezed,
-    Object? description = freezed,
     Object? timeslots = freezed,
-    Object? timeslotsCalender = freezed,
   }) {
     return _then(_BookingResourceModel(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      resourceCategorieId: resourceCategorieId == freezed
-          ? _value.resourceCategorieId
-          : resourceCategorieId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      code: code == freezed
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: description == freezed
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
       timeslots: timeslots == freezed
           ? _value.timeslots
           : timeslots // ignore: cast_nullable_to_non_nullable
               as List<BookingTimeslotModel>?,
-      timeslotsCalender: timeslotsCalender == freezed
-          ? _value.timeslotsCalender
-          : timeslotsCalender // ignore: cast_nullable_to_non_nullable
-              as EventDataModel?,
     ));
   }
 }
@@ -216,11 +136,7 @@ class __$BookingResourceModelCopyWithImpl<$Res>
 class _$_BookingResourceModel implements _BookingResourceModel {
   const _$_BookingResourceModel(
       {@JsonKey(name: '_id') this.id,
-      @JsonKey(name: 'resourceCategorieId') this.resourceCategorieId,
-      @JsonKey(name: 'code') this.code,
-      @JsonKey(name: 'description') this.description,
-      @JsonKey(name: 'timeslots') this.timeslots,
-      @JsonKey(name: 'timeslotsCalender') this.timeslotsCalender});
+      @JsonKey(name: 'timeslots') this.timeslots});
 
   factory _$_BookingResourceModel.fromJson(Map<String, dynamic> json) =>
       _$$_BookingResourceModelFromJson(json);
@@ -229,24 +145,12 @@ class _$_BookingResourceModel implements _BookingResourceModel {
   @JsonKey(name: '_id')
   final String? id;
   @override
-  @JsonKey(name: 'resourceCategorieId')
-  final String? resourceCategorieId;
-  @override
-  @JsonKey(name: 'code')
-  final String? code;
-  @override
-  @JsonKey(name: 'description')
-  final String? description;
-  @override
   @JsonKey(name: 'timeslots')
   final List<BookingTimeslotModel>? timeslots;
-  @override
-  @JsonKey(name: 'timeslotsCalender')
-  final EventDataModel? timeslotsCalender;
 
   @override
   String toString() {
-    return 'BookingResourceModel(id: $id, resourceCategorieId: $resourceCategorieId, code: $code, description: $description, timeslots: $timeslots, timeslotsCalender: $timeslotsCalender)';
+    return 'BookingResourceModel(id: $id, timeslots: $timeslots)';
   }
 
   @override
@@ -255,25 +159,14 @@ class _$_BookingResourceModel implements _BookingResourceModel {
         (other.runtimeType == runtimeType &&
             other is _BookingResourceModel &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality()
-                .equals(other.resourceCategorieId, resourceCategorieId) &&
-            const DeepCollectionEquality().equals(other.code, code) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.timeslots, timeslots) &&
-            const DeepCollectionEquality()
-                .equals(other.timeslotsCalender, timeslotsCalender));
+            const DeepCollectionEquality().equals(other.timeslots, timeslots));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(resourceCategorieId),
-      const DeepCollectionEquality().hash(code),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(timeslots),
-      const DeepCollectionEquality().hash(timeslotsCalender));
+      const DeepCollectionEquality().hash(timeslots));
 
   @JsonKey(ignore: true)
   @override
@@ -289,18 +182,9 @@ class _$_BookingResourceModel implements _BookingResourceModel {
 
 abstract class _BookingResourceModel implements BookingResourceModel {
   const factory _BookingResourceModel(
-      {@JsonKey(name: '_id')
-          String? id,
-      @JsonKey(name: 'resourceCategorieId')
-          String? resourceCategorieId,
-      @JsonKey(name: 'code')
-          String? code,
-      @JsonKey(name: 'description')
-          String? description,
-      @JsonKey(name: 'timeslots')
-          List<BookingTimeslotModel>? timeslots,
-      @JsonKey(name: 'timeslotsCalender')
-          EventDataModel? timeslotsCalender}) = _$_BookingResourceModel;
+          {@JsonKey(name: '_id') String? id,
+          @JsonKey(name: 'timeslots') List<BookingTimeslotModel>? timeslots}) =
+      _$_BookingResourceModel;
 
   factory _BookingResourceModel.fromJson(Map<String, dynamic> json) =
       _$_BookingResourceModel.fromJson;
@@ -309,20 +193,8 @@ abstract class _BookingResourceModel implements BookingResourceModel {
   @JsonKey(name: '_id')
   String? get id;
   @override
-  @JsonKey(name: 'resourceCategorieId')
-  String? get resourceCategorieId;
-  @override
-  @JsonKey(name: 'code')
-  String? get code;
-  @override
-  @JsonKey(name: 'description')
-  String? get description;
-  @override
   @JsonKey(name: 'timeslots')
   List<BookingTimeslotModel>? get timeslots;
-  @override
-  @JsonKey(name: 'timeslotsCalender')
-  EventDataModel? get timeslotsCalender;
   @override
   @JsonKey(ignore: true)
   _$BookingResourceModelCopyWith<_BookingResourceModel> get copyWith =>

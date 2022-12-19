@@ -8,11 +8,17 @@ part 'booking_schedule_model.g.dart';
 class BookingScheduleModel with _$BookingScheduleModel {
 
   const factory BookingScheduleModel({
-    @JsonKey(name: '_id') String? id,
+    @JsonKey(name: 'actionStatus') BookingActionStatus? actionStatus,
     @JsonKey(name: 'date') String? date,
+    @JsonKey(name: 'rescheduleDate') String? rescheduleDate,
     @JsonKey(name: 'resources') List<BookingResourceModel>? resources,
   }) = _BookingScheduleModel;
 
   factory BookingScheduleModel.fromJson(Map<String, dynamic> json) =>
       _$BookingScheduleModelFromJson(json);
+}
+
+enum BookingActionStatus {
+  @JsonValue("SAVE")
+  Save
 }
