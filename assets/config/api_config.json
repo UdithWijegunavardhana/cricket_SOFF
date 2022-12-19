@@ -3,9 +3,19 @@
   "customer_apis": {
     "get_customer_by_email" : "/api/customer/getCustomersByEmail/",
     "get_machine_hours_by_customer_id" : "/api/customer/get-hours-by-customer-id/",
-    "save_customer" : "/api/customer/save-customer"
+    "save_customer" : "/api/customer/save-customer",
+    "delete_soff_cricket":"/api/customer/delete-customer",
+    "delete_keycloak":"/api/user/delete"
   },
   "points_apis": {
     "get_points_by_customer_email" : "/points/get-customer-points-by-email/"
+  },
+  "resources_apis": {
+    "get_all_resource_categories" : "/resource/get-all-resource-categories/",
+    "get_all_resources_by_category_id" : "/resource/get-resource-by-categorie-id/"
+  },
+  "schedule_apis" : {
+    "get_schedules_by_date" : "/schedule/get-all-schedule-by-date2/",
+    "save_schedule" : "/schedule/save-schedule"
   }
 }
