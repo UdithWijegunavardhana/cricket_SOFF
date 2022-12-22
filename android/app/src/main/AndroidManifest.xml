@@ -1,8 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.soffcricket.app.soff_cricket_hybrid">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="soff_cricket_hybrid"
+        android:label="SOFF Cricket"
         android:name="${applicationName}"
+       android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -31,4 +33,11 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    <queries>
+        <!-- If your app checks for SMS support -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
 </manifest>
