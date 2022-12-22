@@ -28,7 +28,7 @@ class _$BookingTimeslotModelTearOff {
       @JsonKey(name: 'customerId') String? customerId,
       @JsonKey(name: 'comment') String? comment,
       @JsonKey(name: 'status') BookingTimeSlotStatus? status,
-      @JsonKey(name: 'isReschedule') bool? isReschedule,
+      @JsonKey(name: 'isReschedule') String? isReschedule,
       @JsonKey(name: 'isSendEmail') BookingEmailStatus? isSendEmail,
       @JsonKey(name: 'createdDateTime') String? createdDateTime}) {
     return _BookingTimeslotModel(
@@ -64,7 +64,7 @@ mixin _$BookingTimeslotModel {
   @JsonKey(name: 'status')
   BookingTimeSlotStatus? get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'isReschedule')
-  bool? get isReschedule => throw _privateConstructorUsedError;
+  String? get isReschedule => throw _privateConstructorUsedError;
   @JsonKey(name: 'isSendEmail')
   BookingEmailStatus? get isSendEmail => throw _privateConstructorUsedError;
   @JsonKey(name: 'createdDateTime')
@@ -87,7 +87,7 @@ abstract class $BookingTimeslotModelCopyWith<$Res> {
       @JsonKey(name: 'customerId') String? customerId,
       @JsonKey(name: 'comment') String? comment,
       @JsonKey(name: 'status') BookingTimeSlotStatus? status,
-      @JsonKey(name: 'isReschedule') bool? isReschedule,
+      @JsonKey(name: 'isReschedule') String? isReschedule,
       @JsonKey(name: 'isSendEmail') BookingEmailStatus? isSendEmail,
       @JsonKey(name: 'createdDateTime') String? createdDateTime});
 }
@@ -136,7 +136,7 @@ class _$BookingTimeslotModelCopyWithImpl<$Res>
       isReschedule: isReschedule == freezed
           ? _value.isReschedule
           : isReschedule // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as String?,
       isSendEmail: isSendEmail == freezed
           ? _value.isSendEmail
           : isSendEmail // ignore: cast_nullable_to_non_nullable
@@ -162,7 +162,7 @@ abstract class _$BookingTimeslotModelCopyWith<$Res>
       @JsonKey(name: 'customerId') String? customerId,
       @JsonKey(name: 'comment') String? comment,
       @JsonKey(name: 'status') BookingTimeSlotStatus? status,
-      @JsonKey(name: 'isReschedule') bool? isReschedule,
+      @JsonKey(name: 'isReschedule') String? isReschedule,
       @JsonKey(name: 'isSendEmail') BookingEmailStatus? isSendEmail,
       @JsonKey(name: 'createdDateTime') String? createdDateTime});
 }
@@ -213,7 +213,7 @@ class __$BookingTimeslotModelCopyWithImpl<$Res>
       isReschedule: isReschedule == freezed
           ? _value.isReschedule
           : isReschedule // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as String?,
       isSendEmail: isSendEmail == freezed
           ? _value.isSendEmail
           : isSendEmail // ignore: cast_nullable_to_non_nullable
@@ -259,7 +259,7 @@ class _$_BookingTimeslotModel implements _BookingTimeslotModel {
   final BookingTimeSlotStatus? status;
   @override
   @JsonKey(name: 'isReschedule')
-  final bool? isReschedule;
+  final String? isReschedule;
   @override
   @JsonKey(name: 'isSendEmail')
   final BookingEmailStatus? isSendEmail;
@@ -322,7 +322,7 @@ abstract class _BookingTimeslotModel implements BookingTimeslotModel {
           @JsonKey(name: 'customerId') String? customerId,
           @JsonKey(name: 'comment') String? comment,
           @JsonKey(name: 'status') BookingTimeSlotStatus? status,
-          @JsonKey(name: 'isReschedule') bool? isReschedule,
+          @JsonKey(name: 'isReschedule') String? isReschedule,
           @JsonKey(name: 'isSendEmail') BookingEmailStatus? isSendEmail,
           @JsonKey(name: 'createdDateTime') String? createdDateTime}) =
       _$_BookingTimeslotModel;
@@ -347,7 +347,7 @@ abstract class _BookingTimeslotModel implements BookingTimeslotModel {
   BookingTimeSlotStatus? get status;
   @override
   @JsonKey(name: 'isReschedule')
-  bool? get isReschedule;
+  String? get isReschedule;
   @override
   @JsonKey(name: 'isSendEmail')
   BookingEmailStatus? get isSendEmail;

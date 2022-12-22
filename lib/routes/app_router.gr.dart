@@ -91,11 +91,9 @@ class AppRouter extends _i10.RootStackRouter {
           barrierDismissible: false);
     },
     HomeRoute.name: (routeData) {
-      final args =
-          routeData.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
       return _i10.CustomPage<dynamic>(
           routeData: routeData,
-          child: _i7.HomeScreen(key: args.key),
+          child: const _i7.HomeScreen(),
           transitionsBuilder: _i10.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
@@ -245,22 +243,10 @@ class QRCodeRoute extends _i10.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.HomeScreen]
-class HomeRoute extends _i10.PageRouteInfo<HomeRouteArgs> {
-  HomeRoute({_i11.Key? key})
-      : super(HomeRoute.name, path: 'home', args: HomeRouteArgs(key: key));
+class HomeRoute extends _i10.PageRouteInfo<void> {
+  const HomeRoute() : super(HomeRoute.name, path: 'home');
 
   static const String name = 'HomeRoute';
-}
-
-class HomeRouteArgs {
-  const HomeRouteArgs({this.key});
-
-  final _i11.Key? key;
-
-  @override
-  String toString() {
-    return 'HomeRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for
