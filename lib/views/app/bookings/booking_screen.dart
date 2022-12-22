@@ -5,16 +5,11 @@ import 'package:soff_cricket_hybrid/routes/app_router.gr.dart';
 import 'package:soff_cricket_hybrid/views/_shared/constants/colors.dart';
 import 'package:soff_cricket_hybrid/views/_shared/loaders/event_page_loader.dart';
 import 'package:soff_cricket_hybrid/views/_shared/widget/custom_appbar.dart';
-import 'package:soff_cricket_hybrid/views/_shared/widget/custom_date_picker.dart';
-import 'package:soff_cricket_hybrid/views/_shared/widget/custom_elevated_button.dart';
-import 'package:soff_cricket_hybrid/views/_shared/widget/custom_time_picker.dart';
 import 'package:soff_cricket_hybrid/views/app/bookings/booking_controller.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../_shared/constants/font_styles.dart';
 import '../schedules/schedule_widget.dart';
-import 'create_booking_overlay.dart';
-import 'booking_requested_success_overlay.dart';
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({Key? key, required this.resourceId, required this.selectedDate}) : super(key: key);
@@ -77,7 +72,7 @@ class _BookingScreenState extends State<BookingScreen> with TickerProviderStateM
     for (i = 0; i < resources.length; i++) {
       listings.add(
         Tab(
-          text: _bookingController.resources[i].description,
+          text: _bookingController.resources[i].description ?? _bookingController.resources[i].code,
         ),
       );
     }

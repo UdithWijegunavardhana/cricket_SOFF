@@ -13,7 +13,7 @@ class BookingTimeslotModel with _$BookingTimeslotModel {
     @JsonKey(name: 'customerId') String? customerId,
     @JsonKey(name: 'comment') String? comment,
     @JsonKey(name: 'status') BookingTimeSlotStatus? status,
-    @JsonKey(name: 'isReschedule') bool? isReschedule,
+    @JsonKey(name: 'isReschedule') String? isReschedule,
     @JsonKey(name: 'isSendEmail') BookingEmailStatus? isSendEmail,
     @JsonKey(name: 'createdDateTime') String? createdDateTime,
   }) = _BookingTimeslotModel;
@@ -29,5 +29,7 @@ enum BookingEmailStatus {
 
 enum BookingTimeSlotStatus {
   @JsonValue("FIXED")
-  Fixed
+  Fixed,
+  @JsonValue("REQUESTED")
+  Requested,
 }

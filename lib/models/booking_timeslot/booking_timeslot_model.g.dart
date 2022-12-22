@@ -15,7 +15,7 @@ _$_BookingTimeslotModel _$$_BookingTimeslotModelFromJson(
       comment: json['comment'] as String?,
       status:
           $enumDecodeNullable(_$BookingTimeSlotStatusEnumMap, json['status']),
-      isReschedule: json['isReschedule'] as bool?,
+      isReschedule: json['isReschedule'] as String?,
       isSendEmail:
           $enumDecodeNullable(_$BookingEmailStatusEnumMap, json['isSendEmail']),
       createdDateTime: json['createdDateTime'] as String?,
@@ -36,6 +36,7 @@ Map<String, dynamic> _$$_BookingTimeslotModelToJson(
 
 const _$BookingTimeSlotStatusEnumMap = {
   BookingTimeSlotStatus.Fixed: 'FIXED',
+  BookingTimeSlotStatus.Requested: 'REQUESTED',
 };
 
 const _$BookingEmailStatusEnumMap = {

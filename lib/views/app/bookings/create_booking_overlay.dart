@@ -510,35 +510,6 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                                 UserModel _user = await _userManager
                                     .getUserData();
                                 Navigator.of(context).push(ProgressLoader());
-                                // var bookingSchedule = {
-                                //   "actionStatus": "SAVE",
-                                //   "date": '${dateTime.year}-${dateTime
-                                //       .month}-${dateTime.day}',
-                                //   "rescheduleDate": descriptionController.text,
-                                //   //null,
-                                //   "resources": [
-                                //     {
-                                //       "_id": widget.resourceId,
-                                //       "timeslots": [
-                                //         {
-                                //           "startTime": DateFormat.Hm().format(
-                                //               startDateTime),
-                                //           "endTime": DateFormat.Hm().format(
-                                //               endDateTime),
-                                //           "customerId": _user.id!,
-                                //           "comment": "",
-                                //           "status": "FIXED",
-                                //           "isReschedule": "false",
-                                //           "isSendEmail": "SEND_EMAIL",
-                                //           "createdDateTime": DateFormat(
-                                //               'yyyy-MM-dd hh:mm:ss').format(
-                                //               DateTime.now())
-                                //           //"2022-11-21 20:00:01"
-                                //         }
-                                //       ]
-                                //     }
-                                //   ]
-                                // };
 
                                 BookingScheduleModel bookingSchedule = BookingScheduleModel(
                                     actionStatus: BookingActionStatus.Save,
@@ -554,9 +525,9 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                                           endTime: DateFormat.Hm().format(
                                               endDateTime),
                                           customerId: _user.id!,
-                                          status: BookingTimeSlotStatus.Fixed,
+                                          status: BookingTimeSlotStatus.Requested,
                                           comment: "",
-                                          isReschedule: false,
+                                          isReschedule: "false",
                                           isSendEmail: BookingEmailStatus.SendEmail,
                                           createdDateTime: DateFormat(
                                               'yyyy-MM-dd hh:mm:ss').format(
