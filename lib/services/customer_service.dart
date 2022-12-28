@@ -7,11 +7,13 @@ import 'package:soff_cricket_hybrid/services/base_service.dart';
 import '../models/user/user_model.dart';
 
 class CustomerService extends BaseService {
-  final _customerAPIConfigHandler = ConfigHandler.loadAPIConfigs()?.customerApis;
+  final _customerAPIConfigHandler =
+      ConfigHandler.loadAPIConfigs()?.customerApis;
 
   Future<ApiResponseModel> getCustomerByEmail(String customerEmail) async {
     try {
-      var res = await dio.get(_customerAPIConfigHandler!.getCustomerByEmail + customerEmail);
+      var res = await dio
+          .get(_customerAPIConfigHandler!.getCustomerByEmail + customerEmail);
       var user = UserModel.fromJson(res.data['data'][0]);
       return ApiResponseModel(status: true, data: user);
     } catch (e) {
@@ -21,7 +23,8 @@ class CustomerService extends BaseService {
 
   Future<ApiResponseModel> getMachineHoursByCustomer(String customerId) async {
     try {
-      var res = await dio.get(_customerAPIConfigHandler!.getMachineHoursByCustomerId + customerId);
+      var res = await dio.get(
+          _customerAPIConfigHandler!.getMachineHoursByCustomerId + customerId);
       return ApiResponseModel(status: true, data: res.data['data']);
     } catch (e) {
       return ApiResponseModel(status: false, message: e.toString());
@@ -33,21 +36,26 @@ class CustomerService extends BaseService {
     var decoded = json.decode(encoded);
 
     try {
-      var res = await dio.post(_customerAPIConfigHandler!.saveCustomer, data: decoded);
-      return ApiResponseModel(status: true, apiStatus: res.statusCode, data: res.data['data']);
+      var res = await dio.post(_customerAPIConfigHandler!.saveCustomer,
+          data: decoded);
+      return ApiResponseModel(
+          status: true, apiStatus: res.statusCode, data: res.data['data']);
     } catch (e) {
-      return ApiResponseModel(status: false, apiStatus: 500, message: e.toString());
+      return ApiResponseModel(
+          status: false, apiStatus: 500, message: e.toString());
     }
   }
 
-  Future<ApiResponseModel> deleteUserAccount(String? userId) async {
+  Future<ApiResponseModel> deleteUserAccount(String? email) async {
     try {
-      if (userId == null) throw 'Invalid user id';
-      var res = await dio.delete(_customerAPIConfigHandler!.deleteKeycloak + '/$userId');
-      // var res = await dio.delete('https://uatsoffcricket.gangfy.com/soffCricketAPIUat/api/user/delete/$userId');
-      return ApiResponseModel(status: true, apiStatus: res.statusCode, data: true);
+      if (email == null) throw 'Invalid user id';
+      // var user = await getCustomerByEmail(email);
+      // var res = await dio.post(_customerAPIConfigHandler!.deleteSoffCricket,
+      //     data: user);
+      return ApiResponseModel(status: true, apiStatus: 200, data: true);
     } catch (e) {
-      return ApiResponseModel(status: false, apiStatus: 500, message: e.toString());
+      return ApiResponseModel(
+          status: false, apiStatus: 500, message: e.toString());
     }
   }
 }

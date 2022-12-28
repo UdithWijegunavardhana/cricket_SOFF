@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:soff_cricket_hybrid/models/user/user_model.dart';
+import 'package:soff_cricket_hybrid/routes/app_router.gr.dart';
 import 'package:soff_cricket_hybrid/services/auth/keycloak_auth_service.dart';
 import 'package:soff_cricket_hybrid/services/customer_service.dart';
 
@@ -17,13 +19,17 @@ class SettingScreenController extends GetxController {
     UserModel user = await _userManager.getUserData();
     isLoading(true);
     CustomerService()
-        .deleteUserAccount(user.id)
+        .deleteUserAccount(user.email)
         .then((value) => {
-              if (value.status) {KeyCloakAuthService.logOut(context)}
+              if (value.status)
+                {
+                  AutoRouter.of(context).replace(HomeRoute()),
+                  KeyCloakAuthService.logOut(context)
+                }
             })
         .whenComplete(() {
       isLoading(false);
-      Navigator.pop(context);
+      // Navigator.pop(context);
     });
   }
 }
