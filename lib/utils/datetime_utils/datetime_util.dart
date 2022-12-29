@@ -69,4 +69,11 @@ class DateTimeUtil {
 
   }
 
+  static String formatDateTime(String pattern, DateTime dateTime) {
+    // "yyyy-MM-dd"
+    // String dateDisplay = DateFormat.yMd().
+    var format = DateFormat(pattern).format(DateTime.parse(dateTime.toIso8601String()));
+    return format;
+  }
+
 }

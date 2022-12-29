@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 
+import '../../../utils/datetime_utils/datetime_util.dart';
 import '../constants/colors.dart';
 import 'custom_form_field.dart';
 
@@ -9,10 +10,16 @@ class CustomDatePicker extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final String? title;
+  final ValueChanged<DateTime> onValueChanged;
 
   const CustomDatePicker(
-      {Key? key, required this.controller, required this.hintText, this.title})
-      : super(key: key);
+      {
+        Key? key,
+        required this.controller,
+        required this.hintText,
+        this.title,
+        required this.onValueChanged
+      }) : super(key: key);
 
   @override
   State<CustomDatePicker> createState() => _CustomDatePickerState();
@@ -54,21 +61,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
 
         setDateValue(selectedDate!);
 
-        // DatePicker.showDatePicker(context,
-        //     showTitleActions: true,
-        //     onChanged: (date) {
-        //       setDateValue(date);
-        //     },
-        //     onConfirm: (date) {
-        //       setDateValue(date);
-        //     },
-        //     currentTime: DateTime.now(),
-        //     theme: DatePickerTheme(
-        //         doneStyle: TextStyle(
-        //             color: kPrimaryColor
-        //         )
-        //     ),
-        //     locale: LocaleType.en);
+        widget.onValueChanged(selectedDate);
+
       },
       child: CustomFormField(
           isEnabled: false,

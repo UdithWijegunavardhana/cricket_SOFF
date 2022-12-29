@@ -19,6 +19,8 @@ _$_BookingTimeslotModel _$$_BookingTimeslotModelFromJson(
       isSendEmail:
           $enumDecodeNullable(_$BookingEmailStatusEnumMap, json['isSendEmail']),
       createdDateTime: json['createdDateTime'] as String?,
+      subResourceList: json['subResourceList'] as List<dynamic>?,
+      amount: json['amount'] as String?,
     );
 
 Map<String, dynamic> _$$_BookingTimeslotModelToJson(
@@ -32,6 +34,8 @@ Map<String, dynamic> _$$_BookingTimeslotModelToJson(
       'isReschedule': instance.isReschedule,
       'isSendEmail': _$BookingEmailStatusEnumMap[instance.isSendEmail],
       'createdDateTime': instance.createdDateTime,
+      'subResourceList': instance.subResourceList,
+      'amount': instance.amount,
     };
 
 const _$BookingTimeSlotStatusEnumMap = {

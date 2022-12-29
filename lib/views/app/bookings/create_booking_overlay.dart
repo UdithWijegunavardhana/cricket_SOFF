@@ -190,7 +190,7 @@ class CreateBookingScreen extends StatefulWidget {
 class _CreateBookingScreenState extends State<CreateBookingScreen> {
   TextEditingController startTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  TextEditingController futureDateController = TextEditingController();
   bool disableDropdown = true;
   String? errorMessage;
   String duration = '';
@@ -198,6 +198,8 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
   DateTime currentDateTime = DateTime.now();
   late DateTime startDateTime;
   late DateTime endDateTime;
+  String? futureDate;
+  String? selectedDateTime;
 
   bool startTimeChanged = false;
   bool endTimeChanged = false;
@@ -234,6 +236,7 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Material(
           child: Column(
@@ -403,7 +406,12 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                         ),
                         CustomDatePicker(title: 'Future Date ( Optional )',
                             hintText: 'Select Future Date',
-                            controller: descriptionController),
+                            onValueChanged: (value) {
+                              setState(() {
+                                futureDate = DateTimeUtil.formatDateTime("yyyy-MM-dd", value);
+                              });
+                            },
+                            controller: futureDateController),
                         const Spacer(),
                         if (errorMessage != null) ...[
                           Container(
@@ -505,7 +513,9 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                                 errorMessage = errorType;
                               });
                               if (errorType == null) {
-                                DateTime dateTime = widget.selectedDateTime;
+
+                                selectedDateTime = DateTimeUtil.formatDateTime("yyyy-MM-dd", widget.selectedDateTime);
+
                                 UserManager _userManager = UserManager();
                                 UserModel _user = await _userManager
                                     .getUserData();
@@ -513,9 +523,8 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
 
                                 BookingScheduleModel bookingSchedule = BookingScheduleModel(
                                     actionStatus: BookingActionStatus.Save,
-                                    date: '${dateTime.year}-${dateTime
-                                        .month}-${dateTime.day}',
-                                    rescheduleDate: descriptionController.text,
+                                    date: futureDate ?? selectedDateTime,
+                                    rescheduleDate: "",
                                     resources: [BookingResourceModel(
                                       id: widget.resourceId,
                                       timeslots: [
@@ -531,7 +540,9 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                                           isSendEmail: BookingEmailStatus.SendEmail,
                                           createdDateTime: DateFormat(
                                               'yyyy-MM-dd hh:mm:ss').format(
-                                              DateTime.now())
+                                              DateTime.now()),
+                                          subResourceList: [],
+                                          amount: ""
                                         )
                                       ],
                                     )
