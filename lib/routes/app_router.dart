@@ -10,6 +10,7 @@ import 'package:soff_cricket_hybrid/views/app/profile/profile_screen.dart';
 import 'package:soff_cricket_hybrid/views/app/qr_code/qr_code_screen.dart';
 import 'package:soff_cricket_hybrid/views/app/records/records_screen.dart';
 import 'package:soff_cricket_hybrid/views/app/settings/settings_screen.dart';
+import 'package:soff_cricket_hybrid/views/app/splash/splash_screen.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Screen,Route',
@@ -17,6 +18,11 @@ import 'package:soff_cricket_hybrid/views/app/settings/settings_screen.dart';
     CustomRoute(
       page: SettingScreen,
       path: 'setting',
+      transitionsBuilder: TransitionsBuilders.slideLeft,
+    ),
+    CustomRoute(
+      page: SplashScreen,
+      path: 'splash',
       transitionsBuilder: TransitionsBuilders.slideLeft,
     ),
     CustomRoute(

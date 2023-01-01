@@ -131,13 +131,14 @@ class _SettingScreenState extends State<SettingScreen> {
                       context: context,
                       builder: (BuildContext context) {
                         return Container(
-                          height: 210,
+                          height: 270,
                           color: kLayoutLightColor,
                           child: Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
+                                const SizedBox(height: 10),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -151,12 +152,20 @@ class _SettingScreenState extends State<SettingScreen> {
                                                 fontSize: 16))),
                                   ],
                                 ),
-                                // Obx(() => Row(
-                                //       children: [
-                                //         Checkbox(value: _controller.deleteKeyCloackAcc.value, onChanged: _controller.onDeleteKeycloakAccChanged),
-                                //         Text("Delete My Keycloak account as well", style: TextStyle(color: kPrimaryColor, fontSize: 16))
-                                //       ],
-                                //     )),
+                                Obx(() => Row(
+                                      children: [
+                                        Checkbox(
+                                            value: _controller
+                                                .deleteKeyCloackAcc.value,
+                                            onChanged: _controller
+                                                .onDeleteKeycloakAccChanged),
+                                        Text(
+                                            "Delete My Keycloak account as well",
+                                            style: TextStyle(
+                                                color: kPrimaryColor,
+                                                fontSize: 16))
+                                      ],
+                                    )),
                                 Container(
                                     width: MediaQuery.of(context).size.width,
                                     height: 60,

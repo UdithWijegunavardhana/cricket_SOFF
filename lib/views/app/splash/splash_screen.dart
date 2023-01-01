@@ -10,8 +10,11 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Image.asset('assets/images/splash/splash.png'),
+    return Container(
+      color: Colors.white,
+      child: Center(
+        child: Image.asset('assets/images/splash/splash.png'),
+      ),
     );
   }
 }

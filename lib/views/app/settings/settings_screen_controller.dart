@@ -9,7 +9,7 @@ import 'package:soff_cricket_hybrid/services/customer_service.dart';
 import '../../../services/auth/user_manager_service.dart';
 
 class SettingScreenController extends GetxController {
-  RxBool deleteKeyCloackAcc = true.obs;
+  RxBool deleteKeyCloackAcc = false.obs;
   RxBool isLoading = false.obs;
 
   void onDeleteKeycloakAccChanged(bool? val) => deleteKeyCloackAcc(val ?? true);
@@ -19,17 +19,16 @@ class SettingScreenController extends GetxController {
     UserModel user = await _userManager.getUserData();
     isLoading(true);
     CustomerService()
-        .deleteUserAccount(user.email)
-        .then((value) => {
+        .deleteUserAccount(user.id, isHardDeleted: deleteKeyCloackAcc.value)
+        .then((value) async => {
               if (value.status)
                 {
-                  AutoRouter.of(context).replace(HomeRoute()),
-                  KeyCloakAuthService.logOut(context)
+                  await KeyCloakAuthService.logOut(context),
+                  AutoRouter.of(context).popAndPush(const SplashRoute())
                 }
             })
         .whenComplete(() {
       isLoading(false);
-      // Navigator.pop(context);
     });
   }
 }

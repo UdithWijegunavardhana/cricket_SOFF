@@ -46,13 +46,16 @@ class CustomerService extends BaseService {
     }
   }
 
-  Future<ApiResponseModel> deleteUserAccount(String? email) async {
+  Future<ApiResponseModel> deleteUserAccount(String? customerId,
+      {bool? isHardDeleted = true}) async {
     try {
-      if (email == null) throw 'Invalid user id';
-      // var user = await getCustomerByEmail(email);
-      // var res = await dio.post(_customerAPIConfigHandler!.deleteSoffCricket,
-      //     data: user);
-      return ApiResponseModel(status: true, apiStatus: 200, data: true);
+      if (customerId == null) throw 'Invalid user id';
+      await dio.delete(_customerAPIConfigHandler!.deleteSoffCricket,
+          queryParameters: {
+            "customerId": customerId,
+            "isHardDeleted": isHardDeleted
+          });
+      return const ApiResponseModel(status: true, apiStatus: 200);
     } catch (e) {
       return ApiResponseModel(
           status: false, apiStatus: 500, message: e.toString());
