@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:soff_cricket_hybrid/config/config_handler.dart';
 import 'package:soff_cricket_hybrid/models/api_response/api_respone_model.dart';
 import 'package:soff_cricket_hybrid/services/base_service.dart';
+import 'package:soff_cricket_hybrid/views/_shared/constants/app_constants.dart';
+import 'package:soff_cricket_hybrid/views/_shared/widget/toast.dart';
 
 import '../models/user/user_model.dart';
 
@@ -57,6 +59,7 @@ class CustomerService extends BaseService {
           });
       return const ApiResponseModel(status: true, apiStatus: 200);
     } catch (e) {
+      toastBottom(AppConstants.aPIErrorMessage);
       return ApiResponseModel(
           status: false, apiStatus: 500, message: e.toString());
     }
