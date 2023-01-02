@@ -1,5 +1,5 @@
 {
-  "base_api_url": "https://uatsoffcricket.gangfy.com/soffCricketAPI",
+  "base_api_url": "https://soffcricket.gangfy.com/soffCricketAPI",
   "customer_apis": {
     "get_customer_by_email" : "/api/customer/getCustomersByEmail/",
     "get_machine_hours_by_customer_id" : "/api/customer/get-hours-by-customer-id/",
