@@ -10,6 +10,7 @@ import 'package:soff_cricket_hybrid/models/time_slots/time_slot_model.dart';
 import 'package:soff_cricket_hybrid/models/user/user_model.dart';
 import 'package:soff_cricket_hybrid/services/auth/user_manager_service.dart';
 import 'package:soff_cricket_hybrid/services/schedule_service.dart';
+import 'package:soff_cricket_hybrid/utils/id_generator_util.dart';
 import 'package:soff_cricket_hybrid/views/_shared/loaders/progress_loader.dart';
 import 'package:soff_cricket_hybrid/views/_shared/widget/custom_dropdown.dart';
 import 'package:soff_cricket_hybrid/views/_shared/widget/toast.dart';
@@ -542,7 +543,8 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                                               'yyyy-MM-dd hh:mm:ss').format(
                                               DateTime.now()),
                                           subResourceList: [],
-                                          amount: ""
+                                          amount: "",
+                                          timeId: IdGenerator.generateTimeId()
                                         )
                                       ],
                                     )

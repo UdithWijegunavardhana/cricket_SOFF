@@ -21,6 +21,7 @@ _$_BookingTimeslotModel _$$_BookingTimeslotModelFromJson(
       createdDateTime: json['createdDateTime'] as String?,
       subResourceList: json['subResourceList'] as List<dynamic>?,
       amount: json['amount'] as String?,
+      timeId: json['timeId'] as String?,
     );
 
 Map<String, dynamic> _$$_BookingTimeslotModelToJson(
@@ -36,6 +37,7 @@ Map<String, dynamic> _$$_BookingTimeslotModelToJson(
       'createdDateTime': instance.createdDateTime,
       'subResourceList': instance.subResourceList,
       'amount': instance.amount,
+      'timeId': instance.timeId,
     };
 
 const _$BookingTimeSlotStatusEnumMap = {

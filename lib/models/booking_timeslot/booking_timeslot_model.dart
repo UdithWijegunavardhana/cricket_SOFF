@@ -17,7 +17,8 @@ class BookingTimeslotModel with _$BookingTimeslotModel {
     @JsonKey(name: 'isSendEmail') BookingEmailStatus? isSendEmail,
     @JsonKey(name: 'createdDateTime') String? createdDateTime,
     @JsonKey(name: 'subResourceList') List? subResourceList,
-    @JsonKey(name: 'amount') String? amount
+    @JsonKey(name: 'amount') String? amount,
+    @JsonKey(name: 'timeId') String? timeId,
   }) = _BookingTimeslotModel;
 
   factory BookingTimeslotModel.fromJson(Map<String, dynamic> json) =>

@@ -32,7 +32,8 @@ class _$BookingTimeslotModelTearOff {
       @JsonKey(name: 'isSendEmail') BookingEmailStatus? isSendEmail,
       @JsonKey(name: 'createdDateTime') String? createdDateTime,
       @JsonKey(name: 'subResourceList') List<dynamic>? subResourceList,
-      @JsonKey(name: 'amount') String? amount}) {
+      @JsonKey(name: 'amount') String? amount,
+      @JsonKey(name: 'timeId') String? timeId}) {
     return _BookingTimeslotModel(
       startTime: startTime,
       endTime: endTime,
@@ -44,6 +45,7 @@ class _$BookingTimeslotModelTearOff {
       createdDateTime: createdDateTime,
       subResourceList: subResourceList,
       amount: amount,
+      timeId: timeId,
     );
   }
 
@@ -77,6 +79,8 @@ mixin _$BookingTimeslotModel {
   List<dynamic>? get subResourceList => throw _privateConstructorUsedError;
   @JsonKey(name: 'amount')
   String? get amount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'timeId')
+  String? get timeId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -99,7 +103,8 @@ abstract class $BookingTimeslotModelCopyWith<$Res> {
       @JsonKey(name: 'isSendEmail') BookingEmailStatus? isSendEmail,
       @JsonKey(name: 'createdDateTime') String? createdDateTime,
       @JsonKey(name: 'subResourceList') List<dynamic>? subResourceList,
-      @JsonKey(name: 'amount') String? amount});
+      @JsonKey(name: 'amount') String? amount,
+      @JsonKey(name: 'timeId') String? timeId});
 }
 
 /// @nodoc
@@ -123,6 +128,7 @@ class _$BookingTimeslotModelCopyWithImpl<$Res>
     Object? createdDateTime = freezed,
     Object? subResourceList = freezed,
     Object? amount = freezed,
+    Object? timeId = freezed,
   }) {
     return _then(_value.copyWith(
       startTime: startTime == freezed
@@ -165,6 +171,10 @@ class _$BookingTimeslotModelCopyWithImpl<$Res>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as String?,
+      timeId: timeId == freezed
+          ? _value.timeId
+          : timeId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -186,7 +196,8 @@ abstract class _$BookingTimeslotModelCopyWith<$Res>
       @JsonKey(name: 'isSendEmail') BookingEmailStatus? isSendEmail,
       @JsonKey(name: 'createdDateTime') String? createdDateTime,
       @JsonKey(name: 'subResourceList') List<dynamic>? subResourceList,
-      @JsonKey(name: 'amount') String? amount});
+      @JsonKey(name: 'amount') String? amount,
+      @JsonKey(name: 'timeId') String? timeId});
 }
 
 /// @nodoc
@@ -212,6 +223,7 @@ class __$BookingTimeslotModelCopyWithImpl<$Res>
     Object? createdDateTime = freezed,
     Object? subResourceList = freezed,
     Object? amount = freezed,
+    Object? timeId = freezed,
   }) {
     return _then(_BookingTimeslotModel(
       startTime: startTime == freezed
@@ -254,6 +266,10 @@ class __$BookingTimeslotModelCopyWithImpl<$Res>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as String?,
+      timeId: timeId == freezed
+          ? _value.timeId
+          : timeId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -271,7 +287,8 @@ class _$_BookingTimeslotModel implements _BookingTimeslotModel {
       @JsonKey(name: 'isSendEmail') this.isSendEmail,
       @JsonKey(name: 'createdDateTime') this.createdDateTime,
       @JsonKey(name: 'subResourceList') this.subResourceList,
-      @JsonKey(name: 'amount') this.amount});
+      @JsonKey(name: 'amount') this.amount,
+      @JsonKey(name: 'timeId') this.timeId});
 
   factory _$_BookingTimeslotModel.fromJson(Map<String, dynamic> json) =>
       _$$_BookingTimeslotModelFromJson(json);
@@ -306,10 +323,13 @@ class _$_BookingTimeslotModel implements _BookingTimeslotModel {
   @override
   @JsonKey(name: 'amount')
   final String? amount;
+  @override
+  @JsonKey(name: 'timeId')
+  final String? timeId;
 
   @override
   String toString() {
-    return 'BookingTimeslotModel(startTime: $startTime, endTime: $endTime, customerId: $customerId, comment: $comment, status: $status, isReschedule: $isReschedule, isSendEmail: $isSendEmail, createdDateTime: $createdDateTime, subResourceList: $subResourceList, amount: $amount)';
+    return 'BookingTimeslotModel(startTime: $startTime, endTime: $endTime, customerId: $customerId, comment: $comment, status: $status, isReschedule: $isReschedule, isSendEmail: $isSendEmail, createdDateTime: $createdDateTime, subResourceList: $subResourceList, amount: $amount, timeId: $timeId)';
   }
 
   @override
@@ -331,7 +351,8 @@ class _$_BookingTimeslotModel implements _BookingTimeslotModel {
                 .equals(other.createdDateTime, createdDateTime) &&
             const DeepCollectionEquality()
                 .equals(other.subResourceList, subResourceList) &&
-            const DeepCollectionEquality().equals(other.amount, amount));
+            const DeepCollectionEquality().equals(other.amount, amount) &&
+            const DeepCollectionEquality().equals(other.timeId, timeId));
   }
 
   @override
@@ -346,7 +367,8 @@ class _$_BookingTimeslotModel implements _BookingTimeslotModel {
       const DeepCollectionEquality().hash(isSendEmail),
       const DeepCollectionEquality().hash(createdDateTime),
       const DeepCollectionEquality().hash(subResourceList),
-      const DeepCollectionEquality().hash(amount));
+      const DeepCollectionEquality().hash(amount),
+      const DeepCollectionEquality().hash(timeId));
 
   @JsonKey(ignore: true)
   @override
@@ -371,7 +393,8 @@ abstract class _BookingTimeslotModel implements BookingTimeslotModel {
       @JsonKey(name: 'isSendEmail') BookingEmailStatus? isSendEmail,
       @JsonKey(name: 'createdDateTime') String? createdDateTime,
       @JsonKey(name: 'subResourceList') List<dynamic>? subResourceList,
-      @JsonKey(name: 'amount') String? amount}) = _$_BookingTimeslotModel;
+      @JsonKey(name: 'amount') String? amount,
+      @JsonKey(name: 'timeId') String? timeId}) = _$_BookingTimeslotModel;
 
   factory _BookingTimeslotModel.fromJson(Map<String, dynamic> json) =
       _$_BookingTimeslotModel.fromJson;
@@ -406,6 +429,9 @@ abstract class _BookingTimeslotModel implements BookingTimeslotModel {
   @override
   @JsonKey(name: 'amount')
   String? get amount;
+  @override
+  @JsonKey(name: 'timeId')
+  String? get timeId;
   @override
   @JsonKey(ignore: true)
   _$BookingTimeslotModelCopyWith<_BookingTimeslotModel> get copyWith =>
