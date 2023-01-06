@@ -9,7 +9,7 @@ import '../../_shared/widget/home_category_card.dart';
 import 'home_controller.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -32,24 +32,24 @@ class _HomeScreenState extends State<HomeScreen> {
         color: kLayoutLightColor,
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(00.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.settings,
-                      size: 28,
-                    ),
-                    tooltip: 'Show Settings',
-                    onPressed: () {
-                      AutoRouter.of(context).push(const SettingRoute());
-                    },
-                  ),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(00.0),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.end,
+            //     children: [
+            //       IconButton(
+            //         icon: const Icon(
+            //           Icons.settings,
+            //           size: 28,
+            //         ),
+            //         tooltip: 'Show Settings',
+            //         onPressed: () {
+            //           AutoRouter.of(context).push(const SettingRoute());
+            //         },
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Obx(
               ()=> _homeController.isLoading.isFalse ? HomeCategoryCard(
                 title: 'Categories',

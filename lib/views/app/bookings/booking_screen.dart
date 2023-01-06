@@ -4,16 +4,12 @@ import 'package:get/get.dart';
 import 'package:soff_cricket_hybrid/routes/app_router.gr.dart';
 import 'package:soff_cricket_hybrid/views/_shared/constants/colors.dart';
 import 'package:soff_cricket_hybrid/views/_shared/loaders/event_page_loader.dart';
-import 'package:soff_cricket_hybrid/views/_shared/widget/custom_date_picker.dart';
-import 'package:soff_cricket_hybrid/views/_shared/widget/custom_elevated_button.dart';
-import 'package:soff_cricket_hybrid/views/_shared/widget/custom_time_picker.dart';
+import 'package:soff_cricket_hybrid/views/_shared/widget/custom_appbar.dart';
 import 'package:soff_cricket_hybrid/views/app/bookings/booking_controller.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../_shared/constants/font_styles.dart';
 import '../schedules/schedule_widget.dart';
-import 'create_booking_overlay.dart';
-import 'booking_requested_success_overlay.dart';
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({Key? key, required this.resourceId, required this.selectedDate}) : super(key: key);
@@ -76,7 +72,7 @@ class _BookingScreenState extends State<BookingScreen> with TickerProviderStateM
     for (i = 0; i < resources.length; i++) {
       listings.add(
         Tab(
-          text: _bookingController.resources[i].description,
+          text: _bookingController.resources[i].description ?? _bookingController.resources[i].code,
         ),
       );
     }
@@ -96,7 +92,7 @@ class _BookingScreenState extends State<BookingScreen> with TickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(elevation: 0, backgroundColor: kSecondaryColor, foregroundColor: kFontLightColor),
+      appBar: const CustomAppBar(title: 'Resource Category'),
       floatingActionButton: Obx(
         () => _bookingController.isLoading.isFalse
             ? FloatingActionButton(
@@ -120,59 +116,57 @@ class _BookingScreenState extends State<BookingScreen> with TickerProviderStateM
                 ),
               ),
       ),
-      body: SafeArea(
-        child: Obx(
-          () => _bookingController.isLoading.isFalse
-              ? Container(
-                  color: kLayoutLightColor,
-                  child: Column(children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Text(
-                            _bookingController.resources[0].resourceCategorieName,
-                            style: kFontScreenTitle,
-                          ),
+      body: Obx(
+        () => _bookingController.isLoading.isFalse
+            ? Container(
+                color: kLayoutLightColor,
+                child: Column(children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                        child: Text(
+                          _bookingController.resources[0].resourceCategorieName,
+                          style: kFontScreenTitle,
                         ),
-                      ],
-                    ),
-                    Container(
-                      width: double.maxFinite,
-                      margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-                      height: 30,
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: TabBar(
-                            labelColor: Colors.white,
-                            labelPadding: const EdgeInsets.only(left: 20, right: 20),
-                            isScrollable: true,
-                            unselectedLabelColor: kPrimaryColor,
-                            indicatorWeight: 0,
-                            indicator: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            controller: _tabController,
-                            onTap: (value) => setState(() {
-                                  selectedTabId = value;
-                                }),
-                            tabs: _getResourceEventsTabs(_bookingController.resources)),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Expanded(
-                      child: TabBarView(
+                    ],
+                  ),
+                  Container(
+                    width: double.maxFinite,
+                    margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                    height: 30,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: TabBar(
+                          labelColor: Colors.white,
+                          labelPadding: const EdgeInsets.only(left: 20, right: 20),
+                          isScrollable: true,
+                          unselectedLabelColor: kPrimaryColor,
+                          indicatorWeight: 0,
+                          indicator: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                           controller: _tabController,
-                          physics: const NeverScrollableScrollPhysics(),
-                          children: _getResourceEventsTabView(_bookingController.resources)),
+                          onTap: (value) => setState(() {
+                                selectedTabId = value;
+                              }),
+                          tabs: _getResourceEventsTabs(_bookingController.resources)),
                     ),
-                  ]),
-                )
-              : const EventPageLoader(),
-        ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                        controller: _tabController,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: _getResourceEventsTabView(_bookingController.resources)),
+                  ),
+                ]),
+              )
+            : const EventPageLoader(),
       ),
     );
   }

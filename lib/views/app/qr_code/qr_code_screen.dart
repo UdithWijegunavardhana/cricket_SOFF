@@ -38,6 +38,24 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
           color: kLayoutLightColor,
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.all(00.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.settings,
+                        size: 28,
+                      ),
+                      tooltip: 'Show Settings',
+                      onPressed: () {
+                        AutoRouter.of(context).push(const SettingRoute());
+                      },
+                    ),
+                  ],
+                ),
+              ),
               Row(
                 children: const [
                   Padding(

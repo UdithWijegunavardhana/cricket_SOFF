@@ -1,7 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:soff_cricket_hybrid/models/api_response/api_respone_model.dart';
+import 'package:soff_cricket_hybrid/models/booking_resource/booking_resource_model.dart';
 import 'package:soff_cricket_hybrid/models/booking_schedule/booking_schedule_model.dart';
+import 'package:soff_cricket_hybrid/models/booking_timeslot/booking_timeslot_model.dart';
+import 'package:soff_cricket_hybrid/models/resource/resource_model.dart';
+import 'package:soff_cricket_hybrid/models/time_slots/time_slot_model.dart';
 import 'package:soff_cricket_hybrid/models/user/user_model.dart';
 import 'package:soff_cricket_hybrid/services/auth/user_manager_service.dart';
 import 'package:soff_cricket_hybrid/services/schedule_service.dart';
@@ -174,7 +179,9 @@ class CreateBookingScreen extends StatefulWidget {
   final DateTime selectedDateTime;
   final String resourceId;
 
-  const CreateBookingScreen({Key? key, required this.selectedDateTime, required this.resourceId}) : super(key: key);
+  const CreateBookingScreen(
+      {Key? key, required this.selectedDateTime, required this.resourceId})
+      : super(key: key);
 
   @override
   State<CreateBookingScreen> createState() => _CreateBookingScreenState();
@@ -195,7 +202,13 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
   bool startTimeChanged = false;
   bool endTimeChanged = false;
 
-  List<String> durationList = const <String>['00:30', '01:00', '01:30', '02:00', '02:30'];
+  List<String> durationList = const <String>[
+    '00:30',
+    '01:00',
+    '01:30',
+    '02:00',
+    '02:30'
+  ];
 
   Map<String, dynamic> getDuration(String selectedDuration) {
     int hours = int.parse(selectedDuration.split(':')[0]);
@@ -230,7 +243,7 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                 children: [
                   IconButton(
                       onPressed: () {
-                        Navigator.pop(context);
+                        AutoRouter.of(context).pop();
                       },
                       icon: Icon(
                         Icons.close,
@@ -240,7 +253,10 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
               ),
               Expanded(
                 child: Container(
-                  width: MediaQuery.of(context).size.width * 0.96,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width * 0.96,
                   height: 450,
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Form(
@@ -266,25 +282,38 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                                     width: 72,
                                     height: 78,
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .center,
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .center,
                                       children: [
                                         Text(
-                                          widget.selectedDateTime.year.toString(),
+                                          widget.selectedDateTime.year
+                                              .toString(),
                                           style: const TextStyle(
-                                            color: Color.fromRGBO(97, 97, 97, 1),
+                                            color: Color.fromRGBO(
+                                                97, 97, 97, 1),
                                           ),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.all(2.0),
                                           child: Text(
-                                            DateTimeUtil.getMonthAbbriviation(widget.selectedDateTime.month).toLowerCase(),
-                                            style: const TextStyle(color: Color.fromRGBO(97, 97, 97, 1), fontSize: 14),
+                                            DateTimeUtil.getMonthAbbriviation(
+                                                widget.selectedDateTime.month)
+                                                .toLowerCase(),
+                                            style: const TextStyle(
+                                                color: Color.fromRGBO(
+                                                    97, 97, 97, 1),
+                                                fontSize: 14),
                                           ),
                                         ),
                                         Text(
-                                          widget.selectedDateTime.day.toString(),
-                                          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Color.fromRGBO(97, 97, 97, 1)),
+                                          widget.selectedDateTime.day
+                                              .toString(),
+                                          style: const TextStyle(fontSize: 22,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(
+                                                  97, 97, 97, 1)),
                                         )
                                       ],
                                     ),
@@ -300,24 +329,32 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                               hint: 'Select Duration',
                               disabled: disableDropdown,
                               onValueChanged: (value) {
-                                Map<String, dynamic> formattedDuration = getDuration(value);
+                                Map<String,
+                                    dynamic> formattedDuration = getDuration(
+                                    value);
 
-                                Duration duration = Duration(hours: formattedDuration['hours'], minutes: formattedDuration['minutes']);
+                                Duration duration = Duration(
+                                    hours: formattedDuration['hours'],
+                                    minutes: formattedDuration['minutes']);
 
                                 if (startTimeChanged && !endTimeChanged) {
                                   setState(() {
-                                    DateTime updatedTime = startDateTime.add(duration);
+                                    DateTime updatedTime = startDateTime.add(
+                                        duration);
                                     endDateTime = updatedTime;
-                                    String formattedTime = DateFormat.jm().format(updatedTime);
+                                    String formattedTime = DateFormat.jm()
+                                        .format(updatedTime);
                                     endTimeController.text = formattedTime;
                                   });
                                 }
 
                                 if (!startTimeChanged && endTimeChanged) {
                                   setState(() {
-                                    DateTime updatedTime = endDateTime.subtract(duration);
+                                    DateTime updatedTime = endDateTime.subtract(
+                                        duration);
                                     startDateTime = updatedTime;
-                                    String formattedTime = DateFormat.jm().format(updatedTime);
+                                    String formattedTime = DateFormat.jm()
+                                        .format(updatedTime);
                                     startTimeController.text = formattedTime;
                                   });
                                 }
@@ -364,7 +401,9 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                         const SizedBox(
                           height: 6,
                         ),
-                        CustomDatePicker(title: 'Future Date ( Optional )', hintText: 'Select Future Date', controller: descriptionController),
+                        CustomDatePicker(title: 'Future Date ( Optional )',
+                            hintText: 'Select Future Date',
+                            controller: descriptionController),
                         const Spacer(),
                         if (errorMessage != null) ...[
                           Container(
@@ -389,10 +428,12 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                                         errorMessage = null;
                                       });
                                     },
-                                    icon: Icon(Icons.cancel, color: kLayoutLightColor))
+                                    icon: Icon(
+                                        Icons.cancel, color: kLayoutLightColor))
                               ],
                             ),
-                            decoration: BoxDecoration(color: kWarningColor, borderRadius: BorderRadius.circular(10)),
+                            decoration: BoxDecoration(color: kWarningColor,
+                                borderRadius: BorderRadius.circular(10)),
                           )
                         ],
                         const Spacer(),
@@ -403,32 +444,43 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                             onPressed: () async {
                               String? errorType;
 
-                              if (startTimeController.text.isEmpty && endTimeController.text.isEmpty) {
-                                errorType = "Start time and End time must be selected";
+                              if (startTimeController.text.isEmpty &&
+                                  endTimeController.text.isEmpty) {
+                                errorType =
+                                "Start time and End time must be selected";
                               }
 
-                              if (startTimeController.text.isEmpty && endTimeController.text.isNotEmpty) {
+                              if (startTimeController.text.isEmpty &&
+                                  endTimeController.text.isNotEmpty) {
                                 errorType = "Start time must be selected";
                               }
 
-                              if (endTimeController.text.isEmpty && startTimeController.text.isNotEmpty) {
+                              if (endTimeController.text.isEmpty &&
+                                  startTimeController.text.isNotEmpty) {
                                 errorType = "End time must be selected";
                               }
 
-                              if (startTimeController.text.isNotEmpty && endTimeController.text.isNotEmpty) {
-                                List<String> start = startTimeController.text.split(" ");
-                                List<String> end = endTimeController.text.split(" ");
+                              if (startTimeController.text.isNotEmpty &&
+                                  endTimeController.text.isNotEmpty) {
+                                List<String> start = startTimeController.text
+                                    .split(" ");
+                                List<String> end = endTimeController.text.split(
+                                    " ");
 
                                 if (start[1] == 'PM' && end[1] == 'AM') {
-                                  errorType = "Start time cannot be in future than ending time";
+                                  errorType =
+                                  "Start time cannot be in future than ending time";
                                 }
 
                                 if (startDateTime.isAfter(endDateTime)) {
-                                  errorType = "Start time cannot be in future than ending time";
+                                  errorType =
+                                  "Start time cannot be in future than ending time";
                                 }
 
-                                if (startDateTime.isAtSameMomentAs(endDateTime)) {
-                                  errorType = "Start time cannot be same as ending time";
+                                if (startDateTime.isAtSameMomentAs(
+                                    endDateTime)) {
+                                  errorType =
+                                  "Start time cannot be same as ending time";
                                 }
 
                                 // if (start[1] == end[1]) {
@@ -455,36 +507,46 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                               if (errorType == null) {
                                 DateTime dateTime = widget.selectedDateTime;
                                 UserManager _userManager = UserManager();
-                                UserModel _user = await _userManager.getUserData();
+                                UserModel _user = await _userManager
+                                    .getUserData();
                                 Navigator.of(context).push(ProgressLoader());
-                                var bookingSchedule = {
-                                  "actionStatus": "SAVE",
-                                  "date": '${dateTime.year}-${dateTime.month}-${dateTime.day}',
-                                  "rescheduleDate": descriptionController.text, //null,
-                                  "resources": [
-                                    {
-                                      "_id": widget.resourceId,
-                                      "timeslots": [
-                                        {
-                                          "startTime": DateFormat.Hm().format(startDateTime),
-                                          "endTime": DateFormat.Hm().format(endDateTime),
-                                          "customerId": _user.id!,
-                                          "comment": "",
-                                          "status": "FIXED",
-                                          "isReschedule": "false",
-                                          "isSendEmail": "SEND_EMAIL",
-                                          "createdDateTime": DateFormat('yyyy-MM-dd hh:mm:ss').format(DateTime.now()) //"2022-11-21 20:00:01"
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                };
-                                ApiResponseModel res = await ScheduleService().saveSchedule(bookingSchedule);
+
+                                BookingScheduleModel bookingSchedule = BookingScheduleModel(
+                                    actionStatus: BookingActionStatus.Save,
+                                    date: '${dateTime.year}-${dateTime
+                                        .month}-${dateTime.day}',
+                                    rescheduleDate: descriptionController.text,
+                                    resources: [BookingResourceModel(
+                                      id: widget.resourceId,
+                                      timeslots: [
+                                        BookingTimeslotModel(
+                                          startTime: DateFormat.Hm().format(
+                                              startDateTime),
+                                          endTime: DateFormat.Hm().format(
+                                              endDateTime),
+                                          customerId: _user.id!,
+                                          status: BookingTimeSlotStatus.Requested,
+                                          comment: "",
+                                          isReschedule: "false",
+                                          isSendEmail: BookingEmailStatus.SendEmail,
+                                          createdDateTime: DateFormat(
+                                              'yyyy-MM-dd hh:mm:ss').format(
+                                              DateTime.now())
+                                        )
+                                      ],
+                                    )
+                                    ]
+                                );
+
+                                ApiResponseModel res = await ScheduleService()
+                                    .saveSchedule(bookingSchedule);
                                 Navigator.pop(context);
                                 if (res.status) {
-                                  Navigator.of(context).push(BookingRequestedSuccessOverlay());
+                                  Navigator.of(context).push(
+                                      BookingRequestedSuccessOverlay());
                                 } else {
-                                  toastBottom("Something went wrong, Please try again later");
+                                  toastBottom(
+                                      "Something went wrong, Please try again later");
                                 }
                               }
                             },
