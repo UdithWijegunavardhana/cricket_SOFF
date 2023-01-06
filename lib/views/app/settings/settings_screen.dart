@@ -131,7 +131,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       context: context,
                       builder: (BuildContext context) {
                         return Container(
-                          height: 270,
+                          height: 380,
                           color: kLayoutLightColor,
                           child: Center(
                             child: Column(
@@ -139,19 +139,15 @@ class _SettingScreenState extends State<SettingScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 const SizedBox(height: 10),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            10, 10, 10, 10),
-                                        child: Text(
-                                            'Are you sure you want to delete your account ?',
-                                            style: TextStyle(
-                                                color: kPrimaryColor,
-                                                fontSize: 16))),
-                                  ],
-                                ),
+                                Container(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        10, 10, 10, 10),
+                                    child: Text(
+                                        'Are you sure you want to delete your account ?',
+                                        style: TextStyle(
+                                            color: kPrimaryColor,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold))),
                                 Obx(() => Row(
                                       children: [
                                         Checkbox(
@@ -159,13 +155,22 @@ class _SettingScreenState extends State<SettingScreen> {
                                                 .deleteKeyCloackAcc.value,
                                             onChanged: _controller
                                                 .onDeleteKeycloakAccChanged),
-                                        Text(
-                                            "Delete My Keycloak account as well",
-                                            style: TextStyle(
-                                                color: kPrimaryColor,
-                                                fontSize: 16))
+                                        Expanded(
+                                          child: Text(
+                                              "Please delete my account in Gangfy Single Sign-on Server too",
+                                              style: TextStyle(
+                                                  color: kPrimaryColor,
+                                                  fontSize: 16)),
+                                        ),
                                       ],
                                     )),
+                                const SizedBox(height: 10),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  child: Text(
+                                      "I understand that by doing so, I will not be able to log-in to other services associate with Soff Cricket in the future with these login credentials"),
+                                ),
+                                const SizedBox(height: 30),
                                 Container(
                                     width: MediaQuery.of(context).size.width,
                                     height: 60,
