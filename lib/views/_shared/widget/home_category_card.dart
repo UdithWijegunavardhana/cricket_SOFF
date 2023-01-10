@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:soff_cricket_hybrid/views/_shared/widget/home_item_tile.dart';
 
 import '../../../routes/app_router.gr.dart';
+import '../../../utils/datetime_utils/datetime_util.dart';
 import '../constants/colors.dart';
 import '../constants/font_styles.dart';
 
@@ -86,7 +87,7 @@ class _HomeCategoryCardState extends State<HomeCategoryCard> {
                         const Text('Selected Date : '),
                         selectedDate != null
                             ? Text(
-                                '${selectedDate?.year} - ${selectedDate?.month} - ${selectedDate?.day}',
+                                DateTimeUtil.formatDateTime("yyyy-MM-dd", selectedDate!),
                                 style: const TextStyle(fontWeight: FontWeight.w500),
                               )
                             : const Text(''),

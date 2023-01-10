@@ -3,6 +3,7 @@ import 'package:soff_cricket_hybrid/models/resource/resource_model.dart';
 import 'package:soff_cricket_hybrid/models/time_slots/time_slot_model.dart';
 
 import '../../../services/schedule_service.dart';
+import '../../../utils/datetime_utils/datetime_util.dart';
 
 class ScheduleWidgetController extends GetxController {
 
@@ -30,7 +31,7 @@ class ScheduleWidgetController extends GetxController {
     List<TimeSlotModel> _timeSlotList = <TimeSlotModel>[];
     isLoading.value = true;
 
-    ScheduleService().getSchedulesByDate('${dateTime.year}-${dateTime.month}-${dateTime.day}').then((value) {
+    ScheduleService().getSchedulesByDate(DateTimeUtil.formatDateTime("yyyy-MM-dd", dateTime)).then((value) {
       if (value.status) {
         for(ResourceModel resource in value.data){
           if(resource.id != null && resource.id == resourceTypeId){

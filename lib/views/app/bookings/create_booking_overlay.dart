@@ -10,6 +10,7 @@ import 'package:soff_cricket_hybrid/models/time_slots/time_slot_model.dart';
 import 'package:soff_cricket_hybrid/models/user/user_model.dart';
 import 'package:soff_cricket_hybrid/services/auth/user_manager_service.dart';
 import 'package:soff_cricket_hybrid/services/schedule_service.dart';
+import 'package:soff_cricket_hybrid/utils/id_generator_util.dart';
 import 'package:soff_cricket_hybrid/views/_shared/loaders/progress_loader.dart';
 import 'package:soff_cricket_hybrid/views/_shared/widget/custom_dropdown.dart';
 import 'package:soff_cricket_hybrid/views/_shared/widget/toast.dart';
@@ -190,7 +191,7 @@ class CreateBookingScreen extends StatefulWidget {
 class _CreateBookingScreenState extends State<CreateBookingScreen> {
   TextEditingController startTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  TextEditingController futureDateController = TextEditingController();
   bool disableDropdown = true;
   String? errorMessage;
   String duration = '';
@@ -198,6 +199,8 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
   DateTime currentDateTime = DateTime.now();
   late DateTime startDateTime;
   late DateTime endDateTime;
+  String? futureDate;
+  String? selectedDateTime;
 
   bool startTimeChanged = false;
   bool endTimeChanged = false;
@@ -234,6 +237,7 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Material(
           child: Column(
@@ -403,7 +407,12 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                         ),
                         CustomDatePicker(title: 'Future Date ( Optional )',
                             hintText: 'Select Future Date',
-                            controller: descriptionController),
+                            onValueChanged: (value) {
+                              setState(() {
+                                futureDate = DateTimeUtil.formatDateTime("yyyy-MM-dd", value);
+                              });
+                            },
+                            controller: futureDateController),
                         const Spacer(),
                         if (errorMessage != null) ...[
                           Container(
@@ -505,7 +514,9 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                                 errorMessage = errorType;
                               });
                               if (errorType == null) {
-                                DateTime dateTime = widget.selectedDateTime;
+
+                                selectedDateTime = DateTimeUtil.formatDateTime("yyyy-MM-dd", widget.selectedDateTime);
+
                                 UserManager _userManager = UserManager();
                                 UserModel _user = await _userManager
                                     .getUserData();
@@ -513,9 +524,8 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
 
                                 BookingScheduleModel bookingSchedule = BookingScheduleModel(
                                     actionStatus: BookingActionStatus.Save,
-                                    date: '${dateTime.year}-${dateTime
-                                        .month}-${dateTime.day}',
-                                    rescheduleDate: descriptionController.text,
+                                    date: futureDate ?? selectedDateTime,
+                                    rescheduleDate: "",
                                     resources: [BookingResourceModel(
                                       id: widget.resourceId,
                                       timeslots: [
@@ -531,7 +541,10 @@ class _CreateBookingScreenState extends State<CreateBookingScreen> {
                                           isSendEmail: BookingEmailStatus.SendEmail,
                                           createdDateTime: DateFormat(
                                               'yyyy-MM-dd hh:mm:ss').format(
-                                              DateTime.now())
+                                              DateTime.now()),
+                                          subResourceList: [],
+                                          amount: "",
+                                          timeId: IdGenerator.generateTimeId()
                                         )
                                       ],
                                     )
