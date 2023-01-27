@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -6,6 +7,7 @@ import 'package:soff_cricket_hybrid/views/_shared/constants/colors.dart';
 import 'package:soff_cricket_hybrid/views/_shared/widget/custom_appbar.dart';
 import 'package:soff_cricket_hybrid/views/_shared/widget/setting_list_tile.dart';
 import 'package:soff_cricket_hybrid/views/app/settings/settings_screen_controller.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -16,6 +18,8 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   final SettingScreenController _controller = SettingScreenController();
+  ImagePicker picker = ImagePicker();
+  XFile? image;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +31,43 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
           body: Column(
             children: [
+              const SizedBox(height: 20),
+              Center(
+                child: Stack(children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          color: const Color.fromARGB(255, 3, 3, 3),
+                          width: 5.0,
+                          style: BorderStyle.solid),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: image != null
+                            ? FileImage(File(image!.path))
+                            : const AssetImage(
+                                    'assets/images/profile/profile.jpg')
+                                as ImageProvider,
+                      ),
+                    ),
+                    height: 180,
+                    width: 200,
+                  ),
+                  Positioned(
+                    bottom: 10,
+                    right: 10,
+                    child: InkWell(
+                      onTap: () async {
+                        image =
+                            await picker.pickImage(source: ImageSource.gallery);
+                        setState(() {});
+                      },
+                      child: profilePicEditIcon(),
+                    ),
+                  ),
+                ]),
+              ),
+              const SizedBox(height: 20),
               SettingListTile(
                   iconData: Icons.exit_to_app,
                   title: 'Sign Out',
@@ -243,4 +284,30 @@ class _SettingScreenState extends State<SettingScreen> {
       ),
     );
   }
+
+  Widget profilePicEditIcon() => buildCircle(
+        color: Colors.white,
+        all: 3,
+        child: buildCircle(
+          color: const Color.fromARGB(255, 0, 0, 0),
+          all: 8,
+          child: const Icon(
+            Icons.add_a_photo,
+            color: Colors.white,
+            size: 20,
+          ),
+        ),
+      );
+  Widget buildCircle({
+    required Widget child,
+    required double all,
+    required Color color,
+  }) =>
+      ClipOval(
+        child: Container(
+          padding: EdgeInsets.all(all),
+          color: color,
+          child: child,
+        ),
+      );
 }

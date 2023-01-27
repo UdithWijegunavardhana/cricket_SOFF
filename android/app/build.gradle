@@ -49,6 +49,7 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    namespace 'com.soffcricket.app.soff_cricket_hybrid'
 }
 
 flutter {
