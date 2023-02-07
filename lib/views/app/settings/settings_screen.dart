@@ -42,7 +42,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       shape: BoxShape.circle,
                       border: Border.all(
                           color: const Color.fromARGB(255, 3, 3, 3),
-                          width: 5.0,
+                          width: 3.0,
                           style: BorderStyle.solid),
                       image: DecorationImage(
                         fit: BoxFit.cover,
@@ -53,7 +53,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                 as ImageProvider,
                       ),
                     ),
-                    height: 180,
+                    height: 200,
                     width: 200,
                   ),
                   Positioned(
@@ -61,18 +61,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     right: 10,
                     child: InkWell(
                       onTap: () async {
-                        try {
-                          // final pickedImage = await picker.pickImage(
-                          //     source: ImageSource.gallery);
-                          // setState(() {
-                          //   image = pickedImage;
-                          // });
-                          _uploadImage();
-                        } catch (e) {
-                          setState(() {
-                            pickImageError = e;
-                          });
-                        }
+                        _showImageAlert(context);
                       },
                       child: profilePicEditIcon(),
                     ),
@@ -323,12 +312,64 @@ class _SettingScreenState extends State<SettingScreen> {
         ),
       );
 
-  Future<void> _uploadImage() async {
+  void _showImageAlert(BuildContext context) {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (context) {
+          return AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            title: const Text('Select a Picture From'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                InkWell(
+                  onTap: _uploadImageFromCamera,
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 30, 10),
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.camera,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text('Camera'),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                InkWell(
+                  onTap: _uploadImageFromGallery,
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 30, 10),
+                    child: Row(children: const [
+                      Icon(
+                        Icons.photo,
+                        size: 30,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text('Gallery'),
+                    ]),
+                  ),
+                )
+              ],
+            ),
+          );
+        });
+  }
+
+  Future<void> _uploadImageFromGallery() async {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
-    // setState(() {
-    //   image = pickedFile;
-    // });
     if (pickedFile != null) {
       final croppedFile = await ImageCropper().cropImage(
         sourcePath: pickedFile.path,
@@ -344,18 +385,33 @@ class _SettingScreenState extends State<SettingScreen> {
           IOSUiSettings(
             title: 'Cropper',
           ),
-          WebUiSettings(
-            context: context,
-            presentStyle: CropperPresentStyle.dialog,
-            boundary: const CroppieBoundary(
-              width: 520,
-              height: 520,
-            ),
-            viewPort:
-                const CroppieViewPort(width: 480, height: 480, type: 'circle'),
-            enableExif: true,
-            enableZoom: true,
-            showZoomer: true,
+        ],
+      );
+      if (croppedFile != null) {
+        setState(() {
+          _croppedFile = croppedFile;
+        });
+      }
+    }
+  }
+
+  Future<void> _uploadImageFromCamera() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: pickedFile.path,
+        compressFormat: ImageCompressFormat.jpg,
+        compressQuality: 100,
+        uiSettings: [
+          AndroidUiSettings(
+              toolbarTitle: 'Cropper',
+              toolbarColor: const Color.fromARGB(255, 25, 24, 24),
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.original,
+              lockAspectRatio: false),
+          IOSUiSettings(
+            title: 'Cropper',
           ),
         ],
       );
