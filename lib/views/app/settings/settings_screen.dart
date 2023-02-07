@@ -8,6 +8,7 @@ import 'package:soff_cricket_hybrid/views/_shared/widget/custom_appbar.dart';
 import 'package:soff_cricket_hybrid/views/_shared/widget/setting_list_tile.dart';
 import 'package:soff_cricket_hybrid/views/app/settings/settings_screen_controller.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -20,6 +21,8 @@ class _SettingScreenState extends State<SettingScreen> {
   final SettingScreenController _controller = SettingScreenController();
   ImagePicker picker = ImagePicker();
   XFile? image;
+  CroppedFile? _croppedFile;
+  dynamic pickImageError;
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +46,8 @@ class _SettingScreenState extends State<SettingScreen> {
                           style: BorderStyle.solid),
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: image != null
-                            ? FileImage(File(image!.path))
+                        image: _croppedFile != null
+                            ? FileImage(File(_croppedFile!.path))
                             : const AssetImage(
                                     'assets/images/profile/profile.jpg')
                                 as ImageProvider,
@@ -58,9 +61,18 @@ class _SettingScreenState extends State<SettingScreen> {
                     right: 10,
                     child: InkWell(
                       onTap: () async {
-                        image =
-                            await picker.pickImage(source: ImageSource.gallery);
-                        setState(() {});
+                        try {
+                          // final pickedImage = await picker.pickImage(
+                          //     source: ImageSource.gallery);
+                          // setState(() {
+                          //   image = pickedImage;
+                          // });
+                          _uploadImage();
+                        } catch (e) {
+                          setState(() {
+                            pickImageError = e;
+                          });
+                        }
                       },
                       child: profilePicEditIcon(),
                     ),
@@ -89,7 +101,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                         padding: const EdgeInsets.fromLTRB(
                                             10, 10, 10, 10),
                                         child: Text(
-                                            'Are you sure you want to sign out ?',
+                                            'Are you sure you want to sign out?',
                                             style: TextStyle(
                                                 color: kPrimaryColor,
                                                 fontSize: 16))),
@@ -310,4 +322,48 @@ class _SettingScreenState extends State<SettingScreen> {
           child: child,
         ),
       );
+
+  Future<void> _uploadImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    // setState(() {
+    //   image = pickedFile;
+    // });
+    if (pickedFile != null) {
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: pickedFile.path,
+        compressFormat: ImageCompressFormat.jpg,
+        compressQuality: 100,
+        uiSettings: [
+          AndroidUiSettings(
+              toolbarTitle: 'Cropper',
+              toolbarColor: const Color.fromARGB(255, 25, 24, 24),
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.original,
+              lockAspectRatio: false),
+          IOSUiSettings(
+            title: 'Cropper',
+          ),
+          WebUiSettings(
+            context: context,
+            presentStyle: CropperPresentStyle.dialog,
+            boundary: const CroppieBoundary(
+              width: 520,
+              height: 520,
+            ),
+            viewPort:
+                const CroppieViewPort(width: 480, height: 480, type: 'circle'),
+            enableExif: true,
+            enableZoom: true,
+            showZoomer: true,
+          ),
+        ],
+      );
+      if (croppedFile != null) {
+        setState(() {
+          _croppedFile = croppedFile;
+        });
+      }
+    }
+  }
 }
