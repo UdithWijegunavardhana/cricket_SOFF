@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,6 +7,8 @@ import 'package:soff_cricket_hybrid/models/user/user_model.dart';
 import 'package:soff_cricket_hybrid/routes/app_router.gr.dart';
 import 'package:soff_cricket_hybrid/services/auth/keycloak_auth_service.dart';
 import 'package:soff_cricket_hybrid/services/customer_service.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 import '../../../services/auth/user_manager_service.dart';
 
@@ -30,5 +34,59 @@ class SettingScreenController extends GetxController {
         .whenComplete(() {
       isLoading(false);
     });
+  }
+
+  Future<CroppedFile?> uploadImageFromGallery(Function callback) async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: pickedFile.path,
+        compressFormat: ImageCompressFormat.jpg,
+        compressQuality: 100,
+        uiSettings: [
+          AndroidUiSettings(
+              toolbarTitle: 'Cropper',
+              toolbarColor: const Color.fromARGB(255, 25, 24, 24),
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.original,
+              lockAspectRatio: false),
+          IOSUiSettings(
+            title: 'Cropper',
+          ),
+        ],
+      );
+      if (croppedFile != null) {
+        callback(croppedFile);
+      }
+    }
+    return null;
+  }
+
+  Future<CroppedFile?> uploadImageFromCamera(Function callback) async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: pickedFile.path,
+        compressFormat: ImageCompressFormat.jpg,
+        compressQuality: 100,
+        uiSettings: [
+          AndroidUiSettings(
+              toolbarTitle: 'Cropper',
+              toolbarColor: const Color.fromARGB(255, 25, 24, 24),
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.original,
+              lockAspectRatio: false),
+          IOSUiSettings(
+            title: 'Cropper',
+          ),
+        ],
+      );
+      if (croppedFile != null) {
+        callback(croppedFile);
+      }
+    }
+    return null;
   }
 }

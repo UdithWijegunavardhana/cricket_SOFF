@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:soff_cricket_hybrid/services/auth/keycloak_auth_service.dart';
@@ -325,7 +324,10 @@ class _SettingScreenState extends State<SettingScreen> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 InkWell(
-                  onTap: _uploadImageFromCamera,
+                  onTap: () {
+                    Navigator.pop(
+                        context, _controller.uploadImageFromCamera(updateUI));
+                  },
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(10, 10, 30, 10),
                     child: Row(
@@ -346,7 +348,10 @@ class _SettingScreenState extends State<SettingScreen> {
                   height: 10,
                 ),
                 InkWell(
-                  onTap: _uploadImageFromGallery,
+                  onTap: () {
+                    Navigator.pop(
+                        context, _controller.uploadImageFromGallery(updateUI));
+                  },
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(10, 10, 30, 10),
                     child: Row(children: const [
@@ -367,59 +372,9 @@ class _SettingScreenState extends State<SettingScreen> {
         });
   }
 
-  Future<void> _uploadImageFromGallery() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      final croppedFile = await ImageCropper().cropImage(
-        sourcePath: pickedFile.path,
-        compressFormat: ImageCompressFormat.jpg,
-        compressQuality: 100,
-        uiSettings: [
-          AndroidUiSettings(
-              toolbarTitle: 'Cropper',
-              toolbarColor: const Color.fromARGB(255, 25, 24, 24),
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: false),
-          IOSUiSettings(
-            title: 'Cropper',
-          ),
-        ],
-      );
-      if (croppedFile != null) {
-        setState(() {
-          _croppedFile = croppedFile;
-        });
-      }
-    }
-  }
-
-  Future<void> _uploadImageFromCamera() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-    if (pickedFile != null) {
-      final croppedFile = await ImageCropper().cropImage(
-        sourcePath: pickedFile.path,
-        compressFormat: ImageCompressFormat.jpg,
-        compressQuality: 100,
-        uiSettings: [
-          AndroidUiSettings(
-              toolbarTitle: 'Cropper',
-              toolbarColor: const Color.fromARGB(255, 25, 24, 24),
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: false),
-          IOSUiSettings(
-            title: 'Cropper',
-          ),
-        ],
-      );
-      if (croppedFile != null) {
-        setState(() {
-          _croppedFile = croppedFile;
-        });
-      }
-    }
+  void updateUI(CroppedFile newCroppedFile) {
+    setState(() {
+      _croppedFile = newCroppedFile;
+    });
   }
 }
